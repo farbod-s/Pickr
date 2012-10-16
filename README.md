@@ -1,4 +1,4 @@
 Pickr
 =====
 
-social network for share picture
+a Social Network for Picture Sharing
