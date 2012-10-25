@@ -1,5 +1,22 @@
 $(document).ready(function() {
- 
+/*
+    var group = document.getElementsByClassName('box');
+    for (var i = 0; i < group.length; i++) 
+    {
+        $('#' + group[i].id).hover(
+            function() {
+                $(this).append($('<span class="tool-box">
+                    <button type="button" class="btn">Pick it</button>
+                    <button type="button" class="btn">Like</button>
+                    <button type="button" class="btn">Dislike</button>
+                    </span>'));
+            },
+            function() {
+                $(this).find('span:last').remove();
+            }
+        );
+    }
+*/
     // Some Variables
     var noBoxes = $('#holder .box');
     var randNumber, prev;

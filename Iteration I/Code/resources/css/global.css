@@ -101,6 +101,10 @@ body {
 
 /* custom style */
 
+.tool-box {
+    display: block;
+}
+
 .box.blue {
     background: url("../images/main/1.jpg") center left no-repeat;
 	background-size:100% 100%;
@@ -126,7 +130,7 @@ body {
 }
 
 .box-3 {
-    background: url("../images/main/4.jpg") center left no-repeat;
+    background: url("../images/main/4.jpeg") center left no-repeat;
 	background-size:100% 100%;
 	-webkit-background-size:100% 100%;        /*  Safari  */
     -khtml-background-size:100% 100%;         /*  Konqueror  */
@@ -134,7 +138,7 @@ body {
 }
 
 .box-4 {
-    background: url("../images/main/5.jpg") center left no-repeat;
+    background: url("../images/main/5.jpeg") center left no-repeat;
 	background-size:100% 100%;
 	-webkit-background-size:100% 100%;        /*  Safari  */
     -khtml-background-size:100% 100%;         /*  Konqueror  */
@@ -206,7 +210,7 @@ body {
 }
 
 #pic-14 {
-    background: url("../images/main/14.jpg") center left no-repeat;
+    background: url("../images/main/14.png") center left no-repeat;
 	background-size:100% 100%;
 	-webkit-background-size:100% 100%;        /*  Safari  */
     -khtml-background-size:100% 100%;         /*  Konqueror  */
@@ -238,7 +242,7 @@ body {
 }
 
 #pic-18 {
-    background: url("../images/main/18.jpg") center left no-repeat;
+    background: url("../images/main/18.jpeg") center left no-repeat;
 	background-size:100% 100%;
 	-webkit-background-size:100% 100%;        /*  Safari  */
     -khtml-background-size:100% 100%;         /*  Konqueror  */
@@ -246,7 +250,7 @@ body {
 }
 
 #pic-19 {
-    background: url("../images/main/19.jpg") center left no-repeat;
+    background: url("../images/main/19.jpeg") center left no-repeat;
 	background-size:100% 100%;
 	-webkit-background-size:100% 100%;        /*  Safari  */
     -khtml-background-size:100% 100%;         /*  Konqueror  */
@@ -254,7 +258,7 @@ body {
 }
 
 #pic-20 {
-    background: url("../images/main/20.jpg") center left no-repeat;
+    background: url("../images/main/20.jpeg") center left no-repeat;
 	background-size:100% 100%;
 	-webkit-background-size:100% 100%;        /*  Safari  */
     -khtml-background-size:100% 100%;         /*  Konqueror  */
@@ -270,7 +274,7 @@ body {
 }
 
 #pic-22 {
-    background: url("../images/main/22.jpg") center left no-repeat;
+    background: url("../images/main/22.jpeg") center left no-repeat;
 	background-size:100% 100%;
 	-webkit-background-size:100% 100%;        /*  Safari  */
     -khtml-background-size:100% 100%;         /*  Konqueror  */
@@ -278,7 +282,7 @@ body {
 }
 
 #pic-23 {
-    background: url("../images/main/23.jpg") center left no-repeat;
+    background: url("../images/main/23.jpeg") center left no-repeat;
 	background-size:100% 100%;
 	-webkit-background-size:100% 100%;        /*  Safari  */
     -khtml-background-size:100% 100%;         /*  Konqueror  */
