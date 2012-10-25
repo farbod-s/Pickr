@@ -3,4 +3,300 @@
 
 body {
 	padding-bottom: 40px;
+	background: #C5C5C5 url('../images/bg-optimized.jpg') repeat 0 0 fixed;
+}
+
+.box {
+    height: 100%;
+    float: left;
+    background: #fff;
+    overflow: hidden;
+    border-radius: 4px;
+    box-shadow: 0px 1px 3px rgba(0,0,0,0.2);
+}
+
+.wrapper {
+    display: block;
+    width: 97%;
+    padding: 1.5% 1.5% 0 1.5%;
+    height: 350px;
+    float: left;
+}
+ 
+.single .box {
+    width: 100%;
+}
+ 
+/* 2 IMAGES PER WRAPPER */
+.left-big .box:last-child { width: 35%; }
+.left-small .box, .left-big .box { width: 65%; }
+.left-small .box:first-child { margin: 0 1.5% 0 0; width: 33.5%; }
+.left-big .box:first-child { margin: 0 1.5% 0 0; width: 63.5%; }
+ 
+/* 3 IMAGES PER WRAPPER */
+.big-middle .box:nth-child(2) { width: 47%; margin: 0 1.5%; }
+.big-middle .box:first-child, .big-middle .box:last-child { width: 25%; }
+.small-middle .box:nth-child(2) { margin: 0 1.5%; width: 22%; }
+.small-middle .box:first-child, .small-middle .box:last-child { width: 37.5%; }
+ 
+/* 4 IMAGES PER WRAPPER */
+ 
+.middle-two-rows .box, .right-two-rows .box  { width: 25%; }
+ 
+.right-two-rows .box:nth-of-type(2) {
+    margin: 0 0 0 1.5%;
+    width: 23.5%;
+}
+ 
+.middle {
+    float: left;
+    width: 47%;
+    height: 100%;
+    margin: 0 1.5%;
+}
+ 
+.middle .box {
+    height: 165px;
+    width: 100%;
+    clear: both;
+    margin: 0;
+}
+ 
+.right-two-rows .middle .box:last-child {
+    margin: 0;
+}
+.right-two-rows .middle {
+    margin: 0 0 0 1.5%;
+    width: 48.5%;
+}
+ 
+.right-two-rows .middle .box {
+    width: 100%;
+}
+ 
+.middle .box:first-child {
+    margin: 0 0 20px 0;
+}
+ 
+ 
+/* 5 IMAGES PER WRAPPER */
+ 
+.four-block .box { width: 48.5%; margin: 0 1.5% 0 0; }
+ 
+.block {
+    width: 50%;
+    height: 100%;
+    float: left;
+}
+.block .box {
+    margin: 0;
+    height: 165px;
+    margin: 0 3% 0 0;
+}
+ 
+.block .box:nth-of-type(3), .block .box:nth-of-type(4) { margin-top: 20px; }
+.block .box:nth-child(2), .block .box:nth-child(4) { margin-right: 0; }
+
+
+
+/* custom style */
+
+.box.blue {
+    background: url("../images/main/1.jpg") center left no-repeat;
+	background-size:100% 100%;
+	-webkit-background-size:100% 100%;        /*  Safari  */
+    -khtml-background-size:100% 100%;         /*  Konqueror  */
+    -moz-background-size:100% 100%;           /*  Firefox  */
+}
+
+.box-1 {
+    background: url("../images/main/2.jpg") center left no-repeat;
+	background-size:100% 100%;
+	-webkit-background-size:100% 100%;        /*  Safari  */
+    -khtml-background-size:100% 100%;         /*  Konqueror  */
+    -moz-background-size:100% 100%;           /*  Firefox  */
+}
+
+.box-2 {
+    background: url("../images/main/3.jpg") center left no-repeat;
+	background-size:100% 100%;
+	-webkit-background-size:100% 100%;        /*  Safari  */
+    -khtml-background-size:100% 100%;         /*  Konqueror  */
+    -moz-background-size:100% 100%;           /*  Firefox  */
+}
+
+.box-3 {
+    background: url("../images/main/4.jpg") center left no-repeat;
+	background-size:100% 100%;
+	-webkit-background-size:100% 100%;        /*  Safari  */
+    -khtml-background-size:100% 100%;         /*  Konqueror  */
+    -moz-background-size:100% 100%;           /*  Firefox  */
+}
+
+.box-4 {
+    background: url("../images/main/5.jpg") center left no-repeat;
+	background-size:100% 100%;
+	-webkit-background-size:100% 100%;        /*  Safari  */
+    -khtml-background-size:100% 100%;         /*  Konqueror  */
+    -moz-background-size:100% 100%;           /*  Firefox  */
+}
+
+.box-5 {
+    background: url("../images/main/6.jpg") center left no-repeat;
+	background-size:100% 100%;
+	-webkit-background-size:100% 100%;        /*  Safari  */
+    -khtml-background-size:100% 100%;         /*  Konqueror  */
+    -moz-background-size:100% 100%;           /*  Firefox  */
+}
+
+#pic-7 {
+    background: url("../images/main/7.jpg") center left no-repeat;
+	background-size:100% 100%;
+	-webkit-background-size:100% 100%;        /*  Safari  */
+    -khtml-background-size:100% 100%;         /*  Konqueror  */
+    -moz-background-size:100% 100%;           /*  Firefox  */
+}
+
+#pic-8 {
+    background: url("../images/main/8.jpg") center left no-repeat;
+	background-size:100% 100%;
+	-webkit-background-size:100% 100%;        /*  Safari  */
+    -khtml-background-size:100% 100%;         /*  Konqueror  */
+    -moz-background-size:100% 100%;           /*  Firefox  */
+}
+
+#pic-9 {
+    background: url("../images/main/9.jpg") center left no-repeat;
+	background-size:100% 100%;
+	-webkit-background-size:100% 100%;        /*  Safari  */
+    -khtml-background-size:100% 100%;         /*  Konqueror  */
+    -moz-background-size:100% 100%;           /*  Firefox  */
+}
+
+#pic-10 {
+    background: url("../images/main/10.jpg") center left no-repeat;
+	background-size:100% 100%;
+	-webkit-background-size:100% 100%;        /*  Safari  */
+    -khtml-background-size:100% 100%;         /*  Konqueror  */
+    -moz-background-size:100% 100%;           /*  Firefox  */
+}
+
+#pic-11 {
+    background: url("../images/main/11.jpg") center left no-repeat;
+	background-size:100% 100%;
+	-webkit-background-size:100% 100%;        /*  Safari  */
+    -khtml-background-size:100% 100%;         /*  Konqueror  */
+    -moz-background-size:100% 100%;           /*  Firefox  */
+}
+
+#pic-12 {
+    background: url("../images/main/12.jpg") center left no-repeat;
+	background-size:100% 100%;
+	-webkit-background-size:100% 100%;        /*  Safari  */
+    -khtml-background-size:100% 100%;         /*  Konqueror  */
+    -moz-background-size:100% 100%;           /*  Firefox  */
+}
+
+#pic-13 {
+    background: url("../images/main/13.jpg") center left no-repeat;
+	background-size:100% 100%;
+	-webkit-background-size:100% 100%;        /*  Safari  */
+    -khtml-background-size:100% 100%;         /*  Konqueror  */
+    -moz-background-size:100% 100%;           /*  Firefox  */
+}
+
+#pic-14 {
+    background: url("../images/main/14.jpg") center left no-repeat;
+	background-size:100% 100%;
+	-webkit-background-size:100% 100%;        /*  Safari  */
+    -khtml-background-size:100% 100%;         /*  Konqueror  */
+    -moz-background-size:100% 100%;           /*  Firefox  */
+}
+
+#pic-15 {
+    background: url("../images/main/15.jpg") center left no-repeat;
+	background-size:100% 100%;
+	-webkit-background-size:100% 100%;        /*  Safari  */
+    -khtml-background-size:100% 100%;         /*  Konqueror  */
+    -moz-background-size:100% 100%;           /*  Firefox  */
+}
+
+#pic-16 {
+    background: url("../images/main/16.jpg") center left no-repeat;
+	background-size:100% 100%;
+	-webkit-background-size:100% 100%;        /*  Safari  */
+    -khtml-background-size:100% 100%;         /*  Konqueror  */
+    -moz-background-size:100% 100%;           /*  Firefox  */
+}
+
+#pic-17 {
+    background: url("../images/main/17.jpg") center left no-repeat;
+	background-size:100% 100%;
+	-webkit-background-size:100% 100%;        /*  Safari  */
+    -khtml-background-size:100% 100%;         /*  Konqueror  */
+    -moz-background-size:100% 100%;           /*  Firefox  */
+}
+
+#pic-18 {
+    background: url("../images/main/18.jpg") center left no-repeat;
+	background-size:100% 100%;
+	-webkit-background-size:100% 100%;        /*  Safari  */
+    -khtml-background-size:100% 100%;         /*  Konqueror  */
+    -moz-background-size:100% 100%;           /*  Firefox  */
+}
+
+#pic-19 {
+    background: url("../images/main/19.jpg") center left no-repeat;
+	background-size:100% 100%;
+	-webkit-background-size:100% 100%;        /*  Safari  */
+    -khtml-background-size:100% 100%;         /*  Konqueror  */
+    -moz-background-size:100% 100%;           /*  Firefox  */
+}
+
+#pic-20 {
+    background: url("../images/main/20.jpg") center left no-repeat;
+	background-size:100% 100%;
+	-webkit-background-size:100% 100%;        /*  Safari  */
+    -khtml-background-size:100% 100%;         /*  Konqueror  */
+    -moz-background-size:100% 100%;           /*  Firefox  */
+}
+
+#pic-21 {
+    background: url("../images/main/21.jpg") center left no-repeat;
+	background-size:100% 100%;
+	-webkit-background-size:100% 100%;        /*  Safari  */
+    -khtml-background-size:100% 100%;         /*  Konqueror  */
+    -moz-background-size:100% 100%;           /*  Firefox  */
+}
+
+#pic-22 {
+    background: url("../images/main/22.jpg") center left no-repeat;
+	background-size:100% 100%;
+	-webkit-background-size:100% 100%;        /*  Safari  */
+    -khtml-background-size:100% 100%;         /*  Konqueror  */
+    -moz-background-size:100% 100%;           /*  Firefox  */
+}
+
+#pic-23 {
+    background: url("../images/main/23.jpg") center left no-repeat;
+	background-size:100% 100%;
+	-webkit-background-size:100% 100%;        /*  Safari  */
+    -khtml-background-size:100% 100%;         /*  Konqueror  */
+    -moz-background-size:100% 100%;           /*  Firefox  */
+}
+
+#pic-24 {
+    background: url("../images/main/24.jpg") center left no-repeat;
+	background-size:100% 100%;
+	-webkit-background-size:100% 100%;        /*  Safari  */
+    -khtml-background-size:100% 100%;         /*  Konqueror  */
+    -moz-background-size:100% 100%;           /*  Firefox  */
+}
+
+#pic-25 {
+    background: url("../images/main/25.jpg") center left no-repeat;
+	background-size:100% 100%;
+	-webkit-background-size:100% 100%;        /*  Safari  */
+    -khtml-background-size:100% 100%;         /*  Konqueror  */
+    -moz-background-size:100% 100%;           /*  Firefox  */
 }

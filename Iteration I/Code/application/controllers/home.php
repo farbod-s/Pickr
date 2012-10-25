@@ -7,8 +7,8 @@ class Home extends MY_Controller {
 		/*
 		 *set up title and keywords (if not the default in custom.php config file will be set) 
 		 */
-		$this->title = "Yaaaaa";
-		$this->keywords = "arny, arnodo";
+		$this->title = "Pickr";
+		$this->keywords = "social network";
 		
 		$this->_render('pages/home');
 	}

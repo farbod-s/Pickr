@@ -6,10 +6,10 @@
 				<span class="icon-bar"></span>
 				<span class="icon-bar"></span>
 			</a>
-			<a class="brand" href="#">Project name</a>
+			<a class="brand" href="#">Pickr</a>
 			<div class="nav-collapse collapse" style="height: 0px; ">
 				<p class="navbar-text pull-right">
-					Logged in as <a href="#" class="navbar-link">Username</a>
+					Logged in as <a href="#" class="navbar-link">Admin</a>
 				</p>
 				<?php echo $nav?>
 				
