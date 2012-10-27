@@ -1,5 +1,5 @@
 <ul class="nav">
-	<li class="active"><a class="<?php echo isActive($pageName,"home")?>" href="<?php echo  base_url()?>">Home</a></li>
-	<li><a class="<?php echo isActive($pageName,"about")?>" href="<?php echo  base_url()?>">About</a></li>
-	<li><a class="<?php echo isActive($pageName,"contact")?>" href="<?php echo  base_url()?>">Contact</a></li>
+	<li class="<?php echo isActive($pageName,"home")?>"><a href="<?php echo  base_url()?>"><i class="icon-home icon-white"></i> Home</a></li>
+	<li class="<?php echo isActive($pageName,"about")?>"><a href="<?php echo  base_url()?>">About</a></li>
+	<li class="<?php echo isActive($pageName,"contact")?>"><a href="<?php echo  base_url()?>">Contact</a></li>
 </ul>

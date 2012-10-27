@@ -2,7 +2,7 @@
 ::selection { background: #fe57a1; color: #fff; text-shadow: none; }
 
 body {
-	padding-bottom: 40px;
+	
 	background: #C5C5C5 url('../images/bg-optimized.jpg') repeat 0 0 fixed;
 }
 
@@ -11,7 +11,7 @@ body {
     float: left;
     background: #fff;
     overflow: hidden;
-    border-radius: 4px;
+    border-radius: 2px; /*was 4px*/
     box-shadow: 0px 1px 3px rgba(0,0,0,0.2);
 }
 
@@ -101,206 +101,19 @@ body {
 
 /* custom style */
 
+#btn-load {
+    margin: 1.5% 1.5% 0.5% 1.5%;
+    width: 97%;
+}
+
+#footer {
+    padding-bottom: 20px;
+}
+
 .tool-box {
-    display: block;
-}
-
-.box.blue {
-    background: url("../images/main/1.jpg") center left no-repeat;
-	background-size:100% 100%;
-	-webkit-background-size:100% 100%;        /*  Safari  */
-    -khtml-background-size:100% 100%;         /*  Konqueror  */
-    -moz-background-size:100% 100%;           /*  Firefox  */
-}
-
-.box-1 {
-    background: url("../images/main/2.jpg") center left no-repeat;
-	background-size:100% 100%;
-	-webkit-background-size:100% 100%;        /*  Safari  */
-    -khtml-background-size:100% 100%;         /*  Konqueror  */
-    -moz-background-size:100% 100%;           /*  Firefox  */
-}
-
-.box-2 {
-    background: url("../images/main/3.jpg") center left no-repeat;
-	background-size:100% 100%;
-	-webkit-background-size:100% 100%;        /*  Safari  */
-    -khtml-background-size:100% 100%;         /*  Konqueror  */
-    -moz-background-size:100% 100%;           /*  Firefox  */
-}
-
-.box-3 {
-    background: url("../images/main/4.jpeg") center left no-repeat;
-	background-size:100% 100%;
-	-webkit-background-size:100% 100%;        /*  Safari  */
-    -khtml-background-size:100% 100%;         /*  Konqueror  */
-    -moz-background-size:100% 100%;           /*  Firefox  */
-}
-
-.box-4 {
-    background: url("../images/main/5.jpeg") center left no-repeat;
-	background-size:100% 100%;
-	-webkit-background-size:100% 100%;        /*  Safari  */
-    -khtml-background-size:100% 100%;         /*  Konqueror  */
-    -moz-background-size:100% 100%;           /*  Firefox  */
-}
-
-.box-5 {
-    background: url("../images/main/6.jpg") center left no-repeat;
-	background-size:100% 100%;
-	-webkit-background-size:100% 100%;        /*  Safari  */
-    -khtml-background-size:100% 100%;         /*  Konqueror  */
-    -moz-background-size:100% 100%;           /*  Firefox  */
-}
-
-#pic-7 {
-    background: url("../images/main/7.jpg") center left no-repeat;
-	background-size:100% 100%;
-	-webkit-background-size:100% 100%;        /*  Safari  */
-    -khtml-background-size:100% 100%;         /*  Konqueror  */
-    -moz-background-size:100% 100%;           /*  Firefox  */
-}
-
-#pic-8 {
-    background: url("../images/main/8.jpg") center left no-repeat;
-	background-size:100% 100%;
-	-webkit-background-size:100% 100%;        /*  Safari  */
-    -khtml-background-size:100% 100%;         /*  Konqueror  */
-    -moz-background-size:100% 100%;           /*  Firefox  */
-}
-
-#pic-9 {
-    background: url("../images/main/9.jpg") center left no-repeat;
-	background-size:100% 100%;
-	-webkit-background-size:100% 100%;        /*  Safari  */
-    -khtml-background-size:100% 100%;         /*  Konqueror  */
-    -moz-background-size:100% 100%;           /*  Firefox  */
-}
-
-#pic-10 {
-    background: url("../images/main/10.jpg") center left no-repeat;
-	background-size:100% 100%;
-	-webkit-background-size:100% 100%;        /*  Safari  */
-    -khtml-background-size:100% 100%;         /*  Konqueror  */
-    -moz-background-size:100% 100%;           /*  Firefox  */
-}
-
-#pic-11 {
-    background: url("../images/main/11.jpg") center left no-repeat;
-	background-size:100% 100%;
-	-webkit-background-size:100% 100%;        /*  Safari  */
-    -khtml-background-size:100% 100%;         /*  Konqueror  */
-    -moz-background-size:100% 100%;           /*  Firefox  */
-}
-
-#pic-12 {
-    background: url("../images/main/12.jpg") center left no-repeat;
-	background-size:100% 100%;
-	-webkit-background-size:100% 100%;        /*  Safari  */
-    -khtml-background-size:100% 100%;         /*  Konqueror  */
-    -moz-background-size:100% 100%;           /*  Firefox  */
-}
-
-#pic-13 {
-    background: url("../images/main/13.jpg") center left no-repeat;
-	background-size:100% 100%;
-	-webkit-background-size:100% 100%;        /*  Safari  */
-    -khtml-background-size:100% 100%;         /*  Konqueror  */
-    -moz-background-size:100% 100%;           /*  Firefox  */
-}
-
-#pic-14 {
-    background: url("../images/main/14.png") center left no-repeat;
-	background-size:100% 100%;
-	-webkit-background-size:100% 100%;        /*  Safari  */
-    -khtml-background-size:100% 100%;         /*  Konqueror  */
-    -moz-background-size:100% 100%;           /*  Firefox  */
-}
-
-#pic-15 {
-    background: url("../images/main/15.jpg") center left no-repeat;
-	background-size:100% 100%;
-	-webkit-background-size:100% 100%;        /*  Safari  */
-    -khtml-background-size:100% 100%;         /*  Konqueror  */
-    -moz-background-size:100% 100%;           /*  Firefox  */
-}
-
-#pic-16 {
-    background: url("../images/main/16.jpg") center left no-repeat;
-	background-size:100% 100%;
-	-webkit-background-size:100% 100%;        /*  Safari  */
-    -khtml-background-size:100% 100%;         /*  Konqueror  */
-    -moz-background-size:100% 100%;           /*  Firefox  */
-}
-
-#pic-17 {
-    background: url("../images/main/17.jpg") center left no-repeat;
-	background-size:100% 100%;
-	-webkit-background-size:100% 100%;        /*  Safari  */
-    -khtml-background-size:100% 100%;         /*  Konqueror  */
-    -moz-background-size:100% 100%;           /*  Firefox  */
-}
-
-#pic-18 {
-    background: url("../images/main/18.jpeg") center left no-repeat;
-	background-size:100% 100%;
-	-webkit-background-size:100% 100%;        /*  Safari  */
-    -khtml-background-size:100% 100%;         /*  Konqueror  */
-    -moz-background-size:100% 100%;           /*  Firefox  */
-}
-
-#pic-19 {
-    background: url("../images/main/19.jpeg") center left no-repeat;
-	background-size:100% 100%;
-	-webkit-background-size:100% 100%;        /*  Safari  */
-    -khtml-background-size:100% 100%;         /*  Konqueror  */
-    -moz-background-size:100% 100%;           /*  Firefox  */
-}
-
-#pic-20 {
-    background: url("../images/main/20.jpeg") center left no-repeat;
-	background-size:100% 100%;
-	-webkit-background-size:100% 100%;        /*  Safari  */
-    -khtml-background-size:100% 100%;         /*  Konqueror  */
-    -moz-background-size:100% 100%;           /*  Firefox  */
-}
-
-#pic-21 {
-    background: url("../images/main/21.jpg") center left no-repeat;
-	background-size:100% 100%;
-	-webkit-background-size:100% 100%;        /*  Safari  */
-    -khtml-background-size:100% 100%;         /*  Konqueror  */
-    -moz-background-size:100% 100%;           /*  Firefox  */
-}
-
-#pic-22 {
-    background: url("../images/main/22.jpeg") center left no-repeat;
-	background-size:100% 100%;
-	-webkit-background-size:100% 100%;        /*  Safari  */
-    -khtml-background-size:100% 100%;         /*  Konqueror  */
-    -moz-background-size:100% 100%;           /*  Firefox  */
-}
-
-#pic-23 {
-    background: url("../images/main/23.jpeg") center left no-repeat;
-	background-size:100% 100%;
-	-webkit-background-size:100% 100%;        /*  Safari  */
-    -khtml-background-size:100% 100%;         /*  Konqueror  */
-    -moz-background-size:100% 100%;           /*  Firefox  */
-}
-
-#pic-24 {
-    background: url("../images/main/24.jpg") center left no-repeat;
-	background-size:100% 100%;
-	-webkit-background-size:100% 100%;        /*  Safari  */
-    -khtml-background-size:100% 100%;         /*  Konqueror  */
-    -moz-background-size:100% 100%;           /*  Firefox  */
-}
-
-#pic-25 {
-    background: url("../images/main/25.jpg") center left no-repeat;
-	background-size:100% 100%;
-	-webkit-background-size:100% 100%;        /*  Safari  */
-    -khtml-background-size:100% 100%;         /*  Konqueror  */
-    -moz-background-size:100% 100%;           /*  Firefox  */
+    display: none;
+    position: absolute;
+    padding-top: 5px;
+    padding-left: 5px;
+    float: left;
 }
