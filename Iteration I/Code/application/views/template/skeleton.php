@@ -63,7 +63,7 @@
 -->
 
 </head>
-<body>
+<body onResize="FixImages(false)">
 	<?php echo $body ?>
 	<script
 		src="//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>

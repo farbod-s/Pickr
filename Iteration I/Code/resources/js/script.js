@@ -1,4 +1,5 @@
-$(document).ready(function() {
+/*$(document).ready(function() {*/
+$(window).load(function() {
 
     // Some Variables
     var noBoxes = $('#holder .box');
