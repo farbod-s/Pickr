@@ -1,0 +1,119 @@
+::-moz-selection { background: #fe57a1; color: #fff; text-shadow: none; }
+::selection { background: #fe57a1; color: #fff; text-shadow: none; }
+
+body {
+	
+	background: #C5C5C5 url('../images/bg-optimized.jpg') repeat 0 0 fixed;
+}
+
+.box {
+    height: 100%;
+    float: left;
+    background: #fff;
+    overflow: hidden;
+    border-radius: 2px; /*was 4px*/
+    box-shadow: 0px 1px 3px rgba(0,0,0,0.2);
+}
+
+.wrapper {
+    display: block;
+    width: 97%;
+    padding: 1.5% 1.5% 0 1.5%;
+    height: 350px;
+    float: left;
+}
+ 
+.single .box {
+    width: 100%;
+}
+ 
+/* 2 IMAGES PER WRAPPER */
+.left-big .box:last-child { width: 35%; }
+.left-small .box, .left-big .box { width: 65%; }
+.left-small .box:first-child { margin: 0 1.5% 0 0; width: 33.5%; }
+.left-big .box:first-child { margin: 0 1.5% 0 0; width: 63.5%; }
+ 
+/* 3 IMAGES PER WRAPPER */
+.big-middle .box:nth-child(2) { width: 47%; margin: 0 1.5%; }
+.big-middle .box:first-child, .big-middle .box:last-child { width: 25%; }
+.small-middle .box:nth-child(2) { margin: 0 1.5%; width: 22%; }
+.small-middle .box:first-child, .small-middle .box:last-child { width: 37.5%; }
+ 
+/* 4 IMAGES PER WRAPPER */
+ 
+.middle-two-rows .box, .right-two-rows .box  { width: 25%; }
+ 
+.right-two-rows .box:nth-of-type(2) {
+    margin: 0 0 0 1.5%;
+    width: 23.5%;
+}
+ 
+.middle {
+    float: left;
+    width: 47%;
+    height: 100%;
+    margin: 0 1.5%;
+}
+ 
+.middle .box {
+    height: 165px;
+    width: 100%;
+    clear: both;
+    margin: 0;
+}
+ 
+.right-two-rows .middle .box:last-child {
+    margin: 0;
+}
+.right-two-rows .middle {
+    margin: 0 0 0 1.5%;
+    width: 48.5%;
+}
+ 
+.right-two-rows .middle .box {
+    width: 100%;
+}
+ 
+.middle .box:first-child {
+    margin: 0 0 20px 0;
+}
+ 
+ 
+/* 5 IMAGES PER WRAPPER */
+ 
+.four-block .box { width: 48.5%; margin: 0 1.5% 0 0; }
+ 
+.block {
+    width: 50%;
+    height: 100%;
+    float: left;
+}
+.block .box {
+    margin: 0;
+    height: 165px;
+    margin: 0 3% 0 0;
+}
+ 
+.block .box:nth-of-type(3), .block .box:nth-of-type(4) { margin-top: 20px; }
+.block .box:nth-child(2), .block .box:nth-child(4) { margin-right: 0; }
+
+
+
+/* custom style */
+
+#btn-load {
+    margin: 1.5% 1.5% 0.5% 1.5%;
+    width: 97%;
+}
+
+#footer {
+    padding-bottom: 20px;
+}
+
+.tool-box {
+    display: none;
+    position: absolute;
+    padding-top: 5px;
+    padding-left: 5px;
+    float: left;
+}
