@@ -6,7 +6,7 @@
 				<span class="icon-bar"></span>
 				<span class="icon-bar"></span>
 			</a>
-			<a class="brand" href="#"><img src="<?php echo  base_url()?>resources/images/pickr_logo.png" alt="pickr"
+			<a class="brand" href="#"><img src="<?php echo  base_url(IMAGES.'pickr_logo.png');?>" alt="pickr"
 				style="width: 100px; height: 40px;">
 			</a>
 			<div class="nav-collapse collapse" style="height: 0px; ">

@@ -29,7 +29,6 @@ class MY_Controller extends CI_Controller{
 		
 		$this->pageName = strToLower(get_class($this));
 	}
-	 
 	
 	protected function _render($view) {
 		//static

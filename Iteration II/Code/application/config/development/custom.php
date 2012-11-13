@@ -2,7 +2,7 @@
 
 $config['site_title'] = 'title';
 $config['site_description'] = 'description';
-$config['site_author'] = 'arny';
+$config['site_author'] = 'pickr group';
 $config['site_keywords'] = 'key1, key2';
 
 
