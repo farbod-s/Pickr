@@ -1,13 +1,24 @@
 /*$(window).load(function() {*/
 $(document).ready(function() {
-    // fix image size
-    /*FixImages(false);*/
 
     // Fix input element click problem
     $('.dropdown-menu').click(function(e) {
         e.stopPropagation();
     });
 
+    // Show compatible brand
+    $(window).resize(function() {
+        if ($(window).width() > 979) {
+            $('.visible-desktop').css('display', 'block');
+            $('.hidden-desktop').css('display', 'none');
+        }
+        else {
+            $('.visible-desktop').css('display', 'none');
+            $('.hidden-desktop').css('display', 'block');
+        }
+    });
+
+    //Description with restrict chars
     $('textarea[maxlength]').keyup(function() {
         var max = parseInt($(this).attr('maxlength'));
         if($(this).val().length > max) {
@@ -15,28 +26,32 @@ $(document).ready(function() {
         }
         $(this).parent().find('.charsRemaining').html(' ' + (max - $(this).val().length) + ' characters remaining');
     });
+
+    //Check to see if the window is top if not then display button
+    $(window).scroll(function() {
+        if ($(this).scrollTop() > 100) {
+            $('#ScrollToTop:hidden').stop(true, true).fadeIn();
+        }
+        else {
+            $('#ScrollToTop').stop(true, true).fadeOut();
+        }
+    });
+
+    //Click event to scroll to top
+    $("#ScrollToTop").click(function() {
+        $("html, body").animate({ scrollTop: 0 }, "slow");
+        return false;
+    });
 });
 
-
-
 function ShowActions(id) {
-    if ($(window).width() > 980) {
-        var img_id = '#' + id + ' .tool-box';
-        $(img_id).css('display', 'block');
-    }
-    else {
-        // TODO
-    }
+    var img_id = '#' + id + ' .tool-box';
+    $(img_id).css('display', 'block');
 }
 
 function HideActions(id) {
-    if ($(window).width() > 980) {
-        var img_id = '#' + id + ' .tool-box';
-        $(img_id).css('display', 'none');
-    }
-    else {
-        // TODO
-    }
+    var img_id = '#' + id + ' .tool-box';
+    $(img_id).css('display', 'none');
 }
 
 function Pick(id) {
@@ -148,7 +163,7 @@ function FixImage(fLetterBox, div, img) {
 }
 
 function FixImages(fLetterBox) {
-    $("div.box").each(function (index, div) {
+    $(".article").each(function (index, div) {
         var img = $(div).find("img").get(0);
         FixImage(fLetterBox, div, img);
     });
@@ -167,7 +182,7 @@ function StretchImage(div, img) {
 }
 
 function StretchImages() {
-    $("div.box").each(function (index, div) {
+    $(".article").each(function (index, div) {
         var img = $(div).find("img").get(0);
         StretchImage(div, img);
     });

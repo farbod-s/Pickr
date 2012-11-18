@@ -1,13 +1,14 @@
+<link rel="stylesheet" type="text/css" media="screen" href="http://localhost/www/codeigniter/assets/css/jquery.fileupload-ui.css"/>
 <div class="container">
 	<!-- Top Message -->
-    <div class="alert alert-error" style="margin-top: 1%;">
+    <div class="alert alert-error" style="margin: 1%;">
         <button type="button" class="close" data-dismiss="alert">×</button>
         <strong style="margin-right: 1%;">You can change your profile information at any time ...</strong>
     </div>
     <!-- END Top Message -->
 
     <!-- Profile Setting -->
-	<?php $attributes = array('id' => 'update-profile-form', 'class' => 'form-horizontal');
+	<?php $attributes = array('id' => 'update-profile-form', 'class' => 'form-horizontal', 'style' => 'margin: 1%;');
 	        				echo form_open('index.php/user/updateProfile', $attributes); ?>
 	  <legend><strong>Profile Information</strong></legend>
 	  <div class="control-group">
@@ -25,7 +26,7 @@
 	  <div class="control-group">
 	    <label class="control-label" for="email"><strong>Email</strong></label>
 	    <div class="controls">
-	      <input class="input-large uneditable-input" type="email" id="email" placeholder="unknown.user@domain.com" spellcheck="false" disabled />
+	      <input class="input-large uneditable-input" type="email" id="email" placeholder="<?php echo $this->tank_auth->get_user_email(); ?>" spellcheck="false" disabled />
 	      <button class="btn"><i class="icon-envelope"></i> Email Setting</button>
 	    </div>
 	  </div>
@@ -51,10 +52,15 @@
 	    <div class="controls">
 	      <div class="media">
 			  <a class="pull-left" href="#">
-			    <img class="media-object" style="margin-right: 5px;" src="http://placehold.it/220x200">
+			    <img class="media-object" style="margin-right: 5px;" src="<?php echo base_url(IMAGES.'220x200.gif'); ?>">
 			  </a>
 			  <div class="media-body">
-			    <button class="btn btn-success"><i class="icon-upload icon-white"></i> Upload Image</button>
+			    <!-- The fileinput-button span is used to style the file input field as button -->
+	            <span class="btn btn-success fileinput-button">
+	                <span><i class="icon-plus icon-white"></i> Add Image</span>
+					<!-- Replace name of this input by userfile-->
+	                <input type="file" name="userfile" multiple>
+	            </span>
 			  </div>
 		  </div>
 	    </div>
@@ -79,7 +85,7 @@
 	<!-- END Profile Setting -->
 
 	<!-- Acount Setting -->
-	<?php $attributes = array('id' => 'change-pass-form', 'class' => 'form-horizontal');
+	<?php $attributes = array('id' => 'change-pass-form', 'class' => 'form-horizontal', 'style' => 'margin: 1%;');
 	echo form_open('index.php/user/changePassword', $attributes); ?>
 	  <legend><strong>Account Setting</strong></legend>
 	  <div class="control-group">

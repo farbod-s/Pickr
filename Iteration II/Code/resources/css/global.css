@@ -3,7 +3,6 @@
 
 body {
 	background: #C5C5C5 url('../images/bg.jpg') repeat 0 0 fixed;
-    min-width: 768px;
 }
 
 
@@ -11,8 +10,8 @@ body {
 /***  Custom ***/
 
 #btn-load {
-    margin: 1.5% 0 1.5% 0%;
-    width: 100%;
+    margin: 1.5% 1% 1.5% 1%;
+    width: 98%;
 }
 
 #footer {
@@ -51,6 +50,67 @@ body {
     height: 100%;
     position: absolute;
     cursor: pointer;
+}
+
+
+
+/*** Scroll Top ***/
+#ScrollToTop {
+    right: 15px;
+    bottom: -10px;
+    width: 70px;
+    padding: 20px 10px 30px;
+    -moz-transition: bottom 250ms ease-in-out;
+    -webkit-transition: bottom 250ms ease-in-out;
+}
+
+.Button.Indicator {
+    border-width: 0;
+    -moz-box-shadow: 0 0 #fff, 0 1px 3px rgba(34,25,25,0.5);
+    -webkit-box-shadow: 0 0 white, 0 1px 3px rgba(34, 25, 25, 0.5);
+    box-shadow: 0 0 white, 0 1px 3px rgba(34, 25, 25, 0.5);
+    display: block;
+    font-size: 15px;
+    text-align: center;
+    position: fixed;
+    z-index: 4;
+}
+
+.Button.WhiteButton {
+    background-color: #F0EDED;
+    background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#FDFAFB), to(#F0EDED), color-stop(.5,#F9F7F7),color-stop(.5,#F6F3F4));
+    background-image: -moz-linear-gradient(top, #FDFAFB, #F9F7F7 50%, #F6F3F4 50%, #F0EDED);
+    background-image: -o-linear-gradient(top, #FDFAFB, #F9F7F7 50%, #F6F3F4 50%, #F0EDED);
+    background-image: -webkit-linear-gradient(top, #FDFAFB, #F9F7F7 50%, #F6F3F4 50%, #F0EDED);
+    border-color: #BBB;
+    color: #524D4D;
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#fdfafb', endColorstr='#f0eded');
+    text-shadow: 0 1px rgba(255, 255, 255, 0.9);
+}
+
+.Button:hover {
+    
+}
+
+.Button {
+    border: 1px solid transparent;
+    -moz-border-radius: .3em;
+    -webkit-border-radius: .3em;
+    border-radius: .3em;
+    -moz-box-shadow: 0 1px rgba(255,255,255,0.8), inset 0 1px rgba(255,255,255,0.35);
+    -webkit-box-shadow: 0 1px rgba(255, 255, 255, 0.8), inset 0 1px rgba(255, 255, 255, 0.35);
+    box-shadow: 0 1px rgba(255, 255, 255, 0.8), inset 0 1px rgba(255, 255, 255, 0.35);
+    cursor: pointer;
+    display: inline-block;
+    font-family: "helvetica neue",arial,sans-serif;
+    font-weight: bold;
+    line-height: 1em;
+    margin: 0;
+    padding: .45em .825em .45em;
+    text-align: center;
+    -moz-transition: all .05s ease-in-out;
+    -o-transition: all .05s ease-in-out;
+    -webkit-transition: all .05s ease-in-out;
 }
 
 
@@ -150,6 +210,57 @@ body {
 
 .block .box:nth-of-type(2), .block .box:nth-of-type(3), .block .box:nth-of-type(4) {
     margin-left: 2%;
+}
+
+
+/*----------------------------------------
+=GALLERY
+----------------------------------------*/
+.gallery {
+    margin: 0 auto;
+    width: 100%;
+    height: 100%;
+}
+
+.gallery .article {
+    position: relative;
+    float: left;
+    margin: 10px 1%;
+    width: 23%;
+    height: 165px;
+    overflow: hidden;
+    background: #fff;
+    border-radius: 2px; /*was 4px*/
+    box-shadow: 0px 1px 3px rgba(0,0,0,0.2);
+}
+
+/*----------------------------------------
+=RESPONSIVE STYLING
+----------------------------------------*/
+
+@media screen and (max-width: 980px) { /* Columns decreased to 3 */
+    
+    .gallery .article {
+        width: 31.3333%;
+        margin-left: 1%;
+        margin-right: 1%;
+    }
+}
+
+@media screen and (max-width: 768px) { /* Columns decreased to 2 */
+
+    .gallery .article {
+        margin: 2%;
+        width: 46%;
+    }
+}
+
+@media screen and (max-width: 480px) { /* Columns decreased to 1 */
+
+    .gallery .article {
+        margin: 4%;
+        width: 92%;
+    }
 }
 
 

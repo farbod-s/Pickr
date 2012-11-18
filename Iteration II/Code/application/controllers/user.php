@@ -10,9 +10,15 @@ class User extends MY_Controller {
 	}
 
 	public function setting() {
-		$this->title = "Setting";
 
-		$this->_render('pages/setting');
+		if (!$this->tank_auth->is_logged_in()) {
+			redirect('index.php/home/index');
+		}
+		else {
+			$this->title = "Setting";
+
+			$this->_render('pages/setting');
+		}
 	}
 
 	public function changePassword()

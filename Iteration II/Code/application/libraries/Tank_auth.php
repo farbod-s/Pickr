@@ -34,6 +34,15 @@ class Tank_auth
 		$this->autologin();
 	}
 
+	function get_user_email() {
+		$user_id = $this->ci->session->userdata('user_id');
+
+		if (!is_null($user = $this->ci->users->get_user_by_id($user_id, TRUE))) {
+			return strtolower($user->email);
+		}
+		return NULL;
+	}
+
 	/**
 	 * Login user on the site. Return TRUE if login is successful
 	 * (user exists and activated, password is correct), otherwise FALSE.

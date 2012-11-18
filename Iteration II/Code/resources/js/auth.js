@@ -1,6 +1,5 @@
 $(document).ready(function() {
 	$('#register-btn').click(function() {
-		alert("click");
 		var form_data = {
 			username: $('#username').val(),
 			email: $('#email').val(),
@@ -16,13 +15,15 @@ $(document).ready(function() {
 			data: form_data,
 			success: function(result) {
 				if (result) {
+					//alert('Success');
                 	window.location = "index.php";
 	            }
 	            else {
-	                alert('error'); // TODO
+	                alert('Error'); // TODO
 	            }
 			},
 			error: function() {
+				//alert('Fatal Error');
 				window.location = "index.php";
 			}
 		});
@@ -30,30 +31,30 @@ $(document).ready(function() {
 	});
 
 	$('#login-btn').click(function() {
-		alert("click");
 		var form_data = {
 			name: $('#name').val(),
-			pass: $('#pass').val()
-			user_remember_me: $('#user_remember_me')
+			pass: $('#pass').val(),
+			user_remember_me: $('#user_remember_me').val()
 		};
-		if(!$('#login-btn').valid())
+		if(!$('#login-form').valid())
 			return false;
 		$.ajax({
 			url: "index.php/auth/login",
 			type: 'POST',
 			dataType: 'JSON',
+			data: form_data,
 			success: function(result) {
 				if(result) {
-					alert('loggedin');
-					// window.location = "index.php";
+					//alert('Success');
+					window.location = "index.php";
 				}
 				else {
-					alert('error');
+					alert('Error'); // TODO
 				}
 			},
 			error: function() {
-				alert('notloggedin');
-				// window.location = "index.php";
+				//alert('Fatal Error');
+				window.location = "index.php";
 			}
 		});
 		return false;

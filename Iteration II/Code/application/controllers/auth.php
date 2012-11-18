@@ -9,16 +9,13 @@ class Auth extends MY_Controller
 	 */
 	function login()
 	{
-		alert("hi!");
 		if ($this->tank_auth->is_logged_in()) {									// logged in
-			redirect('');
+			redirect('index.php/home/index');
 
 		} else {
 			$this->form_validation->set_rules('name', 'Username', 'trim|required|xss_clean');
 			$this->form_validation->set_rules('pass', 'Password', 'trim|required|xss_clean');
 			$this->form_validation->set_rules('user_remember_me', 'Remember me', 'integer');
-
-			$data['errors'] = array();
 
 			if ($this->form_validation->run()) {								// validation ok
 				if ($this->tank_auth->login(
@@ -27,25 +24,16 @@ class Auth extends MY_Controller
 						$this->form_validation->set_value('user_remember_me'), // user_remember_me or remember
 						true,
 						false)) {								// success
-					// redirect('');
+
 					echo json_encode(TRUE);
-					alert("infotrue");
-
-				} else {
-					$errors = $this->tank_auth->get_error_message();
-					if (isset($errors['banned'])) {								// banned user
-						$this->_show_message($this->lang->line('auth_message_banned').' '.$errors['banned']);
-
-					}
-
-					else {													// fail
-						foreach ($errors as $k => $v)	$data['errors'][$k] = $this->lang->line($v);
-					}
+				}
+				else {
 					echo json_encode(FALSE);
-					alert("infonottrue");
 				}
 			}
-			$this->load->view('auth/login_form', $data); // ???
+			else {													// fail
+				echo json_encode(FALSE);
+			}
 		}
 	}
 
@@ -84,6 +72,8 @@ class Auth extends MY_Controller
 						FALSE))) { // success
 
 					unset($data['password']); // Clear password
+					unset($data['confirm_password']); // Clear password
+					
 					echo json_encode(TRUE);
 				}
 				else {
