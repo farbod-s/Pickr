@@ -28,6 +28,19 @@ class MY_Controller extends CI_Controller{
 		$this->author = $this->config->item('site_author');
 		
 		$this->pageName = strToLower(get_class($this));
+
+		// Benchmark
+		//$this->output->enable_profiler(TRUE);
+        
+		// Load Libraries
+        $this->load->helper('url_helper');
+        //$this->load->helper(array('form', 'url'));
+		
+		$this->load->library('form_validation');
+		$this->load->library('security');
+		$this->load->library('tank_auth');
+		
+		$this->lang->load('tank_auth');
 	}
 	
 	protected function _render($view) {

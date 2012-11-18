@@ -1,3 +1,4 @@
+<!--
 <script>
 var PICKR = (function(){
 	var _baseUrl = "<?php echo base_url(); ?>";
@@ -9,3 +10,4 @@ var PICKR = (function(){
 	}
 })();
 </script>
+-->

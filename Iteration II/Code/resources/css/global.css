@@ -55,6 +55,75 @@ body {
 
 
 
+/*** Form Rotation ***/
+#formContainer {
+    -moz-perspective: 800px;
+    -webkit-perspective: 800px;
+    perspective: 800px;
+}
+
+#formContainer form {
+    /* Enabling 3d space for the transforms */
+    -moz-transform-style: preserve-3d;
+    -webkit-transform-style: preserve-3d;
+    transform-style: preserve-3d;
+
+    /* When the forms are flipped, they will be hidden */
+    -moz-backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+
+    /* Enabling a smooth animated transition */
+    -moz-transition:0.8s;
+    -webkit-transition:0.8s;
+    transition:0.8s;
+}
+
+#recovery-form {
+    /*opacity:0;*/
+    display: none;
+
+    /* Rotating the recover password form by default */
+    -moz-transform:rotateY(180deg);
+    -webkit-transform:rotateY(180deg);
+    transform:rotateY(180deg);
+}
+
+#formContainer #recovery-form {
+    /*margin-top: -170px;*/
+}
+
+#formContainer #login-form {
+    /*padding-bottom: 50px;*/
+}
+
+#formContainer.flipped #login-form {
+    /*padding-bottom: 0;*/
+    /*opacity:0;*/
+    display: none;
+
+    /**
+     * Rotating the login form when the
+     * flipped class is added to the container
+     */
+
+    -moz-transform:rotateY(-180deg);
+    -webkit-transform:rotateY(-180deg);
+    transform:rotateY(-180deg);
+}
+
+#formContainer.flipped #recovery-form {
+    /*opacity:1;*/
+    display: block;
+
+    /* Rotating the recover div into view */
+    -moz-transform:rotateY(0deg);
+    -webkit-transform:rotateY(0deg);
+    transform:rotateY(0deg);
+}
+
+
+
 /*** Image Layout Styles ***/
 
 .block {
