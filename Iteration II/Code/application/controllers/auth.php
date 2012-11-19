@@ -19,9 +19,9 @@ class Auth extends MY_Controller
 
 			if ($this->form_validation->run()) {								// validation ok
 				if ($this->tank_auth->login(
-						$this->form_validation->set_value('name'), // name or username?
-						$this->form_validation->set_value('pass'), // pass or password
-						$this->form_validation->set_value('user_remember_me'), // user_remember_me or remember
+						$this->form_validation->set_value('name'),
+						$this->form_validation->set_value('pass'),
+						$this->form_validation->set_value('user_remember_me'),
 						true,
 						false)) {								// success
 

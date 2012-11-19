@@ -34,6 +34,32 @@ class Tank_auth
 		$this->autologin();
 	}
 
+	/*
+	Pickr code
+	BEGIN
+	*/
+	function get_profile() {
+		$user_id = $this->ci->session->userdata('user_id');
+
+		$profile_data = array();
+		if (!is_null($user = $this->ci->users->pickr_get_profile($user_id))) {
+			$profile_data[] = array('country' => $user->country,
+									'website' => $user->website,
+									'firstname' => $user->firstname,
+									'lastname' => $user->lastname,
+									'gender' => $user->gender,
+									'description' => $user->description,
+									'pic_address' => $user->pic_address);
+			return $profile_data;
+		}
+		return NULL;
+	}
+
+	function update_profile($country, $website, $firstname, $lastname, $gender, $description, $pic_address) {
+		$user_id = $this->ci->session->userdata('user_id');
+		$this->ci->users->pickr_update_profile($user_id, $country, $website, $firstname, $lastname, $gender, $description, $pic_address);
+	}
+
 	function get_user_email() {
 		$user_id = $this->ci->session->userdata('user_id');
 
@@ -42,6 +68,11 @@ class Tank_auth
 		}
 		return NULL;
 	}
+	/*
+	END
+	Pickr code
+	*/ 
+
 
 	/**
 	 * Login user on the site. Return TRUE if login is successful

@@ -8,19 +8,41 @@
     <!-- END Top Message -->
 
     <!-- Profile Setting -->
-	<?php $attributes = array('id' => 'update-profile-form', 'class' => 'form-horizontal', 'style' => 'margin: 1%;');
-	        				echo form_open('index.php/user/updateProfile', $attributes); ?>
+    <?php
+    	$country = "";
+		$website = "";
+		$firstname = "";
+		$lastname = "";
+		$gender = "";
+		$description = "";
+		$pic_address = "";
+
+    	if($profile_info) {
+			$country = $profile_info[0]['country'];
+			$website = $profile_info[0]['website'];
+			$firstname = $profile_info[0]['firstname'];
+    		$lastname = $profile_info[0]['lastname'];
+    		$gender = $profile_info[0]['gender'];
+    		$description = $profile_info[0]['description'];
+    		$pic_address = $profile_info[0]['pic_address'];
+    	}
+    ?> 
+
+
+
+	
+	  <form class="form-horizontal" id="update-profile-form" style="margin: 1%;" method="post" action="update_setting">
 	  <legend><strong>Profile Information</strong></legend>
 	  <div class="control-group">
 	    <label class="control-label" for="firstName"><strong>First Name</strong></label>
 	    <div class="controls">
-	      <input class="input-large" type="text" id="name" placeholder="First Name" spellcheck="false" />
+	      <input class="input-large" type="text" id="name" placeholder="First Name" spellcheck="false" value="<?php echo $firstname; ?>" />
 	    </div>
 	  </div>
 	  <div class="control-group">
 	    <label class="control-label" for="lastName"><strong>Last Name</strong></label>
 	    <div class="controls">
-	      <input class="input-large" type="text" id="lastName" placeholder="Last Name" spellcheck="false" />
+	      <input class="input-large" type="text" id="lastName" placeholder="Last Name" spellcheck="false" value="<?php echo $lastname; ?>" />
 	    </div>
 	  </div>
 	  <div class="control-group">
@@ -31,28 +53,28 @@
 	    </div>
 	  </div>
 	  <div class="control-group">
-	  	<label class="control-label" for="lastName"><strong>Gender</strong></label>
+	  	<label class="control-label"><strong>Gender</strong></label>
 	    <div class="controls">
 	        <label class="radio inline">
-			  <input type="radio" name="optionsRadios" id="optionsRadios1" value="male" />
+			  <input type="radio" name="gender" id="male" value="male" />
 			  Male
 			</label>
 			<label class="radio inline">
-			  <input type="radio" name="optionsRadios" id="optionsRadios2" value="female" />
+			  <input type="radio" name="gender" id="female" value="female" />
 			  Female
 			</label>
 			<label class="radio inline">
-			  <input type="radio" name="optionsRadios" id="optionsRadios3" value="unspecified" checked />
+			  <input type="radio" name="gender" id="unspecified" value="unspecified" checked />
 			  Unspecified
 			</label>
 	    </div>
 	  </div>
 	  <div class="control-group">
-	    <label class="control-label" for="lastName"><strong>Image</strong></label>
+	    <label class="control-label"><strong>Image</strong></label>
 	    <div class="controls">
 	      <div class="media">
 			  <a class="pull-left" href="#">
-			    <img class="media-object" style="margin-right: 5px;" src="<?php echo base_url(IMAGES.'220x200.gif'); ?>">
+			    <img class="media-object" id="profile-image" style="margin-right: 5px;" src="<?php if($pic_address != '') echo $pic_address; else echo base_url(IMAGES.'220x200.gif'); ?>">
 			  </a>
 			  <div class="media-body">
 			    <!-- The fileinput-button span is used to style the file input field as button -->
@@ -69,7 +91,7 @@
 	    <label class="control-label" for="description"><strong>Description</strong></label>
 	    <div class="controls">
 	      <div class="media">
-	        <textarea class="pull-left media-object" id="description" rows="3" cols="40" style="resize: none; margin-right: 5px;" maxlength="50" placeholder="Introduce Yourself to Others" onfocus="ShowDescriptionMessage()" onBlur="HideDescriptionMessage()" spellcheck="false"></textarea>
+	        <textarea class="pull-left media-object" id="description" rows="3" cols="40" style="resize: none; margin-right: 5px;" maxlength="50" placeholder="Introduce Yourself to Others" onfocus="ShowDescriptionMessage()" onBlur="HideDescriptionMessage()" spellcheck="false" value="<?php echo $description; ?>"></textarea>
 	        <div class="media-body">
 	        	<span class="charsRemaining" style="display: none;"> 50 characters remaining</span>
 	        </div>
@@ -77,11 +99,23 @@
 		</div>
 	  </div>
 	  <div class="control-group">
+	    <label class="control-label" for="country"><strong>Location</strong></label>
 	    <div class="controls">
-	      <button type="submit" class="btn btn-primary btn-large"><strong>Save Profile</strong></button>
+	      <input class="input-large" type="text" id="country" placeholder="Location" spellcheck="false" value="<?php echo $country; ?>" />
 	    </div>
 	  </div>
-	<?php echo form_close(); ?>
+	  <div class="control-group">
+	    <label class="control-label" for="website"><strong>Website</strong></label>
+	    <div class="controls">
+	      <input class="input-large" type="text" id="website" placeholder="Website" spellcheck="false" value="<?php echo $website; ?>" />
+	    </div>
+	  </div>
+	  <div class="control-group">
+	    <div class="controls">
+	      <button type="submit" id="save-profile-btn" class="btn btn-primary btn-large"><strong>Save Profile</strong></button>
+	    </div>
+	  </div>
+	</form>
 	<!-- END Profile Setting -->
 
 	<!-- Acount Setting -->

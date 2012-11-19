@@ -59,4 +59,37 @@ $(document).ready(function() {
 		});
 		return false;
 	});
+
+	$('#save-profile-btn').click(function() {
+		alert('btn clicked');
+		var form_data = {
+			firstname: $('#firstName').val(),
+			lastname: $('#lastName').val(),
+			gender: $('input[@name="gender"]:checked').val(),
+			country: $('#country').val(),
+			website: $('#website').val(),
+			description: $('description').val(),
+			pic_address: $('#profile-image').attr('src')
+		};
+		$.ajax({
+			url: "index.php/user/update_setting",
+			type: 'POST',
+			dataType: 'JSON',
+			data: form_data,
+			success: function(result) {
+				if(result) {
+					alert('Success');
+					//window.location = "index.php/setting";
+				}
+				else {
+					alert('Error'); // TODO
+				}
+			},
+			error: function() {
+				alert('Fatal Error');
+				//window.location = "index.php/setting";
+			}
+		});
+		return false;
+	});
 });

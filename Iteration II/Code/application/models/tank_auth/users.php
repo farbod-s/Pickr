@@ -24,6 +24,38 @@ class Users extends CI_Model
 		$this->profile_table_name	= $ci->config->item('db_table_prefix', 'tank_auth').$this->profile_table_name;
 	}
 
+	/*
+	Pickr code
+	BEGIN
+	*/
+
+	function pickr_get_profile($user_id) {
+		$this->db->where('user_id', $user_id);
+
+		$query = $this->db->get($this->profile_table_name);
+		if ($query->num_rows() == 1) return $query->row();
+		return NULL;
+	}
+
+	function pickr_update_profile($user_id, $country, $website, $firstname, $lastname, $gender, $description, $pic_address) {
+		$this->db->set('country', $country);
+		$this->db->set('website', $website);
+		$this->db->set('firstname', $firstname);
+		$this->db->set('lastname', $lastname);
+		$this->db->set('gender', $gender);
+		$this->db->set('description', $description);
+		$this->db->set('pic_address', $pic_address);
+
+		$this->db->where('user_id', $user_id);
+		$this->db->update($this->profile_table_name);
+	}
+
+	/*
+	END
+	Pickr code
+	*/ 
+
+
 	/**
 	 * Get user record by Id
 	 *
