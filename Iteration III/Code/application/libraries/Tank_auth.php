@@ -57,7 +57,11 @@ class Tank_auth
 
 	function update_profile($country, $website, $firstname, $lastname, $gender, $description, $pic_address) {
 		$user_id = $this->ci->session->userdata('user_id');
-		$this->ci->users->pickr_update_profile($user_id, $country, $website, $firstname, $lastname, $gender, $description, $pic_address);
+		
+		if($this->ci->users->pickr_update_profile($user_id, $country, $website, $firstname, $lastname, $gender, $description, $pic_address)) {
+			return TRUE;
+		}
+		return FALSE;
 	}
 
 	function get_user_email() {
@@ -67,6 +71,16 @@ class Tank_auth
 			return strtolower($user->email);
 		}
 		return NULL;
+	}
+
+	function get_complete_name() {
+		$user_id = $this->ci->session->userdata('user_id');
+
+		if (!is_null($user = $this->ci->users->pickr_get_profile($user_id))) {
+			$complete_name = $user->firstname.' '.$user->lastname;
+			return $complete_name;
+		}
+		return NULL;		
 	}
 	/*
 	END

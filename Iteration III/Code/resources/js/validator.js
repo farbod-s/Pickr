@@ -1,6 +1,6 @@
 $(document).ready(function() {
 
-    // Validation
+    // Validation sign up form
     $("#register-form").validate({
         rules: {
             username: {required: true, minlength: 4, maxlength: 20},
@@ -25,7 +25,7 @@ $(document).ready(function() {
         },
         errorClass: "help-inline",
         errorElement: "span",
-        highlight:function(element, errorClass, validClass)
+        highlight: function(element, errorClass, validClass)
         {
             $(element).parents('.control-group').removeClass('success');
             $(element).parents('.control-group').addClass('error');
@@ -37,6 +37,7 @@ $(document).ready(function() {
         }
     });
 
+    // Validation Change Password form    
     $("#change-pass-form").validate({
         rules: {
             old_pass: {required: true, minlength: 6},
@@ -56,7 +57,7 @@ $(document).ready(function() {
         },
         errorClass: "help-inline",
         errorElement: "span",
-        highlight:function(element, errorClass, validClass)
+        highlight: function(element, errorClass, validClass)
         {
             $(element).parents('.control-group').removeClass('success');
             $(element).parents('.control-group').addClass('error');

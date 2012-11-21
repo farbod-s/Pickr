@@ -40,7 +40,7 @@ class MY_Controller extends CI_Controller{
 		$this->load->library('security');
 		$this->load->library('tank_auth');
 		
-		$this->lang->load('tank_auth');
+		//$this->lang->load('tank_auth');
 	}
 	
 	protected function _render($view) {

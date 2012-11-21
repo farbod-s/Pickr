@@ -48,8 +48,10 @@ class Users extends CI_Model
 
 		$this->db->where('user_id', $user_id);
 		$this->db->update($this->profile_table_name);
-	}
 
+		return $this->db->affected_rows() > 0;
+	}
+	
 	/*
 	END
 	Pickr code

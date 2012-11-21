@@ -26,23 +26,21 @@
     		$description = $profile_info[0]['description'];
     		$pic_address = $profile_info[0]['pic_address'];
     	}
-    ?> 
-
-
-
+    ?>
 	
-	  <form class="form-horizontal" id="update-profile-form" style="margin: 1%;" method="post" action="update_setting">
+		<?php $attributes = array('id' => 'update-profile-form', 'class' => 'form-horizontal', 'style' => 'margin: 1%;');
+		echo form_open('index.php/setting/update_setting', $attributes); ?>
 	  <legend><strong>Profile Information</strong></legend>
 	  <div class="control-group">
-	    <label class="control-label" for="firstName"><strong>First Name</strong></label>
+	    <label class="control-label" for="firstname"><strong>First Name</strong></label>
 	    <div class="controls">
-	      <input class="input-large" type="text" id="name" placeholder="First Name" spellcheck="false" value="<?php echo $firstname; ?>" />
+	      <input class="input-large" type="text" id="firstname" placeholder="First Name" spellcheck="false" value="<?php echo $firstname; ?>" />
 	    </div>
 	  </div>
 	  <div class="control-group">
-	    <label class="control-label" for="lastName"><strong>Last Name</strong></label>
+	    <label class="control-label" for="lastname"><strong>Last Name</strong></label>
 	    <div class="controls">
-	      <input class="input-large" type="text" id="lastName" placeholder="Last Name" spellcheck="false" value="<?php echo $lastname; ?>" />
+	      <input class="input-large" type="text" id="lastname" placeholder="Last Name" spellcheck="false" value="<?php echo $lastname; ?>" />
 	    </div>
 	  </div>
 	  <div class="control-group">
@@ -56,15 +54,15 @@
 	  	<label class="control-label"><strong>Gender</strong></label>
 	    <div class="controls">
 	        <label class="radio inline">
-			  <input type="radio" name="gender" id="male" value="male" />
+			  <input type="radio" name="gender" id="male" value="1" <?php if($gender == '1') echo 'checked';?> />
 			  Male
 			</label>
 			<label class="radio inline">
-			  <input type="radio" name="gender" id="female" value="female" />
+			  <input type="radio" name="gender" id="female" value="0" <?php if($gender == '0') echo 'checked';?> />
 			  Female
 			</label>
 			<label class="radio inline">
-			  <input type="radio" name="gender" id="unspecified" value="unspecified" checked />
+			  <input type="radio" name="gender" id="unspecified" value="2" <?php if($gender == '2') echo 'checked'; if($gender == '') echo 'checked';?> />
 			  Unspecified
 			</label>
 	    </div>
@@ -91,7 +89,7 @@
 	    <label class="control-label" for="description"><strong>Description</strong></label>
 	    <div class="controls">
 	      <div class="media">
-	        <textarea class="pull-left media-object" id="description" rows="3" cols="40" style="resize: none; margin-right: 5px;" maxlength="50" placeholder="Introduce Yourself to Others" onfocus="ShowDescriptionMessage()" onBlur="HideDescriptionMessage()" spellcheck="false" value="<?php echo $description; ?>"></textarea>
+	        <textarea class="pull-left media-object" id="description" rows="3" cols="40" style="resize: none; margin-right: 5px;" maxlength="50" placeholder="Introduce Yourself to Others" onfocus="ShowDescriptionMessage()" onBlur="HideDescriptionMessage()" spellcheck="false"><?php if($description != '') echo $description; ?></textarea>
 	        <div class="media-body">
 	        	<span class="charsRemaining" style="display: none;"> 50 characters remaining</span>
 	        </div>
@@ -120,7 +118,7 @@
 
 	<!-- Acount Setting -->
 	<?php $attributes = array('id' => 'change-pass-form', 'class' => 'form-horizontal', 'style' => 'margin: 1%;');
-	echo form_open('index.php/user/changePassword', $attributes); ?>
+	echo form_open('index.php/auth/changePassword', $attributes); ?>
 	  <legend><strong>Account Setting</strong></legend>
 	  <div class="control-group">
 	    <label class="control-label" for="old_pass"><strong>Old Password</strong></label>
@@ -142,7 +140,7 @@
 	  </div>
 	  <div class="control-group">
 	    <div class="controls">
-	      <button type="submit" class="btn btn-primary btn-large"><strong>Change Password</strong></button>
+	      <button type="submit" id="change-pass-btn" class="btn btn-primary btn-large"><strong>Change Password</strong></button>
 	    </div>
 	  </div>
 	<?php echo form_close(); ?>

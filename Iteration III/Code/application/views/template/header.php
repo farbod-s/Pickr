@@ -27,9 +27,9 @@
 					              $attributes = array('id' => 'login-form');
 			        			  echo form_open('index.php/auth/login', $attributes);
 			        			  echo '
-								  <input type="text" id="name" name="name" value="'; echo set_value('name'); echo '" minlength="4" maxlength="20" placeholder="Username" spellcheck="false" required />
-			                	  <input type="password" id="pass" name="pass" value="'; echo set_value('pass'); echo '" minlength="6" placeholder="Password" required />
-			              	 	  <input id="user_remember_me" style="float: left; margin-right: 10px;" type="checkbox" name="user[remember_me]" value="1" />
+							  	  <input type="text" id="name" name="name" placeholder="Username / Email" spellcheck="false" />
+	                	  		  <input type="password" id="pass" name="pass" placeholder="Password" />
+			              	 	  <input id="user_remember_me" style="float: left; margin-right: 10px;" type="checkbox" name="remember_me" value="1" />
 			              	 	  <label class="string optional" for="user_remember_me"> Remember me</label>
 			              	 	  <input type="submit" class="btn btn-primary" id="login-btn" style="clear: left; width: 100%; height: 32px; font-weight: bold;" value="Sign In" />
 			              	 	  <li class="divider" style="width: 100%;"></li>
@@ -58,13 +58,20 @@
 				            <a class="dropdown-toggle" href="#" data-toggle="dropdown">
 								<i class="icon-user icon-white"></i>
 				            	<strong>';
-				            	echo $this->tank_auth->get_username();
+				            	$username = $this->tank_auth->get_username();
+				            	$name = $this->tank_auth->get_complete_name();
+				            	if($name && $name != '') {
+				            		echo $name;
+				            	}
+				            	else {
+				            		echo $username;
+				            	}
 				            	echo'</strong> <strong class="caret"></strong>
 				            </a>
 				            	<!-- User Control -->
 				            	<ul class="dropdown-menu">
 					            	<li><a href="#"><i class="icon-picture"></i> Albums</a></li>
-								    <li><a href="'; echo base_url()."index.php/user/setting"; echo '"><i class="icon-pencil"></i> Setting</a></li>
+								    <li><a href="'; echo base_url()."index.php/setting/index"; echo '"><i class="icon-pencil"></i> Setting</a></li>
 								    <!-- <li><a href="#"><i class="icon-upload"></i> Upload</a></li> -->
 								    <li class="divider"></li>
 								    <li><a href="'; echo base_url()."index.php/auth/logout"; echo '"><i class="icon-off"></i> Sign Out</a></li>
