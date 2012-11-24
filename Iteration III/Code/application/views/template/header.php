@@ -60,7 +60,7 @@
 				            	<strong>';
 				            	$username = $this->tank_auth->get_username();
 				            	$name = $this->tank_auth->get_complete_name();
-				            	if($name && $name != '') {
+				            	if($name && $name != '' && $name != ' ') {
 				            		echo $name;
 				            	}
 				            	else {
@@ -82,7 +82,7 @@
 		        ?>
 
 				<form class="navbar-search pull-right" action="" _lpchecked="1">
-					<input type="text" class="search-query span3" placeholder="Search" />
+					<input type="text" class="search-query span3" spellcheck="false" placeholder="Search" />
 				</form>
 			</div><!--/.nav-collapse -->
 		</div>

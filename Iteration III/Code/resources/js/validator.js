@@ -1,10 +1,15 @@
 $(document).ready(function() {
 
+    // no space function for validation plugin
+    jQuery.validator.addMethod("noSpace", function(value, element) { 
+        return value.indexOf(" ") < 0 && value != ""; 
+    }, "No space please and don't leave it empty");
+
     // Validation sign up form
     $("#register-form").validate({
         rules: {
-            username: {required: true, minlength: 4, maxlength: 20},
-            email: {required: true, email: true},
+            username: {required: true, minlength: 4, maxlength: 20, noSpace: true},
+            email: {required: true, email: true, noSpace: true},
             password: {required: true, minlength: 6},
             confirm_password: {required: true, equalTo: "#password"},
         },

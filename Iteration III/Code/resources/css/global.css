@@ -2,7 +2,7 @@
 ::selection { background: #fe57a1; color: #fff; text-shadow: none; }
 
 body {
-	background: #C5C5C5 url('../images/bg.jpg') repeat 0 0 fixed;
+	background: #C5C5C5 url('../images/bg-optimized.jpg') repeat 0 0 fixed;
 }
 
 
@@ -60,14 +60,19 @@ body {
     bottom: -10px;
     width: 70px;
     padding: 20px 10px 30px;
-    -moz-transition: bottom 250ms ease-in-out;
+    
     -webkit-transition: bottom 250ms ease-in-out;
+    -moz-transition: bottom 250ms ease-in-out;
+    -o-transition: bottom 250ms ease-in-out;
+    -ms-transition: bottom 250ms ease-in-out;
 }
 
 .Button.Indicator {
     border-width: 0;
-    -moz-box-shadow: 0 0 #fff, 0 1px 3px rgba(34,25,25,0.5);
     -webkit-box-shadow: 0 0 white, 0 1px 3px rgba(34, 25, 25, 0.5);
+    -moz-box-shadow: 0 0 #fff, 0 1px 3px rgba(34,25,25,0.5);
+    -o-box-shadow: 0 0 #fff, 0 1px 3px rgba(34,25,25,0.5);
+    -ms-box-shadow: 0 0 #fff, 0 1px 3px rgba(34,25,25,0.5);
     box-shadow: 0 0 white, 0 1px 3px rgba(34, 25, 25, 0.5);
     display: block;
     font-size: 15px;
@@ -95,9 +100,13 @@ body {
 .Button {
     border: 1px solid transparent;
     -moz-border-radius: .3em;
+    -o-border-radius: .3em;
+    -ms-border-radius: .3em;
     -webkit-border-radius: .3em;
     border-radius: .3em;
     -moz-box-shadow: 0 1px rgba(255,255,255,0.8), inset 0 1px rgba(255,255,255,0.35);
+    -o-box-shadow: 0 1px rgba(255,255,255,0.8), inset 0 1px rgba(255,255,255,0.35);
+    -ms-box-shadow: 0 1px rgba(255,255,255,0.8), inset 0 1px rgba(255,255,255,0.35);
     -webkit-box-shadow: 0 1px rgba(255, 255, 255, 0.8), inset 0 1px rgba(255, 255, 255, 0.35);
     box-shadow: 0 1px rgba(255, 255, 255, 0.8), inset 0 1px rgba(255, 255, 255, 0.35);
     cursor: pointer;
@@ -110,6 +119,7 @@ body {
     text-align: center;
     -moz-transition: all .05s ease-in-out;
     -o-transition: all .05s ease-in-out;
+    -ms-transition: all .05s ease-in-out;
     -webkit-transition: all .05s ease-in-out;
 }
 
@@ -118,6 +128,8 @@ body {
 /*** Form Rotation ***/
 #formContainer {
     -moz-perspective: 800px;
+    -o-perspective: 800px;
+    -ms-perspective: 800px;
     -webkit-perspective: 800px;
     perspective: 800px;
 }
@@ -125,16 +137,22 @@ body {
 #formContainer form {
     /* Enabling 3d space for the transforms */
     -moz-transform-style: preserve-3d;
+    -o-transform-style: preserve-3d;
+    -ms-transform-style: preserve-3d;
     -webkit-transform-style: preserve-3d;
     transform-style: preserve-3d;
 
     /* When the forms are flipped, they will be hidden */
     -moz-backface-visibility: hidden;
+    -o-backface-visibility: hidden;
+    -ms-backface-visibility: hidden;
     -webkit-backface-visibility: hidden;
     backface-visibility: hidden;
 
     /* Enabling a smooth animated transition */
     -moz-transition:0.8s;
+    -o-transition:0.8s;
+    -ms-transition:0.8s;
     -webkit-transition:0.8s;
     transition:0.8s;
 }
@@ -184,7 +202,7 @@ body {
 
 
 
-/*** Image Layout Styles ***/
+/*** Image OLD Layout Styles ***/
 
 .block {
     display: block;
@@ -232,6 +250,13 @@ body {
     background: #fff;
     border-radius: 2px; /*was 4px*/
     box-shadow: 0px 1px 3px rgba(0,0,0,0.2);
+/*
+    -webkit-transition: top 1s ease, left 1s ease;
+    -moz-transition: top 1s ease, left 1s ease;
+    -o-transition: top 1s ease, left 1s ease;
+    -ms-transition: top 1s ease, left 1s ease;
+    transition: top 1s ease, left 1s ease;
+*/
 }
 
 /*----------------------------------------

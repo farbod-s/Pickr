@@ -76,7 +76,7 @@ $(document).ready(function() {
 		if(!$('#update-profile-form').valid())
 			return false;
 		$.ajax({
-			url: "http://localhost/www/codeigniter/index.php/setting/update_setting", // BUG
+			url: "http://localhost/www/codeigniter/index.php/setting/update_setting",
 			type: 'POST',
 			dataType: 'JSON',
 			data: form_data,
@@ -107,7 +107,7 @@ $(document).ready(function() {
 		if(!$('#change-pass-form').valid())
 			return false;
 		$.ajax({
-			url: "http://localhost/www/codeigniter/index.php/auth/change_password", //BUG
+			url: "http://localhost/www/codeigniter/index.php/auth/change_password",
 			type: 'POST',
 			dataType: 'JSON',
 			data: form_data,
