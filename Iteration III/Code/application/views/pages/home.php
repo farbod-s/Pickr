@@ -1,8 +1,11 @@
+<?php
+  $is_logged_in = $this->tank_auth->is_logged_in(); 
+?>
 <div class="container">
 	<div id="holder">
 
     <?php
-      if (!$this->tank_auth->is_logged_in()) {
+      if (!$is_logged_in) {
         echo '
           <!-- Top Message -->
           <div class="alert alert-error" style="margin: 1%;">
@@ -81,16 +84,16 @@
         for($i = 1; $i < 25; $i++) {
             echo '<div class="article">
                     <figure class="cap-bot">
-                        <div class="inner-box" id="pic_'.$i.'"'; if ($this->tank_auth->is_logged_in()) { echo 'onMouseOver="ShowActions(this.id)" onMouseOut="HideActions(this.id)"';} echo '>
+                        <div class="inner-box" id="pic_'.$i.'"'; if ($is_logged_in) { echo 'onMouseOver="ShowActions(this.id)" onMouseOut="HideActions(this.id)"';} echo '>
                             ';
-                            if ($this->tank_auth->is_logged_in()) {
+                            if ($is_logged_in) {
                             echo '<span class="tool-box">
-                                <a class="btn btn-small" href="#" onClick="Pick(this.parentNode.parentNode.id)"><i class="icon-star"></i></a>
+                                <a href="#pick" role="button" class="btn btn-small" data-toggle="modal"><i class="icon-star"></i></a>
                                 <a class="btn btn-small" href="#" onClick="Comment(this.parentNode.parentNode.id)"><i class="icon-star"></i></a>
                                 <a class="btn btn-small" href="#" onClick="Like(this.parentNode.parentNode.id)"><i class="icon-star"></i></a>
                             </span>';}
                             echo '<a class="pic-link" href="#">
-                                <img class="lazy" src="'.base_url().'resources/images/grey.gif" data-original="'.base_url().'resources/images/main/'.$i.'.jpg" alt="pic_'.$i.'" onLoad="OnImageLoad(event)" />
+                                <img id="pic_'.$i.'" class="lazy" src="'.base_url().'resources/images/grey.gif" data-original="'.base_url().'resources/images/main/'.$i.'.jpg" alt="pic_'.$i.'" onLoad="OnImageLoad(event)" />
                             </a>
                         </div>
                         <figcaption>
@@ -106,6 +109,58 @@
     ?>
     </div>
     <!-- END Load Pictures -->
+
+    <?php
+      if ($is_logged_in) {
+        echo '
+          <!-- pick Form -->
+          <div id="pick" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="pickLabel" aria-hidden="true">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+              <h3 id="pickLabel">Pick</h3>
+            </div>
+            <div class="modal-body">
+              <a class="pull-left" href="#" style="width: 45%; height: 175px;">
+                <img class="thumbnail" style="margin-right: 5px; width: 100%; height: 95%;" src="'; echo base_url(IMAGES.'220x200.gif'); echo '">
+              </a>
+              <div class="control-group pull-right" style="width: 50%; margin-bottom: 0;">
+                <div class="btn-group">
+                  <button style="width: 100%; height: 33px;" id="current-album" class="btn dropdown-toggle" data-toggle="dropdown" href="#">
+                    <strong style="float: left;">Select Album</strong>
+                    <span class="caret" style="float: right;"></span>
+                  </button>
+                  <ul id="album_list" class="dropdown-menu" style="width: 100%; max-height: 145px; overflow-x: hidden; overflow-y: auto;">
+                    <!-- dropdown menu links -->';
+                    if($albums) {
+                      foreach ($albums as $album) {
+                        echo '<li><a href="#" onClick="SetCurrentAlbum(this.innerHTML)">'.$album.'</a></li>';
+                      }
+                    }
+                    echo '<li class="divider"></li>
+                    <li>
+                      <form action="http://localhost/www/codeigniter/index.php/home/create_album" method="post" id="create-album-form">
+                        <input type="text" id="album_name" class="input-small pull-left" style="width: 61%; margin: 0 3% 2% 5%;" placeholder="Album Name" spellcheck="false" />
+                        <button type="submit" class="btn pull-right" id="create-album-btn">Create</button>
+                      </form>
+                    </li>
+                  </ul>
+                </div>';
+                $attributes = array('id' => 'pick-form', 'class' => 'form-horizontal');
+                echo form_open('index.php/home/add_pic_to_album', $attributes);
+                echo '<textarea id="album-description" rows="3" cols="40" style="resize: none; margin-top: 10%; width: 96.5%;" maxlength="50" placeholder="Description" onfocus="ShowDescriptionMessage()" onBlur="HideDescriptionMessage()" spellcheck="false"></textarea>
+                <input type="submit" class="btn btn-large btn-primary disabled" id="add-to-album-btn" style="width:100%; margin-top:5%; font-weight: bold;" value="Add Picture to Album" disabled="disabled" />
+                ';
+                echo form_close();
+                echo '
+              </div>
+            </div>
+            <div class="modal-footer"> 
+            </div>
+          </div>
+          <!-- END pick Form -->
+        ';
+      }
+    ?>
 
   </div>
   <button class="btn btn-large btn-block" id="btn-load" type="button"><b>More</b></button>

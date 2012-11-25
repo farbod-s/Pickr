@@ -42,6 +42,51 @@ $(document).ready(function() {
         $("html, body").animate({ scrollTop: 0 }, "slow");
         return false;
     });
+
+    // Pick action
+    $("a[data-toggle=modal]").click(function() {
+        var image = '#' + $(this).parent().parent().attr('id') + ' img';
+        var src = $(image).attr('src');
+        $('.thumbnail').attr('src', src);
+    });
+
+    // when pop-up window want to close
+    $('#pick').bind('hidden', function () {
+        var src = "http://localhost/www/codeigniter/resources/images/220x200.gif";
+        $('.thumbnail').attr('src', src);
+    });
+
+    // Create Album
+    $('#create-album-btn').click(function() {
+        var form_data = {
+            album_name: $('#album_name').val()
+        };
+        if(!$('#create-album-form').valid())
+            return false;
+        $.ajax({
+            url: "http://localhost/www/codeigniter/index.php/home/create_album",
+            type: 'POST',
+            dataType: 'JSON',
+            data: form_data,
+            success: function(result) {
+                if(result) {
+                    //alert('Success');
+                    var item = $('<li><a href="#" onClick="SetCurrentAlbum(this.innerHTML)">' + $('#album_name').val() + '</a></li>');
+                    $("#album_list").prepend(item);
+                    $('#album_name').attr('value', '');
+                    //window.location = "index.php/setting";
+                }
+                else {
+                    alert('Error'); // TODO
+                }
+            },
+            error: function() {
+                alert('Fatal Error');
+                //window.location = "index.php/setting";
+            }
+        });
+        return false;
+    });
 });
 
 function ShowActions(id) {
@@ -52,10 +97,6 @@ function ShowActions(id) {
 function HideActions(id) {
     var img_id = '#' + id + ' .tool-box';
     $(img_id).css('display', 'none');
-}
-
-function Pick(id) {
-    alert("Pick " + id);
 }
 
 function Like(id) {
@@ -72,6 +113,15 @@ function ShowDescriptionMessage() {
 
 function HideDescriptionMessage() {
     $('.charsRemaining').css('display', 'none');
+}
+
+function SetCurrentAlbum(current_value) {
+    var value = '<strong style="float: left;">' + current_value + '</strong> <span class="caret" style="float: right;"></span>';
+    $('#current-album').html(value);
+    $('#add-to-album-btn').removeClass('disabled');
+    $('#add-to-album-btn').removeAttr('disabled');
+
+    $('[data-toggle="dropdown"]').parent().removeClass('open');
 }
 
 
