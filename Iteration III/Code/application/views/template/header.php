@@ -56,7 +56,7 @@
 			        	  <li class="divider-vertical"></li>
 				          <li class="dropdown">
 				            <a class="dropdown-toggle" href="#" data-toggle="dropdown">
-								<i class="icon-user icon-white"></i>
+								<!-- <i class="icon-user icon-white"></i> -->
 				            	<strong>';
 				            	$username = $this->tank_auth->get_username();
 				            	$name = $this->tank_auth->get_complete_name();
@@ -70,8 +70,8 @@
 				            </a>
 				            	<!-- User Control -->
 				            	<ul class="dropdown-menu">
-					            	<li><a href="#"><i class="icon-picture"></i> Albums</a></li>
-								    <li><a href="'; echo base_url()."index.php/setting/index"; echo '"><i class="icon-pencil"></i> Setting</a></li>
+					            	<li><a href="#"><i class="icon-inbox"></i> Dashboard</a></li>
+								    <li><a href="'; echo base_url()."index.php/setting/index"; echo '"><i class="icon-wrench"></i> Setting</a></li>
 								    <!-- <li><a href="#"><i class="icon-upload"></i> Upload</a></li> -->
 								    <li class="divider"></li>
 								    <li><a href="'; echo base_url()."index.php/auth/logout"; echo '"><i class="icon-off"></i> Sign Out</a></li>

@@ -87,6 +87,15 @@ $(document).ready(function() {
         });
         return false;
     });
+
+/*
+    $('#add-to-album-btn').click(function() {
+        $(this).button('loading');
+        // Then whatever you actually want to do i.e. submit form
+        // After that has finished, reset the button state using
+        $(this).button('reset');
+    });
+*/
 });
 
 function ShowActions(id) {

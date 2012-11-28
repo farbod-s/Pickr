@@ -19,7 +19,7 @@
         ';
         echo '
         <!-- SignUp Form -->
-        <div id="signUp" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="signUpLabel" aria-hidden="true">';
+        <div id="signUp" style="width: 500px;" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="signUpLabel" aria-hidden="true">';
           $attributes = array('id' => 'register-form', 'class' => 'form-horizontal');
             echo form_open('index.php/auth/register', $attributes);
           echo '
@@ -83,27 +83,29 @@
     <?php
         for($i = 1; $i < 25; $i++) {
             echo '<div class="article">
-                    <figure class="cap-bot">
+                      <div class="frame">
+                      <figure class="cap-bot">
                         <div class="inner-box" id="pic_'.$i.'"'; if ($is_logged_in) { echo 'onMouseOver="ShowActions(this.id)" onMouseOut="HideActions(this.id)"';} echo '>
                             ';
                             if ($is_logged_in) {
                             echo '<span class="tool-box">
-                                <a href="#pick" role="button" class="btn btn-small" data-toggle="modal"><i class="icon-star"></i></a>
-                                <a class="btn btn-small" href="#" onClick="Comment(this.parentNode.parentNode.id)"><i class="icon-star"></i></a>
-                                <a class="btn btn-small" href="#" onClick="Like(this.parentNode.parentNode.id)"><i class="icon-star"></i></a>
+                                <a href="#pick" role="button" class="btn btn-small" data-toggle="modal"><i class="icon-magnet"></i></a>
+                                <a class="btn btn-small" href="#" onClick="Comment(this.parentNode.parentNode.id)"><i class="icon-comment"></i></a>
+                                <a class="btn btn-small" href="#" onClick="Like(this.parentNode.parentNode.id)"><i class="icon-thumbs-up"></i></a>
                             </span>';}
                             echo '<a class="pic-link" href="#">
                                 <img id="pic_'.$i.'" class="lazy" src="'.base_url().'resources/images/grey.gif" data-original="'.base_url().'resources/images/main/'.$i.'.jpg" alt="pic_'.$i.'" onLoad="OnImageLoad(event)" />
                             </a>
+                              <figcaption>
+                              <span>by unknown photographer</span>
+                              <span class="record pull-right">
+                                  <i class="icon-comment icon-white record-img"></i> '.(2 * $i + 3).'
+                                  <i class="icon-heart icon-white record-img"></i> '.(2 * $i + 1).'
+                              </span>
+                          </figcaption>
                         </div>
-                        <figcaption>
-                            <span>by unknown photographer</span>
-                            <span class="record pull-right">
-                                <i class="icon-comment icon-white record-img"></i> '.(2 * $i + 3).'
-                                <i class="icon-heart icon-white record-img"></i> '.(2 * $i + 1).'
-                            </span>
-                        </figcaption>
                     </figure>
+                    </div>
                 </div>';
         }
     ?>
@@ -139,8 +141,8 @@
                     echo '<li class="divider"></li>
                     <li>
                       <form action="http://localhost/www/codeigniter/index.php/home/create_album" method="post" id="create-album-form">
-                        <input type="text" id="album_name" class="input-small pull-left" style="width: 61%; margin: 0 3% 2% 5%;" placeholder="Album Name" spellcheck="false" />
-                        <button type="submit" class="btn pull-right" id="create-album-btn">Create</button>
+                        <input type="text" id="album_name" class="input-small pull-left" style="width: 64%; margin: 0 3% 3% 3%;" placeholder="Album Name" spellcheck="false" />
+                        <button type="submit" class="btn pull-right" id="create-album-btn"><strong>Create</strong></button>
                       </form>
                     </li>
                   </ul>
@@ -148,7 +150,7 @@
                 $attributes = array('id' => 'pick-form', 'class' => 'form-horizontal');
                 echo form_open('index.php/home/add_pic_to_album', $attributes);
                 echo '<textarea id="album-description" rows="3" cols="40" style="resize: none; margin-top: 10%; width: 96.5%;" maxlength="50" placeholder="Description" onfocus="ShowDescriptionMessage()" onBlur="HideDescriptionMessage()" spellcheck="false"></textarea>
-                <input type="submit" class="btn btn-large btn-primary disabled" id="add-to-album-btn" style="width:100%; margin-top:5%; font-weight: bold;" value="Add Picture to Album" disabled="disabled" />
+                <input type="submit" class="btn btn-large btn-primary disabled" data-loading-text="Picking..." id="add-to-album-btn" style="width:100%; margin-top:5%; font-weight: bold;" value="Add Picture to Album" disabled="disabled" />
                 ';
                 echo form_close();
                 echo '

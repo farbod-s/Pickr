@@ -2,7 +2,8 @@
 ::selection { background: #fe57a1; color: #fff; text-shadow: none; }
 
 body {
-	background: #C5C5C5 url('../images/bg-optimized.jpg') repeat 0 0 fixed;
+	/*background: #C5C5C5 url('../images/bg-optimized.jpg') repeat 0 0 fixed;*/
+    background: #F1F1F1 url('../images/noise-2.png');
 }
 
 
@@ -32,6 +33,19 @@ body {
 
 .inner-box {
     overflow: hidden;
+    width: 94%;
+    height: 92%;
+    margin: 4% 3%;
+    position: absolute;
+    /*
+    background-image: url('../images/ajax-loader.gif');
+    background-repeat: no-repeat;
+    background-position: center;
+    */
+}
+
+.frame {
+    overflow: hidden;
     width: 100%;
     height: 100%;
     position: absolute;
@@ -50,7 +64,17 @@ body {
     height: 100%;
     position: absolute;
     cursor: pointer;
+    /*border: 1px solid rgba(0, 0, 0, 0.12);*/
 }
+
+#copy-right {
+    color: #999;
+    text-transform: uppercase;
+    font-weight: bold;
+    font-size: 13px;
+    text-shadow: 0 1px 0 rgba(255, 255, 255, 0.6);
+}
+
 
 
 /***  Scrollbar ***/
@@ -255,7 +279,7 @@ body {
 .gallery .article {
     position: relative;
     float: left;
-    margin: 10px 1%;
+    margin: 25px 1%;
     width: 23%;
     height: 165px;
     overflow: hidden;
@@ -268,6 +292,12 @@ body {
     -o-transition: top 1s ease, left 1s ease;
     -ms-transition: top 1s ease, left 1s ease;
     transition: top 1s ease, left 1s ease;
+
+    -webkit-transition: 300ms;
+    -moz-transition: 300ms;
+    -ms-transition: 300ms;
+    -o-transition: 300ms;
+    transition: 300ms;
 */
 }
 
@@ -392,7 +422,7 @@ figure:hover:before
 .cap-bot figcaption
 {
     left: 0;
-    bottom: -15%;
+    bottom: -25%;
     text-align: left;
 }
 
