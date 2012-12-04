@@ -77,6 +77,9 @@
 								    <li><a href="'; echo base_url()."index.php/auth/logout"; echo '"><i class="icon-off"></i> Sign Out</a></li>
 								</ul>
 				          </li>
+						  <li>
+				          	<a href="#upload-picture-form" role="button" class="btn-navbar" data-toggle="modal"><i class="icon-upload  icon-white"></i> Upload</a>
+				          </li>
 				        </ul>';
 		    		}
 		        ?>
