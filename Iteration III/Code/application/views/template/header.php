@@ -70,7 +70,7 @@
 				            </a>
 				            	<!-- User Control -->
 				            	<ul class="dropdown-menu">
-					            	<li><a href="#"><i class="icon-inbox"></i> Dashboard</a></li>
+					            	<li><a href="'; echo base_url()."index.php/dashboard/index"; echo '"><i class="icon-inbox"></i> Dashboard</a></li>
 								    <li><a href="'; echo base_url()."index.php/setting/index"; echo '"><i class="icon-wrench"></i> Setting</a></li>
 								    <!-- <li><a href="#"><i class="icon-upload"></i> Upload</a></li> -->
 								    <li class="divider"></li>
