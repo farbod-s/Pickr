@@ -426,7 +426,18 @@ class Users extends CI_Model
 		$this->db->where('user_id', $user_id);
 		$this->db->delete($this->profile_table_name);
 	}
+	
+	// Get username by user_id
+	function get_username($user_id)
+	{
+		$this->db->where('id', $user_id);
+		$query = $this->db->get($this->table_name);
+		if ($query->num_rows() == 1) return $query->row()->username;
+		return NULL;
+	}
+		
 }
+	
 
 /* End of file users.php */
 /* Location: ./application/models/auth/users.php */
