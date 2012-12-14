@@ -23,4 +23,35 @@ class Picture_Album extends CI_Model
 
 		return FALSE;
 	}
+	
+	public function show_list($album_id){
+			 $this->db->select('picture_id'); 
+   			 $this->db->from('picture_album');   
+			 $this->db->where('album_id', $album_id);
+ 			 return $this->db->get()->result();
+		}
+		
+		public function delete_album ($albumId)
+		{
+			$this->db->where('id', $albumId);
+			$this->db->delete('album');  
+			$this->db->where('album_id', $albumId);
+			$this->db->delete('picture_album'); 
+			return;
+		}
+		public function show_name($album_id){
+			 $this->db->select('name'); 
+   			 $this->db->from('album');   
+			 $this->db->where('id', $album_id);
+ 			 return $this->db->get()->result();
+		}
+		
+			public function delete_pic ($picId,$albumId)
+		{
+			$this->db->where('album_id', $albumId and 'picture_id',$picId);
+			$this->db->delete('picture_album'); 
+			return;
+		}
+		
+		
 }
