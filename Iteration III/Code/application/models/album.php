@@ -4,6 +4,8 @@ class Album extends CI_Model
 {
 	private $table_name = 'album';
 	private $user_album_table_name = 'user_album';
+	private $picture_table_name = 'picture';
+	private $picture_album_table_name = 'picture_album';
 
 	function __construct() {
 		parent::__construct();
@@ -60,4 +62,38 @@ class Album extends CI_Model
 
 	    return $albums_name;
 	}
+
+	public function get_pic_of_album($user_id){
+		$first_pic = array();
+		$temp = array();
+		// find albums by user_id from user_album table
+		$this->db->where('user_id', $user_id);
+		$query = $this->db->get($this->user_album_table_name);
+		// for every founded album
+		foreach ($query->result() as $albums_id) {
+			// find first picture_id from picture_album table
+			$this->db->select_min('picture_id');
+			$query2= $this->db->get_where($this->picture_album_table_name,array('album_id' => $albums_id->album_id));
+			// push first pics into an array
+			if ($query2->num_rows() > 0) {
+				foreach ($query2->result() as $pics_id) {
+					array_push($temp, $pics_id->picture_id);
+				}
+			}
+		}
+		// for every founded picture_id
+		foreach ($temp as $pic_id){
+			// find the picture field (picture address) from picture table
+			$this->db->where('id', $pic_id);
+			$query3 = $this->db->get($this->picture_table_name);
+			//push first pics's addresses into an array
+			if ($query3->num_rows() > 0) {
+				foreach ($query3->result() as $pic) {
+					array_push($first_pic, $pic->picture);
+				}
+			}
+		}
+		return $first_pic;
+	}
+	
 }

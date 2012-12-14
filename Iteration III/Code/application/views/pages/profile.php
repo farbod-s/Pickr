@@ -1,6 +1,7 @@
 <?php
   $is_logged_in = $this->tank_auth->is_logged_in(); 
 ?>
+
 <div class="container">
 	<div id="holder">
 		<?php
@@ -44,7 +45,8 @@
 								<div class="thumbnail">
 									<img src="http://placehold.it/300x200" alt="">
 									<h4 align="center">Album Name</h4>
-									<p align="center">
+									<p align="center">							
+
 										<button class="btn btn-primary" type="button">Follow </button>
 									</p>
 								</div>
@@ -70,14 +72,14 @@
 						';
 					}
 					else {						
-						foreach($albums as $album){
+						foreach(array_combine($albums, $first_pics) as $album => $first_pic){
 							echo '
 								<li class="span4">
 									<div class="thumbnail">
-										<img src="http://placehold.it/300x200" alt="">
-										<h4 align="center">$album</h4>
+										<img src='.$first_pic.' alt="">
+										<h4 align="center">'.$album.'</h4>
 										<p align="center">
-											<button class="btn btn-primary" type="button">Edit Album </button>
+											<button class="btn btn-primary" type="button">Follow </button>
 										</p>
 									</div>
 								</li> 
@@ -88,7 +90,7 @@
 			</ul>	
 		</div>
 	</div>
-</div>
+</div>									
 
 <button id="ScrollToTop" class="Button WhiteButton Indicator" type="button" style="display: none;">
   Scroll to Top
