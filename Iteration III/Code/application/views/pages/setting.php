@@ -1,4 +1,3 @@
-<link rel="stylesheet" type="text/css" media="screen" href="http://localhost/www/codeigniter/assets/css/jquery.fileupload-ui.css"/>
 <div class="container">
 	<!-- Top Message -->
     <div class="alert alert-error" style="margin: 1%;">

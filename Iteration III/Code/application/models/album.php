@@ -94,6 +94,5 @@ class Album extends CI_Model
 			}
 		}
 		return $first_pic;
-	}
-	
+	}	
 }

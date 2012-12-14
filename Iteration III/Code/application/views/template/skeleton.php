@@ -39,9 +39,9 @@
 <link rel="apple-touch-icon" sizes="114x114" href="<?php echo base_url(IMAGES.'ico/apple-touch-icon-114x114-precompressed.png');?>">
 
 <!-- Bootstrap Image Gallery styles -->
-<link rel="stylesheet" href="http://localhost/www/codeigniter/assets/css/bootstrap-image-gallery.min.css">
+<!-- <link rel="stylesheet" href="http://localhost/www/codeigniter/assets/css/bootstrap-image-gallery.min.css"> -->
 <!-- CSS to style the file input field as button and adjust the Bootstrap progress bars -->
-<link rel="stylesheet" href="http://localhost/www/codeigniter/assets/css/jquery.fileupload-ui.css">
+<!-- <link rel="stylesheet" href="http://localhost/www/codeigniter/assets/css/jquery.fileupload-ui.css"> -->
 
 <!--
 <link href="http://twitter.github.com/bootstrap/assets/css/bootstrap.css" rel="stylesheet">

@@ -52,7 +52,7 @@ $(document).ready(function() {
 
     // when pop-up window want to close
     $('#pick').bind('hidden', function () {
-        var src = "http://localhost/www/codeigniter/resources/images/220x200.gif";
+        var src = "http://localhost/pickr/resources/images/220x200.gif";
         $('.thumbnail').attr('src', src);
     });
 
@@ -64,7 +64,7 @@ $(document).ready(function() {
         if(!$('#create-album-form').valid())
             return false;
         $.ajax({
-            url: "http://localhost/www/codeigniter/index.php/home/create_album",
+            url: "http://localhost/pickr/index.php/home/create_album",
             type: 'POST',
             dataType: 'JSON',
             data: form_data,

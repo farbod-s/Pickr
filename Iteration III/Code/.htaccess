@@ -5,7 +5,7 @@ AddDefaultCharset UTF-8
   	# my url is http://localhost/arny
     #RewriteBase /arny/
 	# set your own
-	RewriteBase /www/CodeIgniter
+	RewriteBase /pickr
 	
     #Removes access to the system folder by users.
     #Additionally this will allow you to create a System.php controller,
