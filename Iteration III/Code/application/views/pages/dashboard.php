@@ -29,15 +29,15 @@
 			</div>
 		</div>
     
-    	<?php if($albums && !empty($albums)) { ?>
+    	<?php if($albums_detail && !empty($albums_detail)) { ?>
 		<div>
 			<ul class="thumbnails">
 			<?php
-			foreach(array_combine($albums, $first_pics) as $album => $first_pic) { ?>
+			foreach($albums_detail as $name => $first_pic) { ?>
 				<li class="span4">
 					<div class="thumbnail">
 						<img src="<?php echo $first_pic; ?>" alt="">
-						<h4 align="center"><?php echo $album; ?></h4>
+						<h4 align="center"><?php echo $name; ?></h4>
 						<p align="center">
 							<button class="btn btn-primary" type="button">Edit Album</button>
 						</p>

@@ -16,9 +16,8 @@ class Dashboard extends MY_Controller {
 			$this->ci->load->model('album');
 			
 			$user_id = $this->ci->session->userdata('user_id');
-			
-			$this->data['albums'] = $this->ci->album->get_all_album_name($user_id);
-			$this->data['first_pics'] = $this->ci->album->get_pic_of_album($user_id);
+
+			$this->data['albums_detail'] = $this->ci->album->get_albums_detail($user_id);
 			
 			$this->_render('pages/dashboard');
 		}

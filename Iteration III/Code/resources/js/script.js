@@ -88,14 +88,40 @@ $(document).ready(function() {
         return false;
     });
 
-/*
     $('#add-to-album-btn').click(function() {
         $(this).button('loading');
         // Then whatever you actually want to do i.e. submit form
         // After that has finished, reset the button state using
+        var form_data = {
+            album_name: $('#album_name').val()
+        };
+        if(!$('#create-album-form').valid())
+            return false;
+        $.ajax({
+            url: "http://localhost/pickr/index.php/home/create_album",
+            type: 'POST',
+            dataType: 'JSON',
+            data: form_data,
+            success: function(result) {
+                if(result) {
+                    //alert('Success');
+                    var item = $('<li><a href="#" onClick="SetCurrentAlbum(this.innerHTML)">' + $('#album_name').val() + '</a></li>');
+                    $("#album_list").prepend(item);
+                    $('#album_name').attr('value', '');
+                    //window.location = "index.php/setting";
+                }
+                else {
+                    alert('Error'); // TODO
+                }
+            },
+            error: function() {
+                alert('Fatal Error');
+                //window.location = "index.php/setting";
+            }
+        });
         $(this).button('reset');
+        return false;
     });
-*/
 });
 
 function ShowActions(id) {
