@@ -1,7 +1,15 @@
 <?php
   $is_logged_in = $this->tank_auth->is_logged_in(); 
+
+if (!$is_logged_in)
+{
+	 redirect(base_url().'index.php/');
+} else {
+		$username = $this->tank_auth->get_username();
+		$name = $this->tank_auth->get_complete_name();
+}
 ?>
-<?php $adress= base_url().'index.php/album/deletepic/'.$picId /$albumId ; ?>">
+
 <div class="container">
 <div class = "Album_header">
 			<a class="ImgLink" href=""><div class = "avatar">	
@@ -11,7 +19,7 @@
 			</div></a>
 			<div class = "id_info">
 				<div id="BoardUsers">
-					<span id="BoardUserName" style="line-height: 2"><a href=""><span>User_Name</span></a></span>
+					<span id="BoardUserName" style="line-height: 2"><a href=""><span><?php echo $username ?></span></a></span>
 				</div>
 				<div id="BoardStats">                                  
 				<p style="line-height: 6"><span style="font-size: 105%">
@@ -41,18 +49,18 @@
 				</form>
 				<form action="<?php echo base_url().'index.php/album/rename/'.$albumId ?>" method="get">
 					<input class="rename" type="submit" value="Rename Album">
-					<input name="newname" type="text" />
+					<input name="newname" type="text" style="width:100px; margin-left:120px;"/>
 			</form>
-		</div>
-		</div>
-		</div>
-		</div>
+				</div>
+			</div>
+</div>
+		
 	<div id="holder">
 
     <div class="gallery">
     <?php
     	
-        foreach ($data as $var=> $value) {
+       foreach ($data as $var=> $value) {
     		$i=$value->picture_id;
             echo '<div class="article">
                       <div class="frame">
@@ -62,7 +70,7 @@
                             
                             echo '<span class="tool-box">
                                 <a href="#pick" role="button" class="btn btn-small" data-toggle="modal"><i class="icon-magnet"></i></a>
-                                <a class="btn btn-small" href="#" action=" <?php echo $adress ?>"><i class="icon-delete"></i></a>
+                       			<a class="btn btn-small" href="#" action="<?php echo base_url();?>index.php/album/deletepic/<?php echo $i ; ?>/<?php echo $albumId; ?>"><i class="icon-delete"></i></a>
        
                             </span>';
                             echo '<a class="pic-link" href="#">
@@ -80,13 +88,7 @@
                     </div>
                 </div>';
         }
-    ?>
-    </div>
-    <!-- END Load Pictures -->
- </div>
-  <button class="btn btn-large btn-block" id="btn-load" type="button"><b>More</b></button>
-</div>
-
-<button id="ScrollToTop" class="Button WhiteButton Indicator" type="button" style="display: none;">
-  Scroll to Top
-</button>
+       ?>
+	 </div>
+  </div>
+  </div>

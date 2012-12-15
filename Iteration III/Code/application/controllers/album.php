@@ -37,7 +37,7 @@ class Album extends MY_Controller {
 			$this->ci->load->database();
 			$this->ci->load->model('picture_album');
 			$this->picture_album->delete_album($albumId);
-            redirect(base_url().'index.php/'.'album/view/'.$albumId);
+            redirect(base_url().'index.php/');
 	}
 
 	public function rename($albumId = -1) {
