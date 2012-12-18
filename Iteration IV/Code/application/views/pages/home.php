@@ -177,7 +177,13 @@
                 <div class="comments">
                   <div class="comment">
                     <div class="comment-header">
-                      <img src="<?php echo base_url();?>resources/images/grey.gif" class="img-circle pull-left commenter-pic" style="width: 50px; height: 50px;" />
+                      <div class="btn-group pull-right">
+                        <a class="btn dropdown-toggle" data-toggle="dropdown" href="#"><span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                          <li><a href="#"><i class="icon-flag"></i> Report Spam</a></li>
+                        </ul>
+                      </div>
+                      <img src="<?php echo base_url(IMAGES.'ali-karimi.jpg');?>" class="img-circle pull-left commenter-pic" style="width: 50px; height: 50px;" />
                       <h4 class="commenter-name">Farbod Samsamipour</h4>
                       <div class="commenter-date">12/18/2012 8:06:32</div>
                     </div>
@@ -188,7 +194,13 @@
                   </div>
                   <div class="comment">
                     <div class="comment-header">
-                      <img src="<?php echo base_url();?>resources/images/grey.gif" class="img-circle pull-left commenter-pic" style="width: 50px; height: 50px;" />
+                      <div class="btn-group pull-right">
+                        <a class="btn dropdown-toggle" data-toggle="dropdown" href="#"><span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                          <li><a href="#"><i class="icon-flag"></i> Report Spam</a></li>
+                        </ul>
+                      </div>
+                      <img src="<?php echo base_url(IMAGES.'naser.jpg');?>" class="img-circle pull-left commenter-pic" style="width: 50px; height: 50px;" />
                       <h4 class="commenter-name">Ehsan Nezhadian</h4>
                       <div class="commenter-date">12/18/2012 8:06:32</div>
                     </div>
@@ -199,7 +211,13 @@
                   </div>
                   <div class="comment">
                     <div class="comment-header">
-                      <img src="<?php echo base_url();?>resources/images/grey.gif" class="img-circle pull-left commenter-pic" style="width: 50px; height: 50px;" />
+                      <div class="btn-group pull-right">
+                        <a class="btn dropdown-toggle" data-toggle="dropdown" href="#"><span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                          <li><a href="#"><i class="icon-flag"></i> Report Spam</a></li>
+                        </ul>
+                      </div>
+                      <img src="<?php echo base_url(IMAGES.'ali-karimi.jpg');?>" class="img-circle pull-left commenter-pic" style="width: 50px; height: 50px;" />
                       <h4 class="commenter-name">Farbod Samsamipour</h4>
                       <div class="commenter-date">12/18/2012 8:06:32</div>
                     </div>
@@ -210,7 +228,13 @@
                   </div>
                   <div class="comment">
                     <div class="comment-header">
-                      <img src="<?php echo base_url();?>resources/images/grey.gif" class="img-circle pull-left commenter-pic" style="width: 50px; height: 50px;" />
+                      <div class="btn-group pull-right">
+                        <a class="btn dropdown-toggle" data-toggle="dropdown" href="#"><span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                          <li><a href="#"><i class="icon-flag"></i> Report Spam</a></li>
+                        </ul>
+                      </div>
+                      <img src="<?php echo base_url(IMAGES.'in.jpg');?>" class="img-circle pull-left commenter-pic" style="width: 50px; height: 50px;" />
                       <h4 class="commenter-name">Unknown User</h4>
                       <div class="commenter-date">12/18/2012 8:06:32</div>
                     </div>
@@ -221,7 +245,13 @@
                   </div>
                   <div class="comment">
                     <div class="comment-header">
-                      <img src="<?php echo base_url();?>resources/images/grey.gif" class="img-circle pull-left commenter-pic" style="width: 50px; height: 50px;" />
+                      <div class="btn-group pull-right">
+                        <a class="btn dropdown-toggle" data-toggle="dropdown" href="#"><span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                          <li><a href="#"><i class="icon-flag"></i> Report Spam</a></li>
+                        </ul>
+                      </div>
+                      <img src="<?php echo base_url(IMAGES.'naser.jpg');?>" class="img-circle pull-left commenter-pic" style="width: 50px; height: 50px;" />
                       <h4 class="commenter-name">Ehsan Nezhadian</h4>
                       <div class="commenter-date">12/18/2012 8:06:32</div>
                     </div>
@@ -232,13 +262,53 @@
                   </div>
                   <div class="comment">
                     <div class="comment-header">
-                      <img src="<?php echo base_url();?>resources/images/grey.gif" class="img-circle pull-left commenter-pic" style="width: 50px; height: 50px;" />
+                      <div class="btn-group pull-right">
+                        <a class="btn dropdown-toggle" data-toggle="dropdown" href="#"><span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                          <li><a href="#"><i class="icon-flag"></i> Report Spam</a></li>
+                        </ul>
+                      </div>
+                      <img src="<?php echo base_url(IMAGES.'ali-karimi.jpg');?>" class="img-circle pull-left commenter-pic" style="width: 50px; height: 50px;" />
                       <h4 class="commenter-name">Farbod Samsamipour</h4>
                       <div class="commenter-date">12/18/2012 8:06:32</div>
                     </div>
                     <hr class="soft">
                     <div class="comment-body">
                       khafeh shid, ahhh! :(
+                    </div>
+                  </div>
+                  <div class="comment">
+                    <div class="comment-header">
+                      <div class="btn-group pull-right">
+                        <a class="btn dropdown-toggle" data-toggle="dropdown" href="#"><span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                          <li><a href="#"><i class="icon-flag"></i> Report Spam</a></li>
+                        </ul>
+                      </div>
+                      <img src="<?php echo base_url(IMAGES.'in.jpg');?>" class="img-circle pull-left commenter-pic" style="width: 50px; height: 50px;" />
+                      <h4 class="commenter-name">Unknown User</h4>
+                      <div class="commenter-date">12/18/2012 8:06:32</div>
+                    </div>
+                    <hr class="soft">
+                    <div class="comment-body">
+                      zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz :D
+                    </div>
+                  </div>
+                  <div class="comment">
+                    <div class="comment-header">
+                      <div class="btn-group pull-right">
+                        <a class="btn dropdown-toggle" data-toggle="dropdown" href="#"><span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                          <li><a href="#"><i class="icon-flag"></i> Report Spam</a></li>
+                        </ul>
+                      </div>
+                      <img src="<?php echo base_url(IMAGES.'naser.jpg');?>" class="img-circle pull-left commenter-pic" style="width: 50px; height: 50px;" />
+                      <h4 class="commenter-name">Ehsan Nezhadian</h4>
+                      <div class="commenter-date">12/18/2012 8:06:32</div>
+                    </div>
+                    <hr class="soft">
+                    <div class="comment-body">
+                      kesafat! ...
                     </div>
                   </div>
                 </div>
