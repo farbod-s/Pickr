@@ -81,27 +81,27 @@
       for($i = 1; $i < 25; $i++) { ?>
         <div class="article">
               <div class="frame">
-              <figure class="cap-bot">
-                <div class="inner-box" id="pic_<?php echo $i; ?>"<?php if ($is_logged_in) { ?> onMouseOver="ShowActions(this.id)" onMouseOut="HideActions(this.id)" <?php }?>>
-                  <?php
-                    if ($is_logged_in) { ?>
-                    <span class="tool-box">
-                        <a href="#pick" role="button" class="btn btn-small pick-btn" data-toggle="modal"><i class="icon-magnet"></i></a>
-                        <a class="btn btn-small" href="#"><i class="icon-comment"></i></a>
-                        <a class="btn btn-small like-btn" href="#"><i class="icon-thumbs-up"></i></a>
-                    </span><?php }?>
-                    <a class="pic-link" href="#">
-                        <img id="pic_<?php echo $i; ?>" class="lazy" src="<?php echo base_url();?>resources/images/grey.gif" data-original="<?php echo base_url();?>resources/images/main/<?php echo $i; ?>.jpg" alt="pic_<?php echo $i; ?>" onLoad="OnImageLoad(event)" />
-                    </a>
-                      <figcaption>
-                      <span>by unknown photographer</span>
-                      <span class="record pull-right">
-                          <i class="icon-comment icon-white record-img"></i> <span class="record-comment"><?php echo (2 * $i + 3); ?></span>
-                          <i class="icon-heart icon-white record-img"></i> <span class="record-like"><?php echo (2 * $i + 1); ?></span>
-                      </span>
-                  </figcaption>
-                </div>
-            </figure>
+                <figure class="cap-bot">
+                  <div class="inner-box" id="pic_<?php echo $i; ?>">
+                    <?php
+                      if ($is_logged_in) { ?>
+                      <span class="tool-box">
+                          <a href="#pick" role="button" class="btn btn-small pick-btn" data-toggle="modal"><i class="icon-magnet"></i></a>
+                          <a href="#comment" role="button" class="btn btn-small comment-btn" data-toggle="modal"><i class="icon-comment"></i></a>
+                          <a class="btn btn-small like-btn" href="#"><i class="icon-thumbs-up"></i></a>
+                      </span><?php }?>
+                      <a class="pic-link" href="#">
+                          <img id="pic_<?php echo $i; ?>" class="lazy" src="<?php echo base_url();?>resources/images/grey.gif" data-original="<?php echo base_url();?>resources/images/main/<?php echo $i; ?>.jpg" alt="pic_<?php echo $i; ?>" />
+                      </a>
+                        <figcaption>
+                        <span>by unknown photographer</span>
+                        <span class="record pull-right">
+                            <i class="icon-comment icon-white record-img"></i> <span class="record-comment"><?php echo (2 * $i + 3); ?></span>
+                            <i class="icon-heart icon-white record-img"></i> <span class="record-like"><?php echo (2 * $i + 1); ?></span>
+                        </span>
+                    </figcaption>
+                  </div>
+              </figure>
             </div>
         </div>
     <?php } ?>
@@ -133,10 +133,12 @@
                     }?>
                     <li class="divider"></li>
                     <li>
-                      <form action="http://localhost/pickr/index.php/home/create_album" method="post" id="create-album-form">
+                      <?php
+                      $attributes = array('id' => 'create-album-form', 'class' => 'form-horizontal');
+                      echo form_open(base_url('index.php/home/create_album'), $attributes); ?>
                         <input type="text" id="album_name" class="input-small pull-left" style="width: 64%; margin: 0 3% 3% 3%;" placeholder="Album Name" spellcheck="false" />
                         <button type="submit" class="btn pull-right" id="create-album-btn" data-loading-text="..."><strong>Create</strong></button>
-                      </form>
+                      <?php form_close(); ?>
                     </li>
                   </ul>
                 </div>
@@ -148,8 +150,8 @@
                 <img class="thumbnail" id="picked-pic" style="margin-right: 5px; width: 100%; height: 95%;" src="<?php echo base_url(IMAGES.'220x200.gif'); ?>">
               </a>
               <div class="control-group pull-right" style="width: 50%; margin-bottom: 0;">
-                <textarea id="album-description" rows="3" cols="40" style="resize: none; margin-top: 10%; width: 96.5%;" maxlength="50" placeholder="Description" onfocus="ShowDescriptionMessage()" onBlur="HideDescriptionMessage()" spellcheck="false"></textarea>
-                <button type="submit" class="btn btn-large btn-primary disabled" data-loading-text="Picking..." id="add-to-album-btn" style="width:100%; margin-top:5%; font-weight: bold;" disabled="disabled">Add Picture to Album</button>
+                <textarea id="album-description" rows="3" cols="40" style="resize: none; margin-top: 10%; width: 96.5%;" maxlength="50" placeholder="Description" spellcheck="false"></textarea>
+                <button type="submit" class="btn btn-large btn-primary disabled" data-loading-text="Picking..." id="add-to-album-btn" style="width:100%; margin-top:2%; font-weight: bold;" disabled="disabled">Add Picture to Album</button>
               </div>
               <?php form_close(); ?>
             </div>
@@ -159,10 +161,110 @@
           <!-- END pick Form -->
     <?php } ?>
 
+    <?php
+      if ($is_logged_in) { ?>
+
+          <!-- comment Form -->
+          <div id="comment" class="modal hide fade modal-comment" tabindex="-1" role="dialog" aria-labelledby="commentLabel" aria-hidden="true">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+              <h3 id="commentLabel">Comment</h3>
+            </div>
+            <div class="modal-body">
+              <!-- TODO: load comments here -->
+              <div class="control-group pull-right" style="width: 50%; margin: 0;">
+                <h3 class="comment-title">Preview Comments</h3>
+                <div class="comments">
+                  <div class="comment">
+                    <div class="comment-header">
+                      <img src="<?php echo base_url();?>resources/images/grey.gif" class="img-circle pull-left commenter-pic" style="width: 50px; height: 50px;" />
+                      <h4 class="commenter-name">Farbod Samsamipour</h4>
+                      <div class="commenter-date">12/18/2012 8:06:32</div>
+                    </div>
+                    <hr class="soft">
+                    <div class="comment-body">
+                      nice shot! ;)
+                    </div>
+                  </div>
+                  <div class="comment">
+                    <div class="comment-header">
+                      <img src="<?php echo base_url();?>resources/images/grey.gif" class="img-circle pull-left commenter-pic" style="width: 50px; height: 50px;" />
+                      <h4 class="commenter-name">Ehsan Nezhadian</h4>
+                      <div class="commenter-date">12/18/2012 8:06:32</div>
+                    </div>
+                    <hr class="soft">
+                    <div class="comment-body">
+                      chi migi? :-?
+                    </div>
+                  </div>
+                  <div class="comment">
+                    <div class="comment-header">
+                      <img src="<?php echo base_url();?>resources/images/grey.gif" class="img-circle pull-left commenter-pic" style="width: 50px; height: 50px;" />
+                      <h4 class="commenter-name">Farbod Samsamipour</h4>
+                      <div class="commenter-date">12/18/2012 8:06:32</div>
+                    </div>
+                    <hr class="soft">
+                    <div class="comment-body">
+                      to chi migi?
+                    </div>
+                  </div>
+                  <div class="comment">
+                    <div class="comment-header">
+                      <img src="<?php echo base_url();?>resources/images/grey.gif" class="img-circle pull-left commenter-pic" style="width: 50px; height: 50px;" />
+                      <h4 class="commenter-name">Unknown User</h4>
+                      <div class="commenter-date">12/18/2012 8:06:32</div>
+                    </div>
+                    <hr class="soft">
+                    <div class="comment-body">
+                      chetorid ahmagha! :D
+                    </div>
+                  </div>
+                  <div class="comment">
+                    <div class="comment-header">
+                      <img src="<?php echo base_url();?>resources/images/grey.gif" class="img-circle pull-left commenter-pic" style="width: 50px; height: 50px;" />
+                      <h4 class="commenter-name">Ehsan Nezhadian</h4>
+                      <div class="commenter-date">12/18/2012 8:06:32</div>
+                    </div>
+                    <hr class="soft">
+                    <div class="comment-body">
+                      bebinamet haleto ja miaram.
+                    </div>
+                  </div>
+                  <div class="comment">
+                    <div class="comment-header">
+                      <img src="<?php echo base_url();?>resources/images/grey.gif" class="img-circle pull-left commenter-pic" style="width: 50px; height: 50px;" />
+                      <h4 class="commenter-name">Farbod Samsamipour</h4>
+                      <div class="commenter-date">12/18/2012 8:06:32</div>
+                    </div>
+                    <hr class="soft">
+                    <div class="comment-body">
+                      khafeh shid, ahhh! :(
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <?php
+                $attributes = array('id' => 'comment-form', 'class' => 'form-horizontal');
+                echo form_open(base_url('index.php/home/comment_on_picture'), $attributes); ?>
+              <div class="control-group pull-left" style="width: 50%; margin: 0;">
+                <a href="#">
+                  <img class="thumbnail" id="commented-pic" style="margin-right: 5px; width: 330px; height: 250px;" src="<?php echo base_url(IMAGES.'220x200.gif'); ?>">
+                </a>
+                <textarea id="comment-content" rows="1" cols="30" style="resize: none; max-height: 64px; margin-top: 5%; width: 94.5%;" maxlength="100" placeholder="Write a comment..." spellcheck="false"></textarea>
+                <button type="submit" class="btn btn-large btn-primary disabled" data-loading-text="Adding Comment..." id="add-comment-btn" style="width:94.5%; margin-top:3%; font-weight: bold;" disabled="disabled">Add Comment</button>
+              </div>
+              <?php form_close(); ?>
+            </div>
+            <div class="modal-footer"> 
+            </div>
+          </div>
+          <!-- END comment Form -->
+    <?php } ?>
+
   </div>
   <button class="btn btn-large btn-block" id="btn-load" type="button"><b>More</b></button>
 </div>
 
-<button id="ScrollToTop" class="Button WhiteButton Indicator" type="button" style="display: none;">
+<button id="ScrollToTop" class="btn" type="button" style="display: none;">
   Scroll to Top
 </button>

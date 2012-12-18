@@ -82,6 +82,7 @@
 	<script src="<?php echo base_url(JS."validator.js");?>"></script>
 	<script src="<?php echo base_url(JS."rotation.js");?>"></script>
 	<script src="<?php echo base_url(JS."auth.js");?>"></script>
+	<script src="<?php echo base_url(JS."libs/jquery.autosize.js");?>"></script>
 
 	<!-- extra js-->
 	<?php foreach($javascript as $js):?>

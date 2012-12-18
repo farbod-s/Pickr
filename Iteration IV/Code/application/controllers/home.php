@@ -30,6 +30,25 @@ class Home extends MY_Controller {
 		}
 	}
 
+	public function dislike_picture() {
+		$this->ci =& get_instance();
+		$this->ci->load->database();
+		$this->ci->load->model('feel');
+
+		$user_id = $this->ci->session->userdata('user_id');
+		if ($this->ci->feel->dislike($user_id,
+								  	 $this->input->post('picture_path'))) {
+			echo json_encode(TRUE);
+		}
+		else {
+			echo json_encode(FALSE);
+		}
+	}
+
+	public function comment_on_picture() {
+		// TODO
+	}
+
 	public function add_pic_to_album() {
 		$this->ci =& get_instance();
 		$this->ci->load->database();

@@ -18,6 +18,30 @@ $(document).ready(function() {
         }
     });
 
+    // fix lazy images
+    $("img.lazy").bind("load", function (evt) {
+        var img;
+        if (evt && evt.currentTarget)
+            img = evt.currentTarget;
+        else
+            img = window.event.srcElement;
+
+        // what's the size of this image and it's parent
+        var w = $(img).width();
+        var h = $(img).height();
+        var tw = $(img).parent().width();
+        var th = $(img).parent().height();
+
+        // compute the new size and offsets
+        var result = ScaleImage(w, h, tw, th, false);
+
+        // adjust the image coordinates and size
+        img.width = result.width;
+        img.height = result.height;
+        $(img).css("left", result.targetleft);
+        $(img).css("top", result.targettop);
+    });
+
     //Description with restrict chars
     $('textarea[maxlength]').keyup(function() {
         var max = parseInt($(this).attr('maxlength'));
@@ -43,6 +67,15 @@ $(document).ready(function() {
         return false;
     });
 
+    // show user actions
+    $(".article").hover(function() {
+        var img_id = '#' + $(this).children().children().children().attr('id') + ' .tool-box';
+        $(img_id).css('display', 'block');
+        }, function() {
+            var img_id = '#' + $(this).children().children().children().attr('id') + ' .tool-box';
+            $(img_id).css('display', 'none');
+    });
+
     // Pick action
     $("a.pick-btn[data-toggle=modal]").click(function() {
         var image = '#' + $(this).parent().parent().attr('id') + ' img';
@@ -50,8 +83,26 @@ $(document).ready(function() {
         $('.thumbnail').attr('src', src);
     });
 
+    // resize comment box <!we have bug on this, when user press Enter!>
+    $('textarea#comment-content').autosize();  
+
+    $('textarea#comment-content').on("keyup input change", function () {
+        $('#add-comment-btn').prop({ disabled: !$('textarea#comment-content').val() });
+        $('#add-comment-btn').removeClass('disabled');
+        //$('#add-comment-btn').removeAttr('disabled');
+    });
+
+    // Comment action
+    $("a.comment-btn[data-toggle=modal]").click(function() {
+        var image = '#' + $(this).parent().parent().attr('id') + ' img';
+        var src = $(image).attr('src');
+        $('.thumbnail').attr('src', src);
+    });
+
     // like action
+    //$('.tool-box').on('click', 'a.like-btn', function() { // delegate like-btn
     $("a.like-btn").click(function() {
+        alert('x');
         var image = '#' + $(this).parent().parent().attr('id');
         var form_data = {
             picture_path: $(image + ' img').attr('src')
@@ -67,6 +118,54 @@ $(document).ready(function() {
                     // update likes
                     var likes = Number($(image + ' span.record-like').html()) + 1;
                     $(image + ' span.record-like').html(likes);
+
+                    // change icon to thumbs-down
+                    $(image + ' i.icon-thumbs-up').addClass('icon-thumbs-down');
+                    $(image + ' i.icon-thumbs-up').removeClass('icon-thumbs-up');
+
+                    // remove like button & add dislike button
+                    $(image + ' a.like-btn').addClass('dislike-btn');
+                    $(image + ' a.like-btn').removeClass('like-btn');
+                }
+                else {
+                    alert('Error'); // TODO
+                }
+            },
+            error: function() {
+                alert('Fatal Error');
+                //window.location = "index.php/setting";
+            }
+        });
+        return false;
+    });
+
+    // dislike action
+    //$('.tool-box').on('click', 'a.dislike-btn', function() { // delegate dislike-btn
+    $("a.dislike-btn").click(function() {
+        alert('y');
+        var image = '#' + $(this).parent().parent().attr('id');
+        var form_data = {
+            picture_path: $(image + ' img').attr('src')
+        };
+        $.ajax({
+            url: "http://localhost/pickr/index.php/home/dislike_picture",
+            type: 'POST',
+            dataType: 'JSON',
+            data: form_data,
+            success: function(result) {
+                if(result) {
+                    alert('Success');
+                    // update likes
+                    var likes = Number($(image + ' span.record-like').html()) - 1;
+                    $(image + ' span.record-like').html(likes);
+
+                    // change icon to thumbs-down
+                    $(image + ' i.icon-thumbs-down').addClass('icon-thumbs-up');
+                    $(image + ' i.icon-thumbs-down').removeClass('icon-thumbs-down');
+
+                    // remove like button & add dislike button
+                    $(image + ' a.dislike-btn').addClass('like-btn');
+                    $(image + ' a.dislike-btn').removeClass('dislike-btn');
                 }
                 else {
                     alert('Error'); // TODO
@@ -157,24 +256,6 @@ $(document).ready(function() {
         return false;
     });
 });
-
-function ShowActions(id) {
-    var img_id = '#' + id + ' .tool-box';
-    $(img_id).css('display', 'block');
-}
-
-function HideActions(id) {
-    var img_id = '#' + id + ' .tool-box';
-    $(img_id).css('display', 'none');
-}
-
-function Like(id) {
-    alert("Like " + id);
-}
-
-function Comment(id) {
-    alert("Comment " + id);
-}
 
 function ShowDescriptionMessage() {
     $('.charsRemaining').css('display', 'block');
@@ -283,7 +364,7 @@ function FixImage(fLetterBox, div, img) {
 
 function FixImages(fLetterBox) {
     $(".article").each(function (index, div) {
-        var img = $(div).find("img").get(0);
+        var img = $(div).find("img.lazy").get(0);
         FixImage(fLetterBox, div, img);
     });
 }
@@ -302,7 +383,7 @@ function StretchImage(div, img) {
 
 function StretchImages() {
     $(".article").each(function (index, div) {
-        var img = $(div).find("img").get(0);
+        var img = $(div).find("img.lazy").get(0);
         StretchImage(div, img);
     });
 }

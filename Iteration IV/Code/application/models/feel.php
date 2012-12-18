@@ -28,6 +28,14 @@ class Feel extends CI_Model
 		return FALSE;
 	}
 
+	public function dislike($user_id, $picture_path) {
+		$picture_id = $this->get_picture_id($picture_path);
+		if ($picture_id && $this->delete_like($picture_id, $user_id)) {
+			return TRUE;
+		}
+		return FALSE;
+	}
+
 	private function get_picture_id($picture_path) {
 		$pic_id = 0;
 		$this->db->where('picture', $picture_path);
@@ -38,7 +46,7 @@ class Feel extends CI_Model
 		return $pic_id;
 	}
 
-	private  function save_like($picture_id, $user_id)
+	private function save_like($picture_id, $user_id)
 	{
 		$data_array = array('user_id' => $user_id, 'picture_id' => $picture_id);
 		if ($this->db->insert($this->table_name, $data_array)) {
@@ -47,10 +55,11 @@ class Feel extends CI_Model
 		return FALSE;
 	}
 
-	public function dalete_like($picture_id, $user_id)
+	private function delete_like($picture_id, $user_id)
 	{
 		$this->db->where('user_id', $user_id);
 		$this->db->where('picture_id', $picture_id);
-		$this->db->delete($this->table_name); 
+		$this->db->delete($this->table_name)
+		return ($this->db->affected_rows() > 0) ? TRUE : FALSE;
 	}	
 }
