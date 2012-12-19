@@ -4,21 +4,19 @@ if (!defined('BASEPATH'))
 
 class Album extends MY_Controller {
 
-	public function __construct()
-	{
+	public function __construct() {
 		parent::__construct();
-		// Your own constructor code
 	}
 
 	public function index() {
-		show_404();
+		// redirect to dashboard
+		redirect(base_url('index.php/dashboard'));
 	}
 
 	public function view($albumId = -1) {
 		$this->data['data'] = array();
 		$this->data['albumId'] = $albumId;
-		if ($albumId != -1)
-		{
+		if ($albumId != -1) {
 			$this->ci = &get_instance();
 			$this->ci->load->database();
 			$this->ci->load->model('picture_album');
@@ -26,18 +24,15 @@ class Album extends MY_Controller {
 			$this->data['albumname'] = $this->picture_album->show_name($albumId);
 			
 		}
-		
-		$this->_render('pages/album_view');
-		
+		$this->_render('pages/album');
 	}
 
 	public function delete($albumId = -1) {
-		
-			$this->ci = &get_instance();
-			$this->ci->load->database();
-			$this->ci->load->model('picture_album');
-			$this->picture_album->delete_album($albumId);
-            redirect(base_url().'index.php/');
+		$this->ci = &get_instance();
+		$this->ci->load->database();
+		$this->ci->load->model('picture_album');
+		$this->picture_album->delete_album($albumId);
+        redirect(base_url().'index.php/');
 	}
 
 	public function rename($albumId = -1) {
@@ -47,14 +42,11 @@ class Album extends MY_Controller {
 		redirect(base_url().'index.php/'.'album/view/'.$albumId);
 	}
 	
-		public function deletepic($picId = -1,$albumId= -1) {
-		
-			$this->ci = &get_instance();
-			$this->ci->load->database();
-			$this->ci->load->model('picture_album');
-			$this->picture_album->delete_pic($picId,$albumId);
-            redirect(base_url().'index.php/'.'album/view/'.$albumId);
+	public function deletepic($picId = -1, $albumId= -1) {
+		$this->ci = &get_instance();
+		$this->ci->load->database();
+		$this->ci->load->model('picture_album');
+		$this->picture_album->delete_pic($picId,$albumId);
+        redirect(base_url().'index.php/'.'album/view/'.$albumId);
 	}
-
-	
 }

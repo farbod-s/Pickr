@@ -138,7 +138,7 @@
                       echo form_open(base_url('index.php/home/create_album'), $attributes); ?>
                         <input type="text" id="album_name" class="input-small pull-left" style="width: 64%; margin: 0 3% 3% 3%;" placeholder="Album Name" spellcheck="false" />
                         <button type="submit" class="btn pull-right" id="create-album-btn" data-loading-text="..."><strong>Create</strong></button>
-                      <?php form_close(); ?>
+                      <?php echo form_close(); ?>
                     </li>
                   </ul>
                 </div>
@@ -151,9 +151,9 @@
               </a>
               <div class="control-group pull-right" style="width: 50%; margin-bottom: 0;">
                 <textarea id="album-description" rows="3" cols="40" style="resize: none; margin-top: 10%; width: 96.5%;" maxlength="50" placeholder="Description" spellcheck="false"></textarea>
-                <button type="submit" class="btn btn-large btn-primary disabled" data-loading-text="Picking..." id="add-to-album-btn" style="width:100%; margin-top:2%; font-weight: bold;" disabled="disabled">Add Picture to Album</button>
+                <button type="submit" class="btn btn-large btn-primary disabled" data-loading-text="Picking..." id="add-to-album-btn" style="width:100%; margin-top:5%; font-weight: bold;" disabled="disabled">Add Picture to Album</button>
               </div>
-              <?php form_close(); ?>
+              <?php echo form_close(); ?>
             </div>
             <div class="modal-footer"> 
             </div>
@@ -320,10 +320,10 @@
                 <a href="#">
                   <img class="thumbnail" id="commented-pic" style="margin-right: 5px; width: 330px; height: 250px;" src="<?php echo base_url(IMAGES.'220x200.gif'); ?>">
                 </a>
-                <textarea id="comment-content" rows="1" cols="30" style="resize: none; max-height: 64px; margin-top: 5%; width: 94.5%;" maxlength="100" placeholder="Write a comment..." spellcheck="false"></textarea>
+                <textarea id="comment-content" rows="1" cols="30" style="resize: none; max-height: 64px; margin-top: 7%; width: 94.5%;" maxlength="100" placeholder="Write a comment..." spellcheck="false"></textarea>
                 <button type="submit" class="btn btn-large btn-primary disabled" data-loading-text="Adding Comment..." id="add-comment-btn" style="width:94.5%; margin-top:3%; font-weight: bold;" disabled="disabled">Add Comment</button>
               </div>
-              <?php form_close(); ?>
+              <?php echo form_close(); ?>
             </div>
             <div class="modal-footer"> 
             </div>

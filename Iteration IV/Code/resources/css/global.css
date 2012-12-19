@@ -124,10 +124,6 @@ textarea#comment-content {
     opacity: 1;
 }
 
-.profile-description {
-    border: 1px solid #333;
-}
-
 .modal-comment {
     /*new custom width*/
     width: 750px;
@@ -203,6 +199,231 @@ hr.soft {
     margin-left: 50px;
     /*padding: 5px;*/
 }
+
+.profile-details {
+    height: 150px;
+    overflow: hidden;
+    background: white;
+    border-radius: 2px;
+    box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.2);
+    padding: 20px;
+    margin: 2% auto;
+    position: relative;
+    width: 91%;
+}
+
+.profile-name {
+    padding: 25px;
+    font-size: 25px;
+    font-weight: bold;
+    margin-left: 25px;
+}
+
+.profile-description {
+    padding: 25px;
+    font-size: 15px;
+    font-weight: bold;
+    margin-left: 25px;
+}
+
+.profile-picks {
+
+}
+
+.picks-title {
+
+}
+
+.picks-amount {
+
+}
+
+.profile-likes {
+
+}
+
+.likes-title {
+
+}
+
+.likes-amount {
+
+}
+
+.profile-follows {
+
+}
+
+.follows-title {
+
+}
+
+.follows-amount {
+
+}
+
+.profile-followers {
+
+}
+
+.followers-title {
+
+}
+
+.followers-amount {
+    
+}
+
+
+
+/*** BEGIN Album Style ***/
+
+.pinBoard {
+/*width: 222px !important;*/
+padding: 0 !important;
+background: none;
+box-shadow: none;
+-moz-box-shadow: none;
+-webkit-box-shadow: none;
+margin-bottom: 20px;
+
+background-color: rgba(0, 0, 0, 0.025);
+border: 2px solid rgba(0, 0, 0, 0.15);
+border-radius: 6px;
+-moz-border-radius: 6px;
+-webkit-border-radius: 6px;
+}
+
+.pinBoard .board {
+box-shadow: 0 1px 3px rgba(0, 10, 10, 0.18);
+-moz-box-shadow: 0 1px 3px rgba(0,10,10,0.18);
+-webkit-box-shadow: 0 1px 3px rgba(0, 10, 10, 0.18);
+position: relative;
+}
+
+.pin {
+/*position: absolute;*/
+width: 192px;
+padding: 15px 15px 0;
+font-size: 11px;
+background-color: white;
+box-shadow: 0 1px 3px rgba(34, 25, 25, 0.4);
+-moz-box-shadow: 0 1px 2px rgba(34,25,25,0.4);
+-webkit-box-shadow: 0 1px 3px rgba(34, 25, 25, 0.4);
+}
+
+.pinBoard .holder {
+overflow: hidden;
+width: 222px;
+background-color: white;
+}
+
+.pinBoard .cover {
+height: 150px;
+width: 100%;
+display: block;
+text-align: center;
+margin-bottom: 1px;
+overflow: hidden;
+position: relative;
+position: relative;
+}
+
+.pinBoard .thumbs {
+display: block;
+width: 224px;
+}
+.pinBoard .buttonContainer {
+display:block;
+position: relative;
+height: 34px;
+}
+
+
+
+
+.pinBoard.emptyBoard:hover, .pinBoard.emptyBoard {
+background-color: rgba(0, 0, 0, 0.025);
+border: 2px solid rgba(0, 0, 0, 0.15);
+}
+
+.pinBoard.emptyBoard {
+border: 2px dashed #C1C1C1;
+border-radius: 6px;
+-moz-border-radius: 6px;
+-webkit-border-radius: 6px;
+height: 238px;
+margin-top: 46px;
+overflow: hidden;
+width: 222px;
+}
+
+.pinBoard.emptyBoard:hover .holder, .pinBoard.emptyBoard.holder {
+display: block;
+}
+
+.pinBoard.emptyBoard .holder {
+background-color: transparent;
+display: none;
+}
+
+.createBoard.pinBoard:hover .holder .cover.empty, .pinBoard.emptyBoard .holder .cover.empty {
+border-bottom: 1px solid darkGray;
+margin-bottom: 0;
+}
+
+.pinBoard.emptyBoard .empty {
+background-color: #D2D2D2;
+background-color: rgba(0, 0, 0, 0.05);
+}
+
+.createBoard.pinBoard:hover .holder .thumbs .empty, .pinBoard.emptyBoard .holder .thumbs .empty {
+border-right: 1px solid darkGray;
+margin-right: 0;
+}
+
+.pinBoard .holder .thumbs img, .pinBoard .holder .thumbs .empty {
+float: left;
+width: 55px;
+height: 55px;
+margin: 0 1px 0 0;
+}
+
+.createBoard.pinBoard .buttonContainer {
+display: none;
+}
+
+.createBoard.pinBoard:hover .buttonContainer {
+display:block;
+position: relative;
+height: 34px;
+}
+
+
+.createBoard.pinBoard .createBoardSubmitNoHover {
+display: block;
+background-color: transparent;
+background-image: none;
+box-shadow: 0 1px transparent, inset 0 1px transparent;
+-moz-box-shadow: 0 1px transparent, inset 0 1px transparent;
+-webkit-box-shadow: 0 1px transparent, inset 0 1px transparent;
+border-color: transparent;
+color: #999;
+font-size: 20px;
+width: 100%;
+text-align: center;
+font-weight: bold;
+margin-top: 50%;
+}
+
+.createBoard.pinBoard:hover .createBoardSubmitNoHover {
+display: none;
+}
+
+
+/*** END Album Style ***/
+
+
 
 
 
@@ -394,24 +615,34 @@ textarea::-webkit-scrollbar-thumb {
     background: #fff;
     border-radius: 2px; /*was 4px*/
     box-shadow: 0px 1px 3px rgba(0,0,0,0.2);
-/*
-    -webkit-transition: top 1s ease, left 1s ease;
-    -moz-transition: top 1s ease, left 1s ease;
-    -o-transition: top 1s ease, left 1s ease;
-    -ms-transition: top 1s ease, left 1s ease;
-    transition: top 1s ease, left 1s ease;
+}
 
-    -webkit-transition: 300ms;
-    -moz-transition: 300ms;
-    -ms-transition: 300ms;
-    -o-transition: 300ms;
-    transition: 300ms;
-*/
+.boards {
+    margin: 0 auto;
+    width: 100%;
+    height: 100%;
+}
+
+.boards .pinBoard {
+    position: relative;
+    float: left;
+    margin: 30px 2.8%;
+    width: 19%;
+    /*overflow: hidden;*/
 }
 
 /*----------------------------------------
 =RESPONSIVE STYLING
 ----------------------------------------*/
+
+@media screen and (max-width: 1200px) { /* Columns decreased to 4 */
+
+    .boards .pinBoard {
+        width: 23.6%;
+        margin-left: 4.6%;
+        margin-right: 4.6%;
+    }
+}
 
 @media screen and (max-width: 980px) { /* Columns decreased to 3 */
     
@@ -419,6 +650,16 @@ textarea::-webkit-scrollbar-thumb {
         width: 31.3333%;
         margin-left: 1%;
         margin-right: 1%;
+    }
+
+    .boards .pinBoard {
+        width: 30.6%;
+        margin-left: 9.4%;
+        margin-right: 9.4%;
+    }
+
+    .profile-details {
+        width: 86.5%;
     }
 }
 
@@ -428,6 +669,15 @@ textarea::-webkit-scrollbar-thumb {
         margin: 2%;
         width: 46%;
     }
+
+    .boards .pinBoard {
+        margin: 7.5%;
+        width: 222px;
+    }
+
+    .profile-details {
+        width: 76%;
+    }
 }
 
 @media screen and (max-width: 480px) { /* Columns decreased to 1 */
@@ -435,6 +685,15 @@ textarea::-webkit-scrollbar-thumb {
     .gallery .article {
         margin: 4%;
         width: 92%;
+    }
+
+    .boards .pinBoard {
+        margin: 9%;
+        width: 222px;
+    }
+
+    .profile-details {
+        width: 70%;
     }
 }
 
