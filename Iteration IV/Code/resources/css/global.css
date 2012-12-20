@@ -226,204 +226,163 @@ hr.soft {
     margin-left: 25px;
 }
 
-.profile-picks {
-
-}
-
-.picks-title {
-
-}
-
-.picks-amount {
-
-}
-
-.profile-likes {
-
-}
-
-.likes-title {
-
-}
-
-.likes-amount {
-
-}
-
-.profile-follows {
-
-}
-
-.follows-title {
-
-}
-
-.follows-amount {
-
-}
-
-.profile-followers {
-
-}
-
-.followers-title {
-
-}
-
-.followers-amount {
-    
-}
-
 
 
 /*** BEGIN Album Style ***/
 
 .pinBoard {
-/*width: 222px !important;*/
-padding: 0 !important;
-background: none;
-box-shadow: none;
--moz-box-shadow: none;
--webkit-box-shadow: none;
-margin-bottom: 20px;
+    /*width: 222px !important;*/
+    height: 238px;
+    padding: 0 !important;
+    background: none;
+    box-shadow: none;
+    -moz-box-shadow: none;
+    -webkit-box-shadow: none;
+    margin-bottom: 20px;
 
-background-color: rgba(0, 0, 0, 0.025);
-border: 2px solid rgba(0, 0, 0, 0.15);
-border-radius: 6px;
--moz-border-radius: 6px;
--webkit-border-radius: 6px;
+    background-color: rgba(0, 0, 0, 0.025);
+    border: 2px solid rgba(0, 0, 0, 0.15);
+    border-radius: 6px;
+    -moz-border-radius: 6px;
+    -webkit-border-radius: 6px;
+    height: 270px;
 }
 
 .pinBoard .board {
-box-shadow: 0 1px 3px rgba(0, 10, 10, 0.18);
--moz-box-shadow: 0 1px 3px rgba(0,10,10,0.18);
--webkit-box-shadow: 0 1px 3px rgba(0, 10, 10, 0.18);
-position: relative;
+    box-shadow: 0 1px 3px rgba(0, 10, 10, 0.18);
+    -moz-box-shadow: 0 1px 3px rgba(0,10,10,0.18);
+    -webkit-box-shadow: 0 1px 3px rgba(0, 10, 10, 0.18);
+    position: relative;
 }
 
 .pin {
-/*position: absolute;*/
-width: 192px;
-padding: 15px 15px 0;
-font-size: 11px;
-background-color: white;
-box-shadow: 0 1px 3px rgba(34, 25, 25, 0.4);
--moz-box-shadow: 0 1px 2px rgba(34,25,25,0.4);
--webkit-box-shadow: 0 1px 3px rgba(34, 25, 25, 0.4);
+    width: 192px;
+    padding: 15px 15px 0;
+    font-size: 11px;
+    /*background-color: white;*/
+    box-shadow: 0 1px 3px rgba(34, 25, 25, 0.4);
+    -moz-box-shadow: 0 1px 2px rgba(34,25,25,0.4);
+    -webkit-box-shadow: 0 1px 3px rgba(34, 25, 25, 0.4);
 }
 
 .pinBoard .holder {
 overflow: hidden;
-width: 222px;
-background-color: white;
+/*width: 222px;*/
+    background-color: white;
 }
 
 .pinBoard .cover {
-height: 150px;
-width: 100%;
-display: block;
-text-align: center;
-margin-bottom: 1px;
-overflow: hidden;
-position: relative;
-position: relative;
+    height: 150px;
+    width: 100%;
+    display: block;
+    text-align: center;
+    margin-bottom: 1px;
+    overflow: hidden;
+    position: relative;
 }
 
 .pinBoard .thumbs {
-display: block;
-width: 224px;
+    display: block;
+    width: 224px;
 }
 .pinBoard .buttonContainer {
-display:block;
-position: relative;
-height: 34px;
+    display:block;
+    position: relative;
+    height: 34px;
 }
 
-
-
-
 .pinBoard.emptyBoard:hover, .pinBoard.emptyBoard {
-background-color: rgba(0, 0, 0, 0.025);
-border: 2px solid rgba(0, 0, 0, 0.15);
+    background-color: rgba(0, 0, 0, 0.025);
+    border: 2px solid rgba(0, 0, 0, 0.15);
 }
 
 .pinBoard.emptyBoard {
-border: 2px dashed #C1C1C1;
-border-radius: 6px;
--moz-border-radius: 6px;
--webkit-border-radius: 6px;
-height: 238px;
-margin-top: 46px;
-overflow: hidden;
-width: 222px;
+    border: 2px dashed #C1C1C1;
+    border-radius: 6px;
+    -moz-border-radius: 6px;
+    -webkit-border-radius: 6px;
+    height: 270px;
+    margin-top: 46px;
+    overflow: hidden;
+    width: 222px;
 }
 
 .pinBoard.emptyBoard:hover .holder, .pinBoard.emptyBoard.holder {
-display: block;
+    display: block;
 }
 
 .pinBoard.emptyBoard .holder {
-background-color: transparent;
-display: none;
+    background-color: transparent;
+    display: none;
 }
 
 .createBoard.pinBoard:hover .holder .cover.empty, .pinBoard.emptyBoard .holder .cover.empty {
-border-bottom: 1px solid darkGray;
-margin-bottom: 0;
+    border-bottom: 1px solid darkGray;
+    margin-bottom: 0;
+    height: 180px;
 }
 
 .pinBoard.emptyBoard .empty {
-background-color: #D2D2D2;
-background-color: rgba(0, 0, 0, 0.05);
+    background-color: #D2D2D2;
+    background-color: rgba(0, 0, 0, 0.05);
 }
 
 .createBoard.pinBoard:hover .holder .thumbs .empty, .pinBoard.emptyBoard .holder .thumbs .empty {
-border-right: 1px solid darkGray;
-margin-right: 0;
+    border-right: 1px solid darkGray;
+    margin-right: 0;
 }
 
 .pinBoard .holder .thumbs img, .pinBoard .holder .thumbs .empty {
-float: left;
-width: 55px;
-height: 55px;
-margin: 0 1px 0 0;
+    float: left;
+    width: 55px;
+    height: 55px;
+    margin: 0 1px 0 0;
 }
 
 .createBoard.pinBoard .buttonContainer {
-display: none;
+    display: none;
 }
 
 .createBoard.pinBoard:hover .buttonContainer {
-display:block;
-position: relative;
-height: 34px;
+    display:block;
+    position: relative;
+    height: 34px;
 }
 
-
 .createBoard.pinBoard .createBoardSubmitNoHover {
-display: block;
-background-color: transparent;
-background-image: none;
-box-shadow: 0 1px transparent, inset 0 1px transparent;
--moz-box-shadow: 0 1px transparent, inset 0 1px transparent;
--webkit-box-shadow: 0 1px transparent, inset 0 1px transparent;
-border-color: transparent;
-color: #999;
-font-size: 20px;
-width: 100%;
-text-align: center;
-font-weight: bold;
-margin-top: 50%;
+    display: block;
+    background-color: transparent;
+    background-image: none;
+    box-shadow: 0 1px transparent, inset 0 1px transparent;
+    -moz-box-shadow: 0 1px transparent, inset 0 1px transparent;
+    -webkit-box-shadow: 0 1px transparent, inset 0 1px transparent;
+    border-color: transparent;
+    color: #999;
+    font-size: 20px;
+    width: 100%;
+    text-align: center;
+    font-weight: bold;
+    margin-top: 50%;
 }
 
 .createBoard.pinBoard:hover .createBoardSubmitNoHover {
-display: none;
+    display: none;
 }
 
+.serif {
+    text-align: center;
+    padding: 5px 0;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+    height: 20px;
+    width: 100%;
+    font-weight: bold;
+    font-size: 13px;
+    color: #555;
+}
 
 /*** END Album Style ***/
-
-
 
 
 
@@ -657,10 +616,6 @@ textarea::-webkit-scrollbar-thumb {
         margin-left: 9.4%;
         margin-right: 9.4%;
     }
-
-    .profile-details {
-        width: 86.5%;
-    }
 }
 
 @media screen and (max-width: 768px) { /* Columns decreased to 2 */
@@ -674,10 +629,6 @@ textarea::-webkit-scrollbar-thumb {
         margin: 7.5%;
         width: 222px;
     }
-
-    .profile-details {
-        width: 76%;
-    }
 }
 
 @media screen and (max-width: 480px) { /* Columns decreased to 1 */
@@ -690,10 +641,6 @@ textarea::-webkit-scrollbar-thumb {
     .boards .pinBoard {
         margin: 9%;
         width: 222px;
-    }
-
-    .profile-details {
-        width: 70%;
     }
 }
 

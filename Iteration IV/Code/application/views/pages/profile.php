@@ -5,48 +5,83 @@
 			$lastname = "";
 			$description = "";
 			$pic_address = "";
+			$album_count = count($albums_detail);
 
 			if($profile_info) {
-				$firstname = $profile_info->{'firstname'};
-				$lastname = $profile_info->{'lastname'};
-				$description = $profile_info->{'description'};
-				$pic_address = $profile_info->{'pic_address'};
+				$firstname = $profile_info->firstname;
+				$lastname = $profile_info->lastname;
+				$description = $profile_info->description;
+				$pic_address = $profile_info->pic_address;
 			}
 		?>
 
-		<div class="profile-description" style="margin: 1%;">
-			<div class="row">
-				<div class="span3">
-					<img src="<?php if($pic_address != '') echo $pic_address; else echo base_url(IMAGES.'220x200.gif'); ?>" class="img-rounded">
-				</div>
-				<div class="span2">
-					<p class="lead"><?php if($firstname != '') echo $firstname; else echo "Here's";?> 
-					<?php if($lastname != '') echo $lastname; else echo "name"; ?></p>
-					<p><legend><?php if($description != '') echo $description; else echo "Here's Description";?></legend></p>
-					<button class="btn btn-large btn-block" id="btn-load" type="button">Follow All</button>
-				</div>
-				<div class="span1">
-				</div>
+		<div class="profile-details">
+			<div class="pull-left">
+				<img src="<?php if($pic_address != '') echo $pic_address; else echo base_url(IMAGES.'220x200.gif'); ?>" class="img-circle pull-left pickr-pic" style="width: 150px; height: 150px;" />
+			</div>
+			<div class="pull-left">
+				<div class="profile-name"><?php if($firstname != '') echo $firstname; else echo "Here's";?> 
+				<?php if($lastname != '') echo $lastname; else echo "name"; ?></div>
+				<div class="profile-description"><?php if($description != '') echo $description; else echo "Here's Description";?></div>
+			</div>
+			<div class="pull-right">
+				<?php if(!$ME && $album_count != 0) {?>
+					<button class="btn btn-large btn-danger">Follow All</button>
+				<?php }?>
 			</div>
 		</div>
 
-		<?php if($albums && !empty($albums)) { ?>
-		<div>
-			<ul class="thumbnails">
-			<?php
-				foreach(array_combine($albums, $first_pics) as $album => $first_pic) { ?>
-					<li class="span4">
-						<div class="thumbnail">
-							<img src="<?php echo $first_pic; ?>" alt="">
-							<h4 align="center"><?php echo $album; ?></h4>
-							<p align="center">
-								<button class="btn btn-primary" type="button">Follow</button>
-							</p>
-						</div>
-					</li> 							
-				<?php } ?>
-			</ul>
+		<hr class="soft" />
+
+		<div class="boards">
+			<?php if($albums_detail && !empty($albums_detail)) {
+				foreach($albums_detail as $name => $first_pic) { ?>
+			<div class="pin pinBoard" id="board1">
+				<div class="serif"><?php echo $name; ?></div>
+				<div class="board">
+					<div class="holder">
+						<span class="cover">
+							<img class="lazy" src="<?php echo base_url(IMAGES.'grey.gif');?>" data-original="<?php echo $first_pic; ?>" style="width: 100%; min-height: 150px;">
+						</span>
+						<span class="thumbs">
+						<img class="lazy" src="<?php echo base_url(IMAGES.'grey.gif');?>" data-original="<?php echo base_url(IMAGES.'grey.gif');?>" alt="Photo of a pin">
+						<img class="lazy" src="<?php echo base_url(IMAGES.'grey.gif');?>" data-original="<?php echo base_url(IMAGES.'grey.gif');?>" alt="Photo of a pin">
+						<img class="lazy" src="<?php echo base_url(IMAGES.'grey.gif');?>" data-original="<?php echo base_url(IMAGES.'grey.gif');?>" alt="Photo of a pin">
+						<img class="lazy" src="<?php echo base_url(IMAGES.'grey.gif');?>" data-original="<?php echo base_url(IMAGES.'grey.gif');?>" alt="Photo of a pin">
+						</span>
+					</div>
+					<div class="buttonContainer">
+						<button class="btn" type="submit" style="width: 100%; height: 100%; border-radius: 0 0 6px 6px;">
+							<?php if($ME) {?>
+							<strong>Edit</strong>
+							<?php } else {?>
+							<strong>Follow</strong>
+							<?php }?>
+						</button>
+					</div>
+				</div>
+			</div>
+			<?php } }?>
+
+			<?php if($ME) {?>
+				<div class="pin pinBoard createBoard emptyBoard">
+					<div class="holder">
+						<span class="cover empty"></span>
+						<span class="thumbs">
+							<span class="empty"></span>
+							<span class="empty"></span>
+							<span class="empty"></span>
+							<span class="empty"></span>
+						</span>
+					</div>
+					<div class="createBoardSubmitNoHover">New Album</div>
+					<div class="buttonContainer">
+						<button class="btn" type="submit" style="width: 100%; height: 100%; border-radius: 0 0 6px 6px;">
+							<strong>Create Album</strong>
+						</button>
+					</div>
+				</div>
+			<?php }?>
 		</div>
-		<?php } ?>
 	</div>
 </div>

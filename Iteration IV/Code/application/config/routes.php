@@ -41,6 +41,8 @@
 $route['default_controller'] = "home";
 $route['404_override'] = '';
 
+$route['user/([a-zA-z_]+)'] = "profile/user/$1";
+
 
 /* End of file routes.php */
 /* Location: ./application/config/routes.php */

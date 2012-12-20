@@ -91,7 +91,7 @@
                           <a class="btn btn-small like-btn" href="#"><i class="icon-thumbs-up"></i></a>
                       </span><?php }?>
                       <a class="pic-link" href="#">
-                          <img id="pic_<?php echo $i; ?>" class="lazy" src="<?php echo base_url();?>resources/images/grey.gif" data-original="<?php echo base_url();?>resources/images/main/<?php echo $i; ?>.jpg" alt="pic_<?php echo $i; ?>" />
+                          <img id="pic_<?php echo $i; ?>" class="lazy" src="<?php echo base_url(IMAGES.'grey.gif');?>" data-original="<?php echo base_url();?>resources/images/main/<?php echo $i; ?>.jpg" alt="pic_<?php echo $i; ?>" />
                       </a>
                         <figcaption>
                         <span>by unknown photographer</span>
@@ -128,7 +128,7 @@
                     <!-- dropdown menu links -->
                     <?php if($albums) {
                       foreach ($albums as $album) { ?>
-                        <li><a href="#" onClick="SetCurrentAlbum(this.innerHTML)"><?php echo $album; ?></a></li>
+                        <li style="text-overflow: ellipsis; overflow: hidden; white-space: nowrap;"><a href="#" onClick="SetCurrentAlbum(this.innerHTML)"><?php echo $album; ?></a></li>
                       <?php }
                     }?>
                     <li class="divider"></li>

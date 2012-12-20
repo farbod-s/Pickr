@@ -10,7 +10,7 @@ class Auth extends MY_Controller
 	function login()
 	{
 		if ($this->tank_auth->is_logged_in()) {									// logged in
-			redirect('index.php/home/index');
+			redirect(base_url());
 
 		} else {
 			$this->form_validation->set_rules('name', 'Username', 'trim|required|xss_clean');
@@ -45,7 +45,7 @@ class Auth extends MY_Controller
 	function logout()
 	{
 		$this->tank_auth->logout();
-		redirect('index.php/home/index');
+		redirect(base_url());
 	}
 
 	/**
@@ -56,7 +56,7 @@ class Auth extends MY_Controller
 	public function register()
 	{
 		if ($this->tank_auth->is_logged_in()) { // logged in
-			redirect('index.php/home/index');
+			redirect(base_url());
 		}
 		else {
 			$this->form_validation->set_rules('username', 'Username', 'trim|required|xss_clean|min_length['.$this->config->item('username_min_length', 'tank_auth').']|max_length['.$this->config->item('username_max_length', 'tank_auth').']|alpha_dash');
@@ -94,7 +94,7 @@ class Auth extends MY_Controller
 	function change_password()
 	{
 		if (!$this->tank_auth->is_logged_in()) {								// not logged in or not activated
-			redirect('index.php/home/index');
+			redirect(base_url());
 		}
 		else {
 			$this->form_validation->set_rules('old_pass', 'Old Password', 'trim|required|xss_clean');

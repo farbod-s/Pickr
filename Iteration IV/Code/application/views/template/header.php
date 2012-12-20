@@ -75,11 +75,11 @@
 				            </a>
 				            	<!-- User Control -->
 				            	<ul class="dropdown-menu">
-					            	<li><a href="<?php echo base_url();?>index.php/dashboard/index"><i class="icon-inbox"></i> Dashboard</a></li>
-								    <li><a href="<?php echo base_url();?>index.php/setting/index"><i class="icon-wrench"></i> Setting</a></li>
+					            	<li><a href="<?php echo base_url().'user/'.$username?>"><i class="icon-inbox"></i> Dashboard</a></li>
+								    <li><a href="<?php echo base_url('setting');?>"><i class="icon-wrench"></i> Setting</a></li>
 								    <!-- <li><a href="#"><i class="icon-upload"></i> Upload</a></li> -->
 								    <li class="divider"></li>
-								    <li><a href="<?php base_url()?>index.php/auth/logout"><i class="icon-off"></i> Sign Out</a></li>
+								    <li><a href="<?php echo base_url('auth/logout')?>"><i class="icon-off"></i> Sign Out</a></li>
 								</ul>
 				          </li>
 				        </ul>

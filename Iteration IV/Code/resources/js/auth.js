@@ -41,7 +41,7 @@ $(document).ready(function() {
 		if(!$('#login-form').valid())
 			return false;
 		$.ajax({
-			url: "index.php/auth/login",
+			url: "auth/login",
 			type: 'POST',
 			dataType: 'JSON',
 			data: form_data,
