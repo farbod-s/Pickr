@@ -22,6 +22,8 @@ class MY_Controller extends CI_Controller{
 		parent::__construct();
 		$this->data["uri_segment_1"] = $this->uri->segment(1);
 		$this->data["uri_segment_2"] = $this->uri->segment(2);
+		$this->data["uri_segment_3"] = $this->uri->segment(3);
+
 		$this->title = $this->config->item('site_title');
 		$this->description = $this->config->item('site_description');
 		$this->keywords = $this->config->item('site_keywords');
@@ -34,13 +36,10 @@ class MY_Controller extends CI_Controller{
         
 		// Load Libraries
         $this->load->helper('url_helper');
-        //$this->load->helper(array('form', 'url'));
 		
 		$this->load->library('form_validation');
 		$this->load->library('security');
 		$this->load->library('tank_auth');
-		
-		//$this->lang->load('tank_auth');
 	}
 	
 	protected function _render($view) {

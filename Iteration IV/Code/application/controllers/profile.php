@@ -47,4 +47,24 @@ class Profile extends MY_Controller {
 			redirect(base_url());
 		}
 	}
+
+	public function new_album() {
+		$this->ci =& get_instance();
+		$this->ci->load->database();
+		$this->ci->load->model('album_model');
+
+		$this->form_validation->set_rules('album_name', 'Album Name', 'trim|xss_clean');
+		if ($this->form_validation->run()) {
+			$user_id = $this->ci->session->userdata('user_id');
+			if ($this->ci->album_model->create_album($this->form_validation->set_value('album_name'), $user_id)) {
+				echo json_encode(TRUE);
+			}
+			else {
+				echo json_encode(FALSE);
+			}
+		}
+		else {
+			echo json_encode(FALSE);
+		}
+	}
 }

@@ -2022,6 +2022,13 @@ table .span24 {
   opacity: 0.3;
   filter: alpha(opacity=30);
   content: "";
+
+  /*pickr*/
+  -webkit-transition: 500ms;
+  -moz-transition: 500ms;
+  -ms-transition: 500ms;
+  -o-transition: 500ms;
+  transition: 500ms;
 }
 .dropdown .caret {
   margin-top: 8px;

@@ -61,7 +61,7 @@ class Home extends MY_Controller {
 	              <div class="btn-group pull-right">
 	                <a class="btn dropdown-toggle" data-toggle="dropdown" href="#"><span class="caret"></span></a>
 	                <ul class="dropdown-menu">
-	                  <li><a href="#"><i class="icon-flag"></i> Report Spam</a></li>
+	                  <li><a href="#"><i class="icon-flag"></i> Report Violation</a></li>
 	                </ul>
 	              </div>
 	              <img src="'.base_url(IMAGES.'in.jpg').'" class="img-circle pull-left commenter-pic" style="width: 50px; height: 50px;" />

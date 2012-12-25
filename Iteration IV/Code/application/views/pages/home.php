@@ -77,7 +77,7 @@
 
     <!-- Load Pictures -->
     <div class="gallery">
-    <?php
+    <?php /* TODO: MUST LOAD FROM DATABASE && INFINITE LOOP */
       for($i = 1; $i < 25; $i++) { ?>
         <div class="article">
               <div class="frame">

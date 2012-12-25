@@ -1,5 +1,6 @@
 $(document).ready(function() {
 
+    // used in update comment record in main page
     var LAST_IMG = "";
 
     // Fix input element click problem
@@ -179,6 +180,91 @@ $(document).ready(function() {
         return false;
     });
 
+    // delete picture
+    $('.delete-picture-btn').click(function() {
+        var image = '#' + $(this).parent().parent().attr('id');
+        var form_data = {
+            picture_path: $(image + ' img').attr('src'),
+            album_name: PICKR['uri_segment_3']
+        };
+        $.ajax({
+            url: PICKR['baseUrl'] + "album/delete_picture",
+            type: 'POST',
+            dataType: 'JSON',
+            data: form_data,
+            success: function(result) {
+                if(result) {
+                    //alert('Success, Picture deleted');
+                    window.location = PICKR['baseUrl'] + 'user/' + PICKR['uri_segment_2'] + '/' + PICKR['uri_segment_3'];
+                }
+                else {
+                    alert('Error, Can not delete picture');
+                }
+            },
+            error: function() {
+                alert('Ajax Error');
+                //window.location = PICKR['baseUrl'];
+            }
+        });
+        return false;
+    });
+
+    // delete album
+    $('.delete-album-btn').click(function() {
+        var form_data = {
+            album_name: PICKR['uri_segment_3']
+        };
+        $.ajax({
+            url: PICKR['baseUrl'] + "album/delete_album",
+            type: 'POST',
+            dataType: 'JSON',
+            data: form_data,
+            success: function(result) {
+                if(result) {
+                    //alert('Success, Album deleted');
+                    window.location = PICKR['baseUrl'] + 'user/' + PICKR['uri_segment_2'];
+                }
+                else {
+                    alert('Error, Can not delete album');
+                }
+            },
+            error: function() {
+                alert('Ajax Error');
+                //window.location = PICKR['baseUrl'];
+            }
+        });
+        return false;
+    });
+
+
+    // rename album
+    $('#rename-album-btn').click(function() {
+        var form_data = {
+            old_album_name: $('#old_album_name').attr('placeholder'),
+            new_album_name: $('#new_album_name').val()
+        };
+        $.ajax({
+            url: PICKR['baseUrl'] + "album/rename_album",
+            type: 'POST',
+            dataType: 'JSON',
+            data: form_data,
+            success: function(result) {
+                if(result) {
+                    //alert('Success, Album renamed');
+                    window.location = PICKR['baseUrl'] + 'user/' + PICKR['uri_segment_2'];
+                }
+                else {
+                    alert('Error, Can not rename picture');
+                }
+            },
+            error: function() {
+                alert('Ajax Error');
+                //window.location = PICKR['baseUrl'];
+            }
+        });
+        return false;
+    });    
+
     // when pop-up window want to close
     $('#pick').bind('hidden', function () {
         var src = PICKR['baseUrl'] + "resources/images/220x200.gif";
@@ -220,6 +306,39 @@ $(document).ready(function() {
         return false;
     });
 
+    // Create Album V.2
+    $('#new-album-btn').click(function() {
+        $(this).button('loading');
+        var form_data = {
+            album_name: $('#album_name').val()
+        };
+        if(!$('#new-album-form').valid()) {
+            $(this).button('reset');
+            return false;
+        }
+        $.ajax({
+            url: PICKR['baseUrl'] + "profile/new_album",
+            type: 'POST',
+            dataType: 'JSON',
+            data: form_data,
+            success: function(result) {
+                if(result) {
+                    //alert('Success, Album created');
+                    window.location = PICKR['baseUrl'] + 'user/' + PICKR['uri_segment_2'];
+                }
+                else {
+                    alert('Error, Can not create album');
+                }
+            },
+            error: function() {
+                alert('Ajax Error');
+                //window.location = PICKR['baseUrl'];
+            }
+        });
+        $(this).button('reset');
+        return false;
+    });
+
     // pick
     $('#add-to-album-btn').click(function() {
         $(this).button('loading');
@@ -240,6 +359,7 @@ $(document).ready(function() {
             success: function(result) {
                 if(result) {
                     //alert('Success, Picked');
+                    $('#pick').modal('hide');
                 }
                 else {
                     alert('Error, Can not pick');
@@ -276,6 +396,8 @@ $(document).ready(function() {
                     // update comments
                     var comments = Number($(LAST_IMG + ' span.record-comment').html()) + 1;
                     $(LAST_IMG + ' span.record-comment').html(comments);
+
+                    LoadComments(); // load comments
                 }
                 else {
                     alert('Error, Can not add comment');
@@ -321,6 +443,34 @@ $(document).ready(function() {
 });
 
 
+
+function LoadComments() {
+    $('.comments').html('');
+    //$('#comment').modal('show');
+    var form_data = {
+        picture_path: $('#commented-pic').attr('src')
+    };
+    $.ajax({
+        url: PICKR['baseUrl'] + "home/load_comments",
+        type: 'POST',
+        dataType: 'JSON',
+        data: form_data,
+        success: function(result) {
+            if(result) {
+                //alert('Success, Comments loaded');
+                $('.comments').html(result);
+            }
+            else {
+                //alert('Error, No comment exists for loading');
+            }
+        },
+        error: function() {
+            alert('Ajax Error');
+            //window.location = PICKR['baseUrl'];
+        }
+    });
+    return false;
+}
 
 function ShowDescriptionMessage() {
     $('.charsRemaining').css('display', 'block');

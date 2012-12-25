@@ -18,8 +18,10 @@
 						<!-- The Login drop down menu -->
 				        <ul class="nav pull-left">
 			        	  <li class="divider-vertical"></li>
-				          <li class="dropdown">
-				            <a class="dropdown-toggle" href="#" data-toggle="dropdown"><strong>Sign In</strong> <strong class="caret"></strong></a>
+				          <li class="dropdown header-link">
+				            <a class="dropdown-toggle" href="#" data-toggle="dropdown">
+				            	<i class="icon-user icon-white icon-group"></i> <strong>Sign In</strong> <strong class="caret"></strong>
+				            </a>
 				            <div class="dropdown-menu" style="padding: 15px;">
 				              <!-- Login form -->
 				              <div id="formContainer">
@@ -53,13 +55,13 @@
 		    			<!-- The User Control drop down menu -->
 			        	<ul class="nav pull-left">
 			        	  <li class="divider-vertical"></li>
-			        	  <li id="upload-btn">
-				          	<a href="#upload-picture-form" data-toggle="modal"><i id="upload-icon" class="icon-upload icon-white"></i> Upload</a>
+			        	  <li class="header-link">
+				          	<a href="#upload-picture-form" data-toggle="modal"><i class="icon-upload icon-white icon-group"></i> Upload</a>
 				          </li>
 			        	  <li class="divider-vertical"></li>
-				          <li id="user-btn" class="dropdown">
+				          <li class="dropdown header-link">
 				            <a class="dropdown-toggle" href="#" data-toggle="dropdown">
-								<i id="user-icon" class="icon-user icon-white"></i>
+								<i class="icon-user icon-white icon-group"></i>
 				            	<strong>
 				            		<?php
 				            	$username = $this->tank_auth->get_username();

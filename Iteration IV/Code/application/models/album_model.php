@@ -53,6 +53,38 @@ class Album_Model extends CI_Model
 		return $final_album_info;
 	}
 
+	public function delete_user_album($user_id, $album_name) {
+		$albums_id = array();
+		$this->db->select('*');
+		$query = $this->db->get($this->table_name);
+		if ($query->num_rows() > 0) {
+			foreach ($query->result() as $album) {
+		        if ($album_name == preg_replace("![^a-z0-9_]+!i", "-", strtolower($album->name))) {
+		        	array_push($albums_id, $album->id);
+		        }
+		    }
+		}
+		$final_album_id = 0;
+		$all_albums_id = $this->get_all_album_id($user_id);
+		foreach ($all_albums_id as $album_id) {
+			if (in_array($album_id, $albums_id)) {
+				$final_album_id = $album_id;
+				break;
+			}
+		}
+		$this->db->where('id', $final_album_id);
+		$this->db->delete($this->table_name);
+		return ($this->db->affected_rows() > 0) ? TRUE : FALSE;
+	}
+
+	public function rename_user_album($user_id, $old_album_name, $new_album_name) {
+		$album_id = $this->get_album_id($user_id, $old_album_name);
+		$this->db->set('name', $new_album_name);
+		$this->db->where('id', $album_id);
+		$this->db->update($this->table_name);
+		return ($this->db->affected_rows() > 0) ? TRUE : FALSE;
+	}
+
 	// find album_id
 	public function get_album_id($user_id, $album_name) {
 		$all_album_id = $this->get_all_album_id($user_id);

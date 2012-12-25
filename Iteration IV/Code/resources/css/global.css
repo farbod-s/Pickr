@@ -5,6 +5,18 @@ body {
     background: #F1F1F1 url('../images/noise-2.png');
 }
 
+a, a:link, a:visited {
+    text-decoration : none;
+    /*font-family: "calibri";*/
+    font-weight: bold;
+}
+
+a:hover, a:active, a:focus {
+    /*font-family: "calibri";*/
+    font-weight: bold;
+    text-decoration : none;
+}
+
 
 
 /***  Custom ***/
@@ -87,7 +99,7 @@ textarea#comment-content {
     text-shadow: 0 1px 0 rgba(255, 255, 255, 0.6);
 }
 
-#upload-icon {
+.icon-group {
     -webkit-transition: 500ms;
     -moz-transition: 500ms;
     -ms-transition: 500ms;
@@ -96,25 +108,7 @@ textarea#comment-content {
     opacity: 0.5;
 }
 
-#upload-btn:hover #upload-icon {
-    -webkit-transition: 500ms;
-    -moz-transition: 500ms;
-    -ms-transition: 500ms;
-    -o-transition: 500ms;
-    transition: 500ms;
-    opacity: 1;
-}
-
-#user-icon {
-    -webkit-transition: 500ms;
-    -moz-transition: 500ms;
-    -ms-transition: 500ms;
-    -o-transition: 500ms;
-    transition: 500ms;
-    opacity: 0.5;
-}
-
-#user-btn:hover #user-icon {
+.header-link:hover .icon-group {
     -webkit-transition: 500ms;
     -moz-transition: 500ms;
     -ms-transition: 500ms;
@@ -205,10 +199,9 @@ hr.soft {
     background: white;
     border-radius: 2px;
     box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.2);
-    padding: 20px;
+    padding: 20px 60px;
     margin: 2% auto;
     position: relative;
-/*    width: 91%; */
 }
 
 .profile-name {
@@ -778,169 +771,4 @@ figure:hover:before
 {
     bottom: 0;
     text-align: left;
-}
-
-
-
-/* albumview css*/
-
-a, a:link, a:visited
-{
-	/*color : #000;*/
-	text-decoration : none;
-	font-family: "calibri";
-	font-weight: bold;
-}
-a:hover, a:active, a:focus
-{
-	font-family: "calibri";
-	/*color : #D34843;*/
-	font-weight: bold;
-	text-decoration : none;
-}
-div.Album_header
-{
-
-border: #F5DfDf 1px solid; 
-border-radius: 8px;
-width: 970px;
-height: 180px; 
-margin-left: -15px; 
-margin-top: 0px;
-background-image: url(../images/3.jpg);
-/*background-color: #FAF0E6;*/
-}
-div.avatar
-{
-/*outline: #F5DfDf 1px solid;*/
-margin-top:36px;
-height: 133px;
-float: left;
-width: 133px;
-margin-left: 1.2%;
-background: url('../images/zir.jpg');
-border-radius: 10px;
-}
-
-div.id_info
-{
-/*outline: #F5DfDf 1px solid;*/
-margin-top:36px;
-height: 138px;
-float:left;
-width: 20%;
-margin-left:0.5%;
-margin-right: 0.5%;
-}
-div.album_info
-{
-/*outline: #F5DfDf 1px solid;*/
-margin-top:36px;
-height: 138px;
-font-family: "calibri";
-float:right;
-width: 50%;
-margin-right: 2%;
-}
-#album_title
-{
-	display: block;
-	/*outline: #F5DfDf 1px solid;*/
-	height: 100px;
-	text-align: right;
-	font: 50.4px bold;
-}
-#buttons
-{
-	display: block;
-	/*outline: #F5DfDf 1px solid;*/
-	height: 38px;
-}
-#buttons span
-{
-	
-	color: white;
-}
-#user_pic
-{
-	height: 130px;
-	width: 130px;
-	
-	margin: auto;
-	margin-top: 3px;
-}
-#BoardUserName
-{
-	font: 28px bold;
-}
-#BoardStats
-{
-	font-size: 14px;
-}
-input.rename
-{
-/*border:#D34843 1px solid; */
-border-radius:5px; 
-float:right; 
-padding-right: 10px;
-padding-left: 10px;
-background:#D34843; 
-height:30px;
-color: white;
-font: 16px bold;
-font-family: Calibri;
-}
-input.delete
-{
-/*border:#D34843 1px solid; */
-border-radius:5px;
-float:right;
-padding-right: 10px;
-padding-left: 10px;
-margin-right: 5px;
-background:#D34843; 
-height:30px;
-color: white;
-font: 16px bold;
-font-family: Calibri;
-}
-div.Album_body
-{
-border: #F5DfDf 1px solid; 
-border-radius: 8px;
-width: 1000px;
-height: 1500px; 
-margin-right: auto; 
-margin-left: auto;
-margin-top: 20px;
-margin-bottom: 50px;
-background-image: url(../images/3.jpg);
-}
-div.pic
-{
-height: 300px;
-width: 200px;
-margin-left: 40px;
-border:#F5DfDf 1px solid;
-float: left;
-background: #FFFFFF;
-}
-div.picrow
-{
-height: 300px;
-width: 1000px;
-display: block;
-/*border:#D34843 1px solid;*/
-margin-top: 50px;
-}
-div.top_pic
-{
-	height: 75px;
-	width: 76px;
-	margin-left: auto;
-	margin-right: auto;
-	margin-top: 26px;
-	border: red 1px solid;
-	border-radius: 10px;
-	background: url('../images/in.jpg');
 }

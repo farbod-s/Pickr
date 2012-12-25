@@ -105,23 +105,38 @@ class Picture_Album extends CI_Model
 		}
 		return $pictures;
 	}
-		
 
-
-
-	public function delete_album ($albumId)
-	{
-		$this->db->where('id', $albumId);
-		$this->db->delete('album');  
-		$this->db->where('album_id', $albumId);
-		$this->db->delete('picture_album'); 
-		return;
+	public function delete_pic($user_id, $picture_path, $album_name) {
+		$picture_id = $this->get_picture_id($picture_path);
+		$album_id = $this->get_album_id_from_url($user_id, $album_name);
+		if ($picture_id && $album_id) {
+			$this->db->where('picture_id', $picture_id);
+			$this->db->where('album_id', $album_id);
+			$this->db->delete($this->table_name);
+			return ($this->db->affected_rows() > 0) ? TRUE : FALSE;
+		}
+		return FALSE;
 	}
 
-	public function delete_pic ($picId,$albumId)
-	{
-		$this->db->where('album_id', $albumId and 'picture_id',$picId);
-		$this->db->delete('picture_album'); 
-		return;
+	private function get_album_id_from_url($user_id, $album_name) {
+		$albums_id = array();
+		$this->db->select('*');
+		$query = $this->db->get($this->album_table_name);
+		if ($query->num_rows() > 0) {
+			foreach ($query->result() as $album) {
+		        if ($album_name == preg_replace("![^a-z0-9_]+!i", "-", strtolower($album->name))) {
+		        	array_push($albums_id, $album->id);
+		        }
+		    }
+		}
+		$final_album_id = 0;
+		$user_albums_id = $this->get_all_album_id($user_id);
+		foreach ($user_albums_id as $album_id) {
+			if (in_array($album_id, $albums_id)) {
+				$final_album_id = $album_id;
+				return $final_album_id;
+			}
+		}
+		return $final_album_id;
 	}
 }

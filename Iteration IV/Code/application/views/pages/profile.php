@@ -25,12 +25,11 @@
 		</div>
 		<div class="pull-right">
 			<?php if(!$ME && $album_count != 0) {?>
-				<button class="btn btn-large btn-danger">Follow All</button>
+				<button class="btn btn-large btn-danger" style="margin-top: 25px;">Follow All</button>
 			<?php }?>
 		</div>
 	</div>
 
-	<!-- <hr class="soft" /> -->
 	<div id="TitlePro">
         <h1>
             <span>Albums</span>
@@ -88,12 +87,32 @@
 				</div>
 				<div class="createBoardSubmitNoHover">New Album</div>
 				<div class="buttonContainer">
-					<!-- TODO -->
-					<button class="btn" type="submit" style="width: 100%; height: 100%; border-radius: 0 0 6px 6px;">
-						<strong>Create Album</strong>
-					</button>
+					<a href="#new_album" style="width: 90.5%; height: 75%; line-height: 25px; border-radius: 0 0 6px 6px; border-radius: 0 0 6px 6px;" role="button" class="btn" data-toggle="modal"><strong>Create Album</strong></a>
 				</div>
 			</div>
+
+			<!-- create Form -->
+	        <div id="new_album" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="newAlbumLabel" aria-hidden="true">
+	          <?php $attributes = array('id' => 'new-album-form', 'class' => 'form-horizontal');
+	          echo form_open(base_url('profile/new_album'), $attributes); ?>
+	          <div class="modal-header">
+	            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+	            <h3 id="newAlbumLabel">Create Album</h3>
+	          </div>
+	          <div class="modal-body">
+	            <div class="control-group">
+	                <label class="control-label" for="album_name">Album Name</label>
+	                <div class="controls">
+	                  <input type="text" id="album_name" name="album_name" value="<?php echo set_value('album_name');?>" maxlength="50" minlength="4" placeholder="Album Name" spellcheck="false" required />
+	                </div>
+	            </div>
+	          </div>
+	          <div class="modal-footer"> 
+	            <button type="submit" style="width:100%; font-weight: bold;" class="btn btn-large btn-primary" id="new-album-btn" data-loading-text="Creating Album...">Create New Album</button>
+	          </div>
+	          <?php echo form_close();?>
+	        </div>
+	        <!-- END create Form -->
 		<?php }?>
 	</div>
 </div>

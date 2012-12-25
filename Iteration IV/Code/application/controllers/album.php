@@ -46,6 +46,7 @@ class Album extends MY_Controller {
 			$this->data['pictures'] = $this->ci->picture_album->get_album_pictures($user_id, $album_name);
 			$this->data['ME'] = $ME;
 			$this->data['username'] = $username;
+			$this->data['albums'] = $this->ci->album_model->get_all_album_name($this->ci->session->userdata('user_id'));
 
 			$this->title = strtolower($username).'/'.strtolower($album_name);
 
@@ -56,28 +57,58 @@ class Album extends MY_Controller {
 		}
 	}
 
-	
-
-	public function delete($albumId = -1) {
+	public function delete_picture() {
 		$this->ci = &get_instance();
 		$this->ci->load->database();
 		$this->ci->load->model('picture_album');
-		$this->picture_album->delete_album($albumId);
-        redirect(base_url().'index.php/');
+
+		$user_id = $this->ci->session->userdata('user_id');
+		if ($this->ci->picture_album->delete_pic($user_id,
+								  				 $this->input->post('picture_path'),
+								  				 $this->input->post('album_name'))) {
+			echo json_encode(TRUE);
+		}
+		else {
+			echo json_encode(FALSE);
+		}
 	}
 
-	public function rename($albumId = -1) {
-		$newname = $this->input->get('newname', TRUE);
-		$this->load->database();
-		mysql_query("UPDATE album SET name= '$newname' where id=$albumId");
-		redirect(base_url().'index.php/'.'album/view/'.$albumId);
+	public function rename_album() {
+		$this->ci =& get_instance();
+		$this->ci->load->database();
+		$this->ci->load->model('album_model');
+
+		$this->form_validation->set_rules('old_album_name', 'Old Album Name', 'trim|xss_clean');
+		$this->form_validation->set_rules('new_album_name', 'New Album Name', 'trim|xss_clean');
+
+		if ($this->form_validation->run()) {
+			$user_id = $this->ci->session->userdata('user_id');
+			if ($this->ci->album_model->rename_user_album($user_id,
+													   $this->form_validation->set_value('old_album_name'),
+													   $this->form_validation->set_value('new_album_name'))) {
+				echo json_encode(TRUE);
+			}
+			else {
+				echo json_encode(FALSE);
+			}
+		}
+		else {
+			echo json_encode(FALSE);
+		}
 	}
-	
-	public function deletepic($picId = -1, $albumId= -1) {
+
+	public function delete_album() {
 		$this->ci = &get_instance();
 		$this->ci->load->database();
-		$this->ci->load->model('picture_album');
-		$this->picture_album->delete_pic($picId,$albumId);
-        redirect(base_url().'index.php/'.'album/view/'.$albumId);
+		$this->ci->load->model('album_model');
+
+		$user_id = $this->ci->session->userdata('user_id');
+		if ($this->ci->album_model->delete_user_album($user_id,
+								  					  $this->input->post('album_name'))) {
+			echo json_encode(TRUE);
+		}
+		else {
+			echo json_encode(FALSE);
+		}
 	}
 }
