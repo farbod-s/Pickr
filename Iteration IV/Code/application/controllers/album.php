@@ -78,8 +78,8 @@ class Album extends MY_Controller {
 		$this->ci->load->database();
 		$this->ci->load->model('album_model');
 
-		$this->form_validation->set_rules('old_album_name', 'Old Album Name', 'trim|xss_clean');
-		$this->form_validation->set_rules('new_album_name', 'New Album Name', 'trim|xss_clean');
+		$this->form_validation->set_rules('old_album_name', 'Old Album Name', 'trim|required|xss_clean|min_length[4]|max_length[50]');
+		$this->form_validation->set_rules('new_album_name', 'New Album Name', 'trim|required|xss_clean|min_length[4]|max_length[50]');
 
 		if ($this->form_validation->run()) {
 			$user_id = $this->ci->session->userdata('user_id');
