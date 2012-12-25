@@ -104,10 +104,17 @@ class Album_Model extends CI_Model
 
 	public function create_album($album_name, $user_id) {
 		$albums_name = $this->get_all_album_name($user_id);
+		
 		// duplicated albums aborted!
-		if (in_array($album_name, $albums_name)) {
+		$clean_names = array();
+		foreach ($albums_name as $name) {
+			array_push($clean_names, preg_replace("![^a-z0-9_]+!i", "-", strtolower($name)));
+		}
+		$clean_album_name = preg_replace("![^a-z0-9_]+!i", "-", strtolower($album_name));
+		if (in_array($clean_album_name, $clean_names)) {
 			return FALSE;
 		}
+		
 		$data['name'] = $album_name;
 		$data['added'] = date('Y-m-d H:i:s');
 		if ($this->db->insert($this->table_name, $data)) {
