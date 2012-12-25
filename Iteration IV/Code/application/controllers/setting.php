@@ -2,21 +2,22 @@
 
 class Setting extends MY_Controller {
 
+	function __construct() {
+		parent::__construct();
+
+		if (!$this->tank_auth->is_logged_in()) {
+			redirect(base_url());
+		}
+	}
+
 	public function index() {
 
 		$this->title = "Setting";
 
-		if (!$this->tank_auth->is_logged_in()) {
-			redirect('index.php/home/index');
-		}
-		else {
-			$this->title = "Setting";
+		// load user setting
+		$this->data['profile_info'] = $this->tank_auth->get_profile();
 
-			// load user setting
-			$this->data['profile_info'] = $this->tank_auth->get_profile();
-
-			$this->_render('pages/setting');
-		}
+		$this->_render('pages/setting');
 	}
 
 	public function update_setting() {

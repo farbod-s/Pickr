@@ -59,7 +59,7 @@ class Feel extends CI_Model
 	{
 		$this->db->where('user_id', $user_id);
 		$this->db->where('picture_id', $picture_id);
-		$this->db->delete($this->table_name)
+		$this->db->delete($this->table_name);
 		return ($this->db->affected_rows() > 0) ? TRUE : FALSE;
 	}	
 }

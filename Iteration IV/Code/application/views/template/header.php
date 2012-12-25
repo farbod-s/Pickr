@@ -25,7 +25,7 @@
 				              <div id="formContainer">
 				              	<?php
 					              $attributes = array('id' => 'login-form');
-			        			  echo form_open('index.php/auth/login', $attributes);
+			        			  echo form_open(base_url('auth/login'), $attributes);
 			        			  ?>
 							  	  <input type="text" id="name" name="name" placeholder="Username / Email" spellcheck="false" />
 	                	  		  <input type="password" id="pass" name="pass" placeholder="Password" />
@@ -36,7 +36,7 @@
 			              	 	  <li><a href="#" id="flipToRecover" class="flipLink" style="background-color: #fff; color: #000; padding: 0;"><strong>Forgot password?</strong></a></li>
 			              	 	  <?php echo form_close();
 								   $attributes = array('id' => 'recovery-form');
-			        				echo form_open('index.php/auth/recover', $attributes);
+			        				echo form_open(base_url('auth/recover'), $attributes);
 			        				?>
 								  	<input type="email" name="recoverEmail" id="recoverEmail" placeholder="Email Address" spellcheck="false" required />
 								  	<input type="submit" name="submit" class="btn btn-primary" id="recover-btn" style="clear: left; width: 100%; height: 32px; font-weight: bold;" value="Recover" />

@@ -50,7 +50,7 @@ echo '<!-- upload form -->
               </ul>
             </div>';
             $attributes = array('id' => 'upload-form', 'class' => 'form-horizontal');
-            echo form_open('index.php/Upload/upload_pic', $attributes);
+            echo form_open(base_url('Upload/upload_pic'), $attributes);
             echo '<textarea id="album-description-upload" rows="3" cols="40" style="resize: none; margin-top: 10%; width: 96.5%;" maxlength="50" placeholder="Description" onfocus="ShowDescriptionMessage()" onBlur="HideDescriptionMessage()" spellcheck="false"></textarea>
             <input type="submit" class="btn btn-large btn-primary disabled" data-loading-text="Picking..." id="add-to-album-btn-upload" style="width:100%; margin-top:5%; font-weight: bold;" value="Add Picture to Album" disabled="disabled" />
             ';

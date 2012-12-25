@@ -1,7 +1,7 @@
 <?php if (!defined('BASEPATH')) exit('No direct script access allowed');
 
-class Album extends CI_Model
-{
+class Album_Model extends CI_Model
+{ // must have not the same name with it's controller name! :)
 	private $table_name = 'album';
 	private $user_album_table_name = 'user_album';
 	private $picture_table_name = 'picture';
@@ -11,6 +11,48 @@ class Album extends CI_Model
 		parent::__construct();
 	}
 
+	public function is_album_exist($user_id, $album_name) {
+		$albums_name = $this->get_all_album_name($user_id);
+		$clear_albums_name = array();
+		foreach ($albums_name as $name) { // clean names for URL
+			$name = preg_replace("![^a-z0-9_]+!i", "-", strtolower($name));
+			array_push($clear_albums_name, $name);
+		}
+		if (in_array($album_name, $clear_albums_name)) {
+			return TRUE;
+		}
+		return FALSE;
+	}
+
+	public function get_album_information($user_id, $album_name) {
+		$albums_info = array();
+		$this->db->select('*');
+		$query = $this->db->get($this->table_name);
+		if ($query->num_rows() > 0) {
+			foreach ($query->result() as $album) {
+		        if ($album_name == preg_replace("![^a-z0-9_]+!i", "-", strtolower($album->name))) {
+		        	array_push($albums_info, array('id' => $album->id,
+		        								   'name' => $album->name,
+		        								   'description' => $album->description));
+		        }
+		    }
+		}
+		$final_album_info = array();
+		$this->db->where('user_id', $user_id);
+		$query = $this->db->get($this->user_album_table_name);
+		if ($query->num_rows() > 0) {
+			foreach ($query->result() as $row) {
+				foreach ($albums_info as $album_info) {
+					if ($album_info['id'] == $row->album_id) {
+						array_push($final_album_info, $album_info);
+						return $final_album_info;
+					}
+				}
+			}
+		}
+		return $final_album_info;
+	}
+
 	// find album_id
 	public function get_album_id($user_id, $album_name) {
 		$all_album_id = $this->get_all_album_id($user_id);
@@ -18,7 +60,7 @@ class Album extends CI_Model
 		$this->db->where('name', $album_name);
 		$query = $this->db->get($this->table_name);
 		if ($query->num_rows() > 0) {
-			foreach ($query as $row) {
+			foreach ($query->result() as $row) {
 				if (in_array($row->id, $all_album_id)) {
 					$album_id = $row->id;
 					return $album_id;
@@ -51,7 +93,7 @@ class Album extends CI_Model
 		$albums_id = array();
 		$this->db->where('user_id', $user_id);
 		$query = $this->db->get($this->user_album_table_name);
-		foreach ($query as $row) {
+		foreach ($query->result() as $row) {
 			array_push($albums_id, $row->album_id);
 		}
 		return $albums_id;

@@ -1,5 +1,6 @@
-/*$(window).load(function() {*/
 $(document).ready(function() {
+
+    var LAST_IMG = "";
 
     // Fix input element click problem
     $('.dropdown-menu').click(function(e) {
@@ -97,24 +98,25 @@ $(document).ready(function() {
         var image = '#' + $(this).parent().parent().attr('id') + ' img';
         var src = $(image).attr('src');
         $('.thumbnail').attr('src', src);
+
+        // update last image clicked
+        LAST_IMG = '#' + $(this).parent().parent().attr('id');
     });
 
     // like action
-    //$('.tool-box').on('click', 'a.like-btn', function() { // delegate like-btn
-    $("a.like-btn").click(function() {
-        alert('x');
+    $('.tool-box').on('click', 'a.like-btn', function() { // delegate like-btn
         var image = '#' + $(this).parent().parent().attr('id');
         var form_data = {
             picture_path: $(image + ' img').attr('src')
         };
         $.ajax({
-            url: "http://localhost/pickr/index.php/home/like_picture",
+            url: PICKR['baseUrl'] + "home/like_picture",
             type: 'POST',
             dataType: 'JSON',
             data: form_data,
             success: function(result) {
                 if(result) {
-                    alert('Success');
+                    //alert('Success, liked');
                     // update likes
                     var likes = Number($(image + ' span.record-like').html()) + 1;
                     $(image + ' span.record-like').html(likes);
@@ -128,33 +130,31 @@ $(document).ready(function() {
                     $(image + ' a.like-btn').removeClass('like-btn');
                 }
                 else {
-                    alert('Error'); // TODO
+                    alert('Error, Can not like');
                 }
             },
             error: function() {
-                alert('Fatal Error');
-                //window.location = "index.php/setting";
+                alert('Ajax Error');
+                //window.location = PICKR['baseUrl'];
             }
         });
         return false;
     });
 
     // dislike action
-    //$('.tool-box').on('click', 'a.dislike-btn', function() { // delegate dislike-btn
-    $("a.dislike-btn").click(function() {
-        alert('y');
+    $('.tool-box').on('click', 'a.dislike-btn', function() { // delegate dislike-btn
         var image = '#' + $(this).parent().parent().attr('id');
         var form_data = {
             picture_path: $(image + ' img').attr('src')
         };
         $.ajax({
-            url: "http://localhost/pickr/index.php/home/dislike_picture",
+            url: PICKR['baseUrl'] + "home/dislike_picture",
             type: 'POST',
             dataType: 'JSON',
             data: form_data,
             success: function(result) {
                 if(result) {
-                    alert('Success');
+                    //alert('Success, disliked');
                     // update likes
                     var likes = Number($(image + ' span.record-like').html()) - 1;
                     $(image + ' span.record-like').html(likes);
@@ -168,12 +168,12 @@ $(document).ready(function() {
                     $(image + ' a.dislike-btn').removeClass('dislike-btn');
                 }
                 else {
-                    alert('Error'); // TODO
+                    alert('Error, Can not dislike');
                 }
             },
             error: function() {
-                alert('Fatal Error');
-                //window.location = "index.php/setting";
+                alert('Ajax Error');
+                //window.location = PICKR['baseUrl'];
             }
         });
         return false;
@@ -181,7 +181,7 @@ $(document).ready(function() {
 
     // when pop-up window want to close
     $('#pick').bind('hidden', function () {
-        var src = "http://localhost/pickr/resources/images/220x200.gif";
+        var src = PICKR['baseUrl'] + "resources/images/220x200.gif";
         $('.thumbnail').attr('src', src);
     });
 
@@ -196,25 +196,24 @@ $(document).ready(function() {
             return false;
         }
         $.ajax({
-            url: "http://localhost/pickr/index.php/home/create_album",
+            url: PICKR['baseUrl'] + "home/create_album",
             type: 'POST',
             dataType: 'JSON',
             data: form_data,
             success: function(result) {
                 if(result) {
-                    //alert('Success');
+                    //alert('Success, Album created');
                     var item = $('<li><a href="#" onClick="SetCurrentAlbum(this.innerHTML)">' + $('#album_name').val() + '</a></li>');
                     $("#album_list").prepend(item);
                     $('#album_name').attr('value', '');
-                    //window.location = "index.php/setting";
                 }
                 else {
-                    alert('Error'); // TODO
+                    alert('Error, Can not create album');
                 }
             },
             error: function() {
-                alert('Fatal Error');
-                //window.location = "index.php/setting";
+                alert('Ajax Error');
+                //window.location = PICKR['baseUrl'];
             }
         });
         $(this).button('reset');
@@ -234,28 +233,94 @@ $(document).ready(function() {
             return false;
         }
         $.ajax({
-            url: "http://localhost/pickr/index.php/home/add_pic_to_album",
+            url: PICKR['baseUrl'] + "home/add_pic_to_album",
             type: 'POST',
             dataType: 'JSON',
             data: form_data,
             success: function(result) {
                 if(result) {
-                    alert('Success');
-                    //window.location = "index.php/setting";
+                    //alert('Success, Picked');
                 }
                 else {
-                    alert('Error'); // TODO
+                    alert('Error, Can not pick');
                 }
             },
             error: function() {
-                alert('Fatal Error');
-                //window.location = "index.php/setting";
+                alert('Ajax Error');
+                //window.location = PICKR['baseUrl'];
             }
         });
         $(this).button('reset');
         return false;
     });
+
+    // add comment
+    $('#add-comment-btn').click(function() {
+        $(this).button('loading');
+        var form_data = {
+            picture_path: $('#commented-pic').attr('src'),
+            comment_content: $('textarea#comment-content').val()
+        };
+        if(!$('#comment-form').valid()) {
+            $(this).button('reset');
+            return false;
+        }
+        $.ajax({
+            url: PICKR['baseUrl'] + "home/comment_on_picture",
+            type: 'POST',
+            dataType: 'JSON',
+            data: form_data,
+            success: function(result) {
+                if(result) {
+                    //alert('Success, Comment added');
+                    // update comments
+                    var comments = Number($(LAST_IMG + ' span.record-comment').html()) + 1;
+                    $(LAST_IMG + ' span.record-comment').html(comments);
+                }
+                else {
+                    alert('Error, Can not add comment');
+                }
+            },
+            error: function() {
+                alert('Ajax Error');
+                //window.location = PICKR['baseUrl'];
+            }
+        });
+        $(this).button('reset');
+        return false;
+    });
+
+    // load comment
+    $('.comment-btn').click(function() {
+        $('.comments').html('');
+        $('#comment').modal('show');
+        var form_data = {
+            picture_path: $('#commented-pic').attr('src')
+        };
+        $.ajax({
+            url: PICKR['baseUrl'] + "home/load_comments",
+            type: 'POST',
+            dataType: 'JSON',
+            data: form_data,
+            success: function(result) {
+                if(result) {
+                    //alert('Success, Comments loaded');
+                    $('.comments').html(result);
+                }
+                else {
+                    //alert('Error, No comment exists for loading');
+                }
+            },
+            error: function() {
+                alert('Ajax Error');
+                //window.location = PICKR['baseUrl'];
+            }
+        });
+        return false;
+    });
 });
+
+
 
 function ShowDescriptionMessage() {
     $('.charsRemaining').css('display', 'block');

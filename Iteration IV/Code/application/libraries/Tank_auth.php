@@ -76,8 +76,15 @@ class Tank_auth
 	function get_complete_name() {
 		$user_id = $this->ci->session->userdata('user_id');
 
+		$complete_name = "";
 		if (!is_null($user = $this->ci->users->pickr_get_profile($user_id))) {
-			$complete_name = $user->firstname.' '.$user->lastname;
+			$firstname = $user->firstname;
+			$lastname = $user->lastname;
+			if(isset($firstname) && !is_null($firstname) && strlen($firstname) > 0)
+				$complete_name = $complete_name.$firstname;
+			if(isset($lastname) && !is_null($lastname) && strlen($lastname) > 0)
+				$complete_name = $complete_name.' '.$lastname;
+			
 			return $complete_name;
 		}
 		return NULL;		

@@ -28,7 +28,7 @@
     ?>
 	
 		<?php $attributes = array('id' => 'update-profile-form', 'class' => 'form-horizontal', 'style' => 'margin: 1%;');
-		echo form_open('index.php/setting/update_setting', $attributes); ?>
+		echo form_open('setting/update_setting', $attributes); ?>
 	  <legend><strong>Profile Information</strong></legend>
 	  <div class="control-group">
 	    <label class="control-label" for="firstname"><strong>First Name</strong></label>
@@ -117,7 +117,7 @@
 
 	<!-- Acount Setting -->
 	<?php $attributes = array('id' => 'change-pass-form', 'class' => 'form-horizontal', 'style' => 'margin: 1%;');
-	echo form_open('index.php/auth/changePassword', $attributes); ?>
+	echo form_open('auth/changePassword', $attributes); ?>
 	  <legend><strong>Account Setting</strong></legend>
 	  <div class="control-group">
 	    <label class="control-label" for="old_pass"><strong>Old Password</strong></label>

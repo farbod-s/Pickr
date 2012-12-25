@@ -10,22 +10,22 @@ $(document).ready(function() {
         if(!$('#register-form').valid())
             return false;
 		$.ajax({
-			url: "index.php/auth/register",
+			url: PICKR['baseUrl'] + "auth/register",
 			type: 'POST',
 			dataType: 'JSON',
 			data: form_data,
 			success: function(result) {
 				if (result) {
-					//alert('Success');
-                	window.location = "index.php";
+					//alert('Success, Signed up');
+                	window.location = PICKR['baseUrl'];
 	            }
 	            else {
-	                alert('Error'); // TODO
+	                alert('Error, Can not register');
 	            }
 			},
 			error: function() {
-				//alert('Fatal Error');
-				window.location = "index.php";
+				alert('Ajax Error');
+				//window.location = PICKR['baseUrl'];
 			}
 		});
 		return false;
@@ -41,22 +41,22 @@ $(document).ready(function() {
 		if(!$('#login-form').valid())
 			return false;
 		$.ajax({
-			url: "auth/login",
+			url: PICKR['baseUrl'] + "auth/login",
 			type: 'POST',
 			dataType: 'JSON',
 			data: form_data,
 			success: function(result) {
 				if(result) {
-					//alert('Success');
-					window.location = "index.php";
+					//alert('Success, Signed in');
+					window.location = PICKR['baseUrl'];
 				}
 				else {
-					alert('Error'); // TODO
+					alert('Error, Can not login');
 				}
 			},
 			error: function() {
-				//alert('Fatal Error');
-				window.location = "index.php";
+				alert('Ajax Error');
+				//window.location = PICKR['baseUrl'];
 			}
 		});
 		return false;
@@ -76,22 +76,22 @@ $(document).ready(function() {
 		if(!$('#update-profile-form').valid())
 			return false;
 		$.ajax({
-			url: "http://localhost/pickr/index.php/setting/update_setting",
+			url: PICKR['baseUrl'] + "setting/update_setting",
 			type: 'POST',
 			dataType: 'JSON',
 			data: form_data,
 			success: function(result) {
 				if(result) {
-					alert('Success');
-					//window.location = "index.php/setting";
+					//alert('Success, Profile saved');
+					window.location = PICKR['baseUrl'] + "setting";
 				}
 				else {
-					alert('Error'); // TODO
+					alert('Error, Can not save profile');
 				}
 			},
 			error: function() {
-				alert('Fatal Error');
-				//window.location = "index.php/setting";
+				alert('Ajax Error');
+				//window.location = PICKR['baseUrl'] + "setting";
 			}
 		});
 		return false;
@@ -107,22 +107,22 @@ $(document).ready(function() {
 		if(!$('#change-pass-form').valid())
 			return false;
 		$.ajax({
-			url: "http://localhost/pickr/index.php/auth/change_password",
+			url: PICKR['baseUrl'] + "auth/change_password",
 			type: 'POST',
 			dataType: 'JSON',
 			data: form_data,
 			success: function(result) {
 				if(result) {
-					alert('Success');
-					//window.location = "index.php/setting";
+					//alert('Success, Password changed');
+					window.location = PICKR['baseUrl'] + "setting";
 				}
 				else {
-					alert('Error'); // TODO
+					alert('Error, Can not change password');
 				}
 			},
 			error: function() {
-				alert('Fatal Error');
-				//window.location = "index.php/setting";
+				alert('Ajax Error');
+				//window.location = PICKR['baseUrl'] + "setting";
 			}
 		});
 		return false;

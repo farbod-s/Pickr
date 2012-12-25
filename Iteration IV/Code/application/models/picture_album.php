@@ -62,14 +62,53 @@ class Picture_Album extends CI_Model
 		}
 		return $albums_id;
 	}
-	
-	public function show_list($album_id) {
-		$this->db->select('picture_id'); 
-		$this->db->from('picture_album');   
+
+	public function get_album_pictures($user_id, $album_name) {
+		$albums_id = array();
+		$this->db->select('*');
+		$query = $this->db->get($this->album_table_name);
+		if ($query->num_rows() > 0) {
+			foreach ($query->result() as $album) {
+		        if ($album_name == preg_replace("![^a-z0-9_]+!i", "-", strtolower($album->name))) {
+		        	array_push($albums_id, $album->id);
+		        }
+		    }
+		}
+		$album_id = 0;
+		$this->db->where('user_id', $user_id);
+		$query = $this->db->get($this->user_album_table_name);
+		if ($query->num_rows() > 0) {
+			foreach ($query->result() as $row) {
+				if (in_array($row->album_id, $albums_id)) {
+					$album_id = $row->album_id;
+					break;
+				}
+			}
+		}
+		$pictures_id = array();
 		$this->db->where('album_id', $album_id);
-		return $this->db->get()->result();
+		$query = $this->db->get($this->table_name);
+		if ($query->num_rows() > 0) {
+			foreach ($query->result() as $row) {
+				array_push($pictures_id, $row->picture_id);
+			}
+		}
+		$pictures = array();
+		foreach ($pictures_id as $picture_id) {
+			$this->db->where('id', $picture_id);
+			$query = $this->db->get($this->picture_table_name);
+			if ($query->num_rows() > 0) {
+				foreach ($query->result() as $row) {
+					array_push($pictures, $row->picture);
+				}
+			}
+		}
+		return $pictures;
 	}
 		
+
+
+
 	public function delete_album ($albumId)
 	{
 		$this->db->where('id', $albumId);
@@ -78,12 +117,6 @@ class Picture_Album extends CI_Model
 		$this->db->delete('picture_album'); 
 		return;
 	}
-	public function show_name($album_id){
-		$this->db->select('name'); 
-		$this->db->from('album');   
-		$this->db->where('id', $album_id);
-		return $this->db->get()->result();
-	}
 
 	public function delete_pic ($picId,$albumId)
 	{
@@ -91,6 +124,4 @@ class Picture_Album extends CI_Model
 		$this->db->delete('picture_album'); 
 		return;
 	}
-		
-		
 }

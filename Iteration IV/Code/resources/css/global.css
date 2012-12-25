@@ -2,7 +2,6 @@
 ::selection { background: #fe57a1; color: #fff; text-shadow: none; }
 
 body {
-	/*background: #C5C5C5 url('../images/bg-optimized.jpg') repeat 0 0 fixed;*/
     background: #F1F1F1 url('../images/noise-2.png');
 }
 
@@ -209,7 +208,7 @@ hr.soft {
     padding: 20px;
     margin: 2% auto;
     position: relative;
-    width: 91%;
+/*    width: 91%; */
 }
 
 .profile-name {
@@ -224,6 +223,33 @@ hr.soft {
     font-size: 15px;
     font-weight: bold;
     margin-left: 25px;
+}
+
+#TitlePro {
+    overflow: hidden;
+    position: relative;
+    text-align: center;
+    top: 29px;
+    width: 100%;
+}
+
+#TitlePro h1 {
+    margin: auto;
+    border: 1px solid #C1C1C1;
+    background: #E5E1E2;
+    border-radius: 5px;
+    overflow: hidden;
+    padding: 3px 30px;
+    box-shadow: 0 1px 1px whiteSmoke;
+    display: inline-block;
+    text-shadow: 0 1px 0 white;
+}
+
+#TitlePro span {
+    float: left;
+    color: #999;
+    font-size: 20px;
+    font-weight: bold;
 }
 
 
@@ -378,9 +404,15 @@ overflow: hidden;
     height: 20px;
     width: 100%;
     font-weight: bold;
-    font-size: 13px;
-    color: #555;
+    font-size: 15px;
+    color: #666;
 }
+
+.serif:hover {
+    color: #000;
+}
+
+
 
 /*** END Album Style ***/
 
@@ -580,6 +612,8 @@ textarea::-webkit-scrollbar-thumb {
     margin: 0 auto;
     width: 100%;
     height: 100%;
+    border-top: 1px solid #BFBFBF;
+    padding-top: 5%;
 }
 
 .boards .pinBoard {
@@ -745,8 +779,10 @@ figure:hover:before
     bottom: 0;
     text-align: left;
 }
-/* albumview css*/
 
+
+
+/* albumview css*/
 
 a, a:link, a:visited
 {

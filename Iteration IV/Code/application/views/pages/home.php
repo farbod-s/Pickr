@@ -19,7 +19,7 @@
         <div id="signUp" style="width: 500px;" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="signUpLabel" aria-hidden="true">
         
         <?php $attributes = array('id' => 'register-form', 'class' => 'form-horizontal');
-          echo form_open('index.php/auth/register', $attributes); ?>
+          echo form_open(base_url('auth/register'), $attributes); ?>
 
           <div class="modal-header">
             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
@@ -91,7 +91,7 @@
                           <a class="btn btn-small like-btn" href="#"><i class="icon-thumbs-up"></i></a>
                       </span><?php }?>
                       <a class="pic-link" href="#">
-                          <img id="pic_<?php echo $i; ?>" class="lazy" src="<?php echo base_url(IMAGES.'grey.gif');?>" data-original="<?php echo base_url();?>resources/images/main/<?php echo $i; ?>.jpg" alt="pic_<?php echo $i; ?>" />
+                          <img id="pic_<?php echo $i; ?>" class="lazy" src="<?php echo base_url(IMAGES.'grey.gif');?>" data-original="<?php echo base_url(IMAGES.'main/'.$i.'.jpg');?>" alt="pic_<?php echo $i; ?>" />
                       </a>
                         <figcaption>
                         <span>by unknown photographer</span>
@@ -135,7 +135,7 @@
                     <li>
                       <?php
                       $attributes = array('id' => 'create-album-form', 'class' => 'form-horizontal');
-                      echo form_open(base_url('index.php/home/create_album'), $attributes); ?>
+                      echo form_open(base_url('home/create_album'), $attributes); ?>
                         <input type="text" id="album_name" class="input-small pull-left" style="width: 64%; margin: 0 3% 3% 3%;" placeholder="Album Name" spellcheck="false" />
                         <button type="submit" class="btn pull-right" id="create-album-btn" data-loading-text="..."><strong>Create</strong></button>
                       <?php echo form_close(); ?>
@@ -145,7 +145,7 @@
               </div>
               <?php
                 $attributes = array('id' => 'pick-form', 'class' => 'form-horizontal');
-                echo form_open(base_url('index.php/home/add_pic_to_album'), $attributes); ?>
+                echo form_open(base_url('home/add_pic_to_album'), $attributes); ?>
               <a class="pull-left" href="#" style="width: 45%; height: 175px;">
                 <img class="thumbnail" id="picked-pic" style="margin-right: 5px; width: 100%; height: 95%;" src="<?php echo base_url(IMAGES.'220x200.gif'); ?>">
               </a>
@@ -171,151 +171,14 @@
               <h3 id="commentLabel">Comment</h3>
             </div>
             <div class="modal-body">
-              <!-- TODO: load comments here -->
               <div class="control-group pull-right" style="width: 50%; margin: 0;">
-                <h3 class="comment-title">Preview Comments</h3>
-                <div class="comments">
-                  <div class="comment">
-                    <div class="comment-header">
-                      <div class="btn-group pull-right">
-                        <a class="btn dropdown-toggle" data-toggle="dropdown" href="#"><span class="caret"></span></a>
-                        <ul class="dropdown-menu">
-                          <li><a href="#"><i class="icon-flag"></i> Report Spam</a></li>
-                        </ul>
-                      </div>
-                      <img src="<?php echo base_url(IMAGES.'ali-karimi.jpg');?>" class="img-circle pull-left commenter-pic" style="width: 50px; height: 50px;" />
-                      <h4 class="commenter-name">Farbod Samsamipour</h4>
-                      <div class="commenter-date">12/18/2012 8:06:32</div>
-                    </div>
-                    <hr class="soft">
-                    <div class="comment-body">
-                      nice shot! ;)
-                    </div>
-                  </div>
-                  <div class="comment">
-                    <div class="comment-header">
-                      <div class="btn-group pull-right">
-                        <a class="btn dropdown-toggle" data-toggle="dropdown" href="#"><span class="caret"></span></a>
-                        <ul class="dropdown-menu">
-                          <li><a href="#"><i class="icon-flag"></i> Report Spam</a></li>
-                        </ul>
-                      </div>
-                      <img src="<?php echo base_url(IMAGES.'naser.jpg');?>" class="img-circle pull-left commenter-pic" style="width: 50px; height: 50px;" />
-                      <h4 class="commenter-name">Ehsan Nezhadian</h4>
-                      <div class="commenter-date">12/18/2012 8:06:32</div>
-                    </div>
-                    <hr class="soft">
-                    <div class="comment-body">
-                      chi migi? :-?
-                    </div>
-                  </div>
-                  <div class="comment">
-                    <div class="comment-header">
-                      <div class="btn-group pull-right">
-                        <a class="btn dropdown-toggle" data-toggle="dropdown" href="#"><span class="caret"></span></a>
-                        <ul class="dropdown-menu">
-                          <li><a href="#"><i class="icon-flag"></i> Report Spam</a></li>
-                        </ul>
-                      </div>
-                      <img src="<?php echo base_url(IMAGES.'ali-karimi.jpg');?>" class="img-circle pull-left commenter-pic" style="width: 50px; height: 50px;" />
-                      <h4 class="commenter-name">Farbod Samsamipour</h4>
-                      <div class="commenter-date">12/18/2012 8:06:32</div>
-                    </div>
-                    <hr class="soft">
-                    <div class="comment-body">
-                      to chi migi?
-                    </div>
-                  </div>
-                  <div class="comment">
-                    <div class="comment-header">
-                      <div class="btn-group pull-right">
-                        <a class="btn dropdown-toggle" data-toggle="dropdown" href="#"><span class="caret"></span></a>
-                        <ul class="dropdown-menu">
-                          <li><a href="#"><i class="icon-flag"></i> Report Spam</a></li>
-                        </ul>
-                      </div>
-                      <img src="<?php echo base_url(IMAGES.'in.jpg');?>" class="img-circle pull-left commenter-pic" style="width: 50px; height: 50px;" />
-                      <h4 class="commenter-name">Unknown User</h4>
-                      <div class="commenter-date">12/18/2012 8:06:32</div>
-                    </div>
-                    <hr class="soft">
-                    <div class="comment-body">
-                      chetorid ahmagha! :D
-                    </div>
-                  </div>
-                  <div class="comment">
-                    <div class="comment-header">
-                      <div class="btn-group pull-right">
-                        <a class="btn dropdown-toggle" data-toggle="dropdown" href="#"><span class="caret"></span></a>
-                        <ul class="dropdown-menu">
-                          <li><a href="#"><i class="icon-flag"></i> Report Spam</a></li>
-                        </ul>
-                      </div>
-                      <img src="<?php echo base_url(IMAGES.'naser.jpg');?>" class="img-circle pull-left commenter-pic" style="width: 50px; height: 50px;" />
-                      <h4 class="commenter-name">Ehsan Nezhadian</h4>
-                      <div class="commenter-date">12/18/2012 8:06:32</div>
-                    </div>
-                    <hr class="soft">
-                    <div class="comment-body">
-                      bebinamet haleto ja miaram.
-                    </div>
-                  </div>
-                  <div class="comment">
-                    <div class="comment-header">
-                      <div class="btn-group pull-right">
-                        <a class="btn dropdown-toggle" data-toggle="dropdown" href="#"><span class="caret"></span></a>
-                        <ul class="dropdown-menu">
-                          <li><a href="#"><i class="icon-flag"></i> Report Spam</a></li>
-                        </ul>
-                      </div>
-                      <img src="<?php echo base_url(IMAGES.'ali-karimi.jpg');?>" class="img-circle pull-left commenter-pic" style="width: 50px; height: 50px;" />
-                      <h4 class="commenter-name">Farbod Samsamipour</h4>
-                      <div class="commenter-date">12/18/2012 8:06:32</div>
-                    </div>
-                    <hr class="soft">
-                    <div class="comment-body">
-                      khafeh shid, ahhh! :(
-                    </div>
-                  </div>
-                  <div class="comment">
-                    <div class="comment-header">
-                      <div class="btn-group pull-right">
-                        <a class="btn dropdown-toggle" data-toggle="dropdown" href="#"><span class="caret"></span></a>
-                        <ul class="dropdown-menu">
-                          <li><a href="#"><i class="icon-flag"></i> Report Spam</a></li>
-                        </ul>
-                      </div>
-                      <img src="<?php echo base_url(IMAGES.'in.jpg');?>" class="img-circle pull-left commenter-pic" style="width: 50px; height: 50px;" />
-                      <h4 class="commenter-name">Unknown User</h4>
-                      <div class="commenter-date">12/18/2012 8:06:32</div>
-                    </div>
-                    <hr class="soft">
-                    <div class="comment-body">
-                      zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz :D
-                    </div>
-                  </div>
-                  <div class="comment">
-                    <div class="comment-header">
-                      <div class="btn-group pull-right">
-                        <a class="btn dropdown-toggle" data-toggle="dropdown" href="#"><span class="caret"></span></a>
-                        <ul class="dropdown-menu">
-                          <li><a href="#"><i class="icon-flag"></i> Report Spam</a></li>
-                        </ul>
-                      </div>
-                      <img src="<?php echo base_url(IMAGES.'naser.jpg');?>" class="img-circle pull-left commenter-pic" style="width: 50px; height: 50px;" />
-                      <h4 class="commenter-name">Ehsan Nezhadian</h4>
-                      <div class="commenter-date">12/18/2012 8:06:32</div>
-                    </div>
-                    <hr class="soft">
-                    <div class="comment-body">
-                      kesafat! ...
-                    </div>
-                  </div>
-                </div>
+                <h3 class="comment-title">Last Comments</h3>
+                <!-- load comments here -->
+                <div class="comments"></div>
               </div>
               <?php
                 $attributes = array('id' => 'comment-form', 'class' => 'form-horizontal');
-                echo form_open(base_url('index.php/home/comment_on_picture'), $attributes); ?>
+                echo form_open(base_url('home/comment_on_picture'), $attributes); ?>
               <div class="control-group pull-left" style="width: 50%; margin: 0;">
                 <a href="#">
                   <img class="thumbnail" id="commented-pic" style="margin-right: 5px; width: 330px; height: 250px;" src="<?php echo base_url(IMAGES.'220x200.gif'); ?>">

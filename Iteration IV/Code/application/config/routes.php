@@ -41,7 +41,8 @@
 $route['default_controller'] = "home";
 $route['404_override'] = '';
 
-$route['user/([a-zA-z_]+)'] = "profile/user/$1";
+$route['user/([a-zA-z0-9_-]+)'] = "profile/user/$1";
+$route['user/([a-zA-z0-9_-]+)/([a-zA-z0-9_-]+)'] = "album/edit/$1/$2";
 
 
 /* End of file routes.php */

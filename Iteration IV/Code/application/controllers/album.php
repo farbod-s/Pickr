@@ -1,31 +1,62 @@
-<?php
-if (!defined('BASEPATH'))
-	exit('No direct script access allowed');
+<?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
 class Album extends MY_Controller {
 
-	public function __construct() {
+	function __construct() {
 		parent::__construct();
+
+		if (!$this->tank_auth->is_logged_in()) {
+			redirect(base_url());
+		}
 	}
 
 	public function index() {
-		// redirect to dashboard
-		redirect(base_url('index.php/dashboard'));
+		$this->ci =& get_instance();
+		$this->ci->load->database();
+		$this->ci->load->model('tank_auth/users');
+		
+		$username = $this->ci->users->get_username($this->ci->session->userdata('user_id'));
+		redirect(base_url('user/'.strtolower($username)));
 	}
 
-	public function view($albumId = -1) {
-		$this->data['data'] = array();
-		$this->data['albumId'] = $albumId;
-		if ($albumId != -1) {
-			$this->ci = &get_instance();
-			$this->ci->load->database();
-			$this->ci->load->model('picture_album');
-			$this->data['data'] = $this->picture_album->show_list($albumId);
-			$this->data['albumname'] = $this->picture_album->show_name($albumId);
-			
+	public function edit($username, $album_name) {
+		$this->ci =& get_instance();
+		$this->ci->load->database();
+		$this->ci->load->model('tank_auth/users');
+		$this->ci->load->model('album_model');
+		$this->ci->load->model('picture_album');
+
+		if(!$this->ci->users->is_username_available($username)) { // user exist
+			$ME = FALSE;
+			$user_id = $this->ci->users->get_user_by_username($username)->id;
+			if($this->ci->album_model->is_album_exist($user_id, $album_name)) {
+				// album exist for this user
+				if($user_id == $this->ci->session->userdata('user_id')) {
+					$ME = TRUE;
+					if (!$this->tank_auth->is_logged_in()) {
+						redirect(base_url());
+					}
+				}
+			}
+			else {
+				redirect(base_url('user/'.strtolower($username)));
+			}
+			$this->data['profile_info'] = $this->ci->users->pickr_get_profile($user_id);
+			$this->data['album_info'] = $this->ci->album_model->get_album_information($user_id, $album_name);
+			$this->data['pictures'] = $this->ci->picture_album->get_album_pictures($user_id, $album_name);
+			$this->data['ME'] = $ME;
+			$this->data['username'] = $username;
+
+			$this->title = strtolower($username).'/'.strtolower($album_name);
+
+			$this->_render('pages/album');
 		}
-		$this->_render('pages/album');
+		else {
+			redirect(base_url());
+		}
 	}
+
+	
 
 	public function delete($albumId = -1) {
 		$this->ci = &get_instance();

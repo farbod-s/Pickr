@@ -38,36 +38,6 @@
 <link rel="apple-touch-icon" sizes="72x72" href="<?php echo base_url(IMAGES.'ico/apple-touch-icon-72x72-precompressed.png');?>">
 <link rel="apple-touch-icon" sizes="114x114" href="<?php echo base_url(IMAGES.'ico/apple-touch-icon-114x114-precompressed.png');?>">
 
-<!-- Bootstrap Image Gallery styles -->
-<!-- <link rel="stylesheet" href="http://localhost/www/codeigniter/assets/css/bootstrap-image-gallery.min.css"> -->
-<!-- CSS to style the file input field as button and adjust the Bootstrap progress bars -->
-<!-- <link rel="stylesheet" href="http://localhost/www/codeigniter/assets/css/jquery.fileupload-ui.css"> -->
-
-<!--
-<link href="http://twitter.github.com/bootstrap/assets/css/bootstrap.css" rel="stylesheet">
-<link href="http://twitter.github.com/bootstrap/assets/css/bootstrap-responsive.css" rel="stylesheet">
-<link href="http://twitter.github.com/bootstrap/assets/css/docs.css" rel="stylesheet">
-<link href="http://twitter.github.com/bootstrap/assets/js/google-code-prettify/prettify.css" rel="stylesheet">
-
-<script type="text/javascript" src="http://platform.twitter.com/widgets.js"></script>
-<script src="http://twitter.github.com/bootstrap/assets/js/jquery.js"></script>
-<script src="http://twitter.github.com/bootstrap/assets/js/google-code-prettify/prettify.js"></script>
-<script src="http://twitter.github.com/bootstrap/assets/js/bootstrap-transition.js"></script>
-<script src="http://twitter.github.com/bootstrap/assets/js/bootstrap-alert.js"></script>
-<script src="http://twitter.github.com/bootstrap/assets/js/bootstrap-modal.js"></script>
-<script src="http://twitter.github.com/bootstrap/assets/js/bootstrap-dropdown.js"></script>
-<script src="http://twitter.github.com/bootstrap/assets/js/bootstrap-scrollspy.js"></script>
-<script src="http://twitter.github.com/bootstrap/assets/js/bootstrap-tab.js"></script>
-<script src="http://twitter.github.com/bootstrap/assets/js/bootstrap-tooltip.js"></script>
-<script src="http://twitter.github.com/bootstrap/assets/js/bootstrap-popover.js"></script>
-<script src="http://twitter.github.com/bootstrap/assets/js/bootstrap-button.js"></script>
-<script src="http://twitter.github.com/bootstrap/assets/js/bootstrap-collapse.js"></script>
-<script src="http://twitter.github.com/bootstrap/assets/js/bootstrap-carousel.js"></script>
-<script src="http://twitter.github.com/bootstrap/assets/js/bootstrap-typeahead.js"></script>
-<script src="http://twitter.github.com/bootstrap/assets/js/bootstrap-affix.js"></script>
-<script src="http://twitter.github.com/bootstrap/assets/js/application.js"></script>
--->
-
 </head>
 <body onResize="FixImages(false)">
 	<?php echo $body ?>
