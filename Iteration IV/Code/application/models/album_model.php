@@ -54,6 +54,7 @@ class Album_Model extends CI_Model
 	}
 
 	public function delete_user_album($user_id, $album_name) {
+		// BUG: Must delete picks of this album!
 		$albums_id = array();
 		$this->db->select('*');
 		$query = $this->db->get($this->table_name);
@@ -171,17 +172,30 @@ class Album_Model extends CI_Model
 			$query2 = $this->db->get($this->table_name);
 			if ($query2->num_rows() > 0) {
 				$album_name = $query2->row()->name;
-				$this->db->where('album_id', $row->album_id);
+				$this->db->where('album_id', $row->album_id)
+						 ->order_by('added', 'ASC') // first pick is cover for album
+						 ->limit(5);
 				$temp = $this->db->get($this->picture_album_table_name);
 				if ($temp->num_rows() > 0) {
-					$this->db->where('id', $temp->row()->picture_id);
-					$picture_address = $this->db->get($this->picture_table_name);
-					if ($picture_address->num_rows() > 0) {
-						$detail[$album_name] = $picture_address->row()->picture;
+					$pics = array();
+					foreach ($temp->result() as $value) {
+						$this->db->where('id', $value->picture_id);
+						$picture_address = $this->db->get($this->picture_table_name);
+						if ($picture_address->num_rows() > 0) {
+							array_push($pics, $picture_address->row()->picture);
+						}
+					}		
+					for ($i = 0; $i < (5 - $temp->num_rows()); $i++) { // the rest of array must be full
+						array_push($pics, base_url(IMAGES.'grey.gif'));
 					}
+					$detail[$album_name] = $pics;
 				}
-				else {
-					$detail[$album_name] = base_url(IMAGES.'upload_picture.png');
+				else { //  full array with default pictures
+					$detail[$album_name] = array(base_url(IMAGES.'upload_picture.png'),
+												 base_url(IMAGES.'grey.gif'),
+												 base_url(IMAGES.'grey.gif'),
+												 base_url(IMAGES.'grey.gif'),
+												 base_url(IMAGES.'grey.gif'));
 				}
 			}
 		}

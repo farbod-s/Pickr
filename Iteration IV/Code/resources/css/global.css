@@ -16,6 +16,15 @@ a:hover, a:active, a:focus {
     font-weight: bold;
     text-decoration : none;
 }
+/*
+ul.nav li.dropdown:hover ul.dropdown-menu{
+    display: block;    
+}
+
+a.menu:after, .dropdown-toggle:after {
+    content: none;
+}
+*/
 
 
 
@@ -126,7 +135,7 @@ textarea#comment-content {
 
 hr.soft {
     height: 1px;
-    margin: 5px 0;
+    margin: 10px 0;
     background-image: -webkit-linear-gradient(left, transparent, rgba(0, 0, 0, .1), transparent);
     background-image: -moz-linear-gradient(left, transparent, rgba(0, 0, 0, .1), transparent);
     background-image: -ms-linear-gradient(left, transparent, rgba(0, 0, 0, .1), transparent);
@@ -185,37 +194,47 @@ hr.soft {
 .commenter-name {
     margin-left: 50px;
     padding: 5px;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
 }
 
 .commenter-date {
     color: #AAA;
-    margin-left: 50px;
-    /*padding: 5px;*/
+    margin-left: 60px;
+    padding: 0 0 0 5px;
 }
 
 .profile-details {
     height: 150px;
-    overflow: hidden;
-    background: white;
-    border-radius: 2px;
-    box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.2);
     padding: 20px 60px;
+    box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.2);
     margin: 2% auto;
+    overflow: hidden;
+    background-color: whiteSmoke;
+    border: 1px solid rgba(0, 0, 0, 0.05);
+    -webkit-border-radius: 4px;
     position: relative;
 }
 
 .profile-name {
-    padding: 25px;
+    padding: 10px 25px 20px 25px;
     font-size: 25px;
     font-weight: bold;
     margin-left: 25px;
+
+    text-overflow: ellipsis;
+    overflow: hidden;
 }
 
 .profile-description {
-    padding: 25px;
     font-size: 15px;
+    padding: 5px 0 10px 25px;
     font-weight: bold;
     margin-left: 25px;
+
+    white-space: pre-wrap;
+    word-wrap: break-word;
 }
 
 #TitlePro {
@@ -243,6 +262,52 @@ hr.soft {
     color: #999;
     font-size: 20px;
     font-weight: bold;
+}
+
+.user-records {
+    font-weight: bold;
+    margin-right: 50px;
+    border-left: 1px solid #BFBFBF;
+    padding-left: 20px;
+    width: 100%;
+    margin-top: 5px;
+}
+
+.follow-all-btn {
+    margin: 10px 0 0 50px;
+    width: 200px;
+}
+
+.album-name {
+    padding: 10px 0 10px 0;
+    font-size: 25px;
+    font-weight: bold;
+}
+
+.album-records {
+    font-weight: bold;
+    margin-right: 50px;
+    border-left: 1px solid #BFBFBF;
+    padding-left: 20px;
+    width: 100%;
+    margin-top: 5px;
+}
+
+.follow-album-btn {
+    margin: 10px 0 10px 0;
+    width: 200px;
+}
+
+.modal-small {
+    margin-left: -200px;
+    width: 400px;
+}
+
+.error-message {
+    font-size: 15px;
+    font-weight: bold;
+    color: #B94A48;
+    opacity: 0;
 }
 
 
@@ -399,6 +464,8 @@ overflow: hidden;
     font-weight: bold;
     font-size: 15px;
     color: #666;
+    background-color: whiteSmoke;
+    border-radius: 6px 6px 0 0;
 }
 
 .serif:hover {
@@ -516,14 +583,6 @@ textarea::-webkit-scrollbar-thumb {
     transform:rotateY(180deg);
 }
 
-#formContainer #recovery-form {
-    /*margin-top: -170px;*/
-}
-
-#formContainer #login-form {
-    /*padding-bottom: 50px;*/
-}
-
 #formContainer.flipped #login-form {
     /*padding-bottom: 0;*/
     /*opacity:0;*/
@@ -620,6 +679,23 @@ textarea::-webkit-scrollbar-thumb {
 /*----------------------------------------
 =RESPONSIVE STYLING
 ----------------------------------------*/
+
+@media (max-width: 979px) {
+    .profile-name {
+        margin: 15px auto;
+        padding: 10px 0;
+    }
+
+    .profile-description {
+        padding: 5px 0 5px 0;
+        margin: 0;
+    }
+
+    .follow-all-btn {
+        margin: 10px auto;
+        width: 100%;
+    }
+}
 
 @media screen and (max-width: 1200px) { /* Columns decreased to 4 */
 

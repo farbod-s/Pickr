@@ -20,7 +20,8 @@ $(document).ready(function() {
                 	window.location = PICKR['baseUrl'];
 	            }
 	            else {
-	                alert('Error, Can not register');
+	                //alert('Error, Can not register');
+	                $(".error-message").show().animate({opacity: 1.0}, 1000).fadeOut(3000);
 	            }
 			},
 			error: function() {
@@ -51,12 +52,14 @@ $(document).ready(function() {
 					window.location = PICKR['baseUrl'];
 				}
 				else {
-					alert('Error, Can not login');
+					//alert('Error, Can not login');
+					$(".error").show().animate({opacity: 1.0}, 1000).fadeOut(3000);
 				}
 			},
 			error: function() {
-				alert('Ajax Error');
+				//alert('Ajax Error');
 				//window.location = PICKR['baseUrl'];
+				$(".error").show().animate({opacity: 1.0}, 1000).fadeOut(3000);
 			}
 		});
 		return false;

@@ -48,7 +48,7 @@ class Album extends MY_Controller {
 			$this->data['username'] = $username;
 			$this->data['albums'] = $this->ci->album_model->get_all_album_name($this->ci->session->userdata('user_id'));
 
-			$this->title = strtolower($username).'/'.strtolower($album_name);
+			$this->title = strtolower($username).' / '.strtolower($album_name);
 
 			$this->_render('pages/album');
 		}

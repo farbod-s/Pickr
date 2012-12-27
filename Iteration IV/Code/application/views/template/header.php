@@ -35,7 +35,7 @@
 			              	 	  <label class="string optional" for="user_remember_me"> Remember me</label>
 			              	 	  <input type="submit" class="btn btn-primary" id="login-btn" style="clear: left; width: 100%; height: 32px; font-weight: bold;" value="Sign In" />
 			              	 	  <li class="divider" style="width: 100%;"></li>
-			              	 	  <li><a href="#" id="flipToRecover" class="flipLink" style="background-color: #fff; color: #000; padding: 0;"><strong>Forgot password?</strong></a></li>
+			              	 	  <li><a href="#" id="flipToRecover" class="flipLink" style="background-color: #fff; color: #000; padding: 0;"><strong>Forgot password?</strong><span class="pull-right error" style="font-weight: bold; color: #B94A48; opacity: 0;">Error<span></a></li>
 			              	 	  <?php echo form_close();
 								   $attributes = array('id' => 'recovery-form');
 			        				echo form_open(base_url('auth/recover'), $attributes);

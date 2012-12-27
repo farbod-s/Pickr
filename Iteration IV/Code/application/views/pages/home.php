@@ -65,8 +65,10 @@
               </div>
           </div>
           <div class="modal-footer">
-            <!-- <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button> -->
-            <input type="submit" class="btn btn-large btn-primary" id="register-btn" style="width:100%; font-weight: bold;" value="Sign Up" />
+            <input type="submit" class="btn btn-large btn-primary" id="register-btn" value="Sign Up" />
+            <div class="pull-left">
+              <div class="error-message">Username or Email is duplicated</div>
+            </div>
           </div>
           
           <?php echo form_close();?>
@@ -86,7 +88,7 @@
                     <?php
                       if ($is_logged_in) { ?>
                       <span class="tool-box">
-                          <a href="#pick" role="button" class="btn btn-small pick-btn" data-toggle="modal"><i class="icon-magnet"></i></a>
+                          <a href="#pick" role="button" class="btn btn-small pick-btn" data-toggle="modal"><i class="icon-magnet"></i> Pick</a>
                           <a href="#comment" role="button" class="btn btn-small comment-btn" data-toggle="modal"><i class="icon-comment"></i></a>
                           <a class="btn btn-small like-btn" href="#"><i class="icon-thumbs-up"></i></a>
                       </span><?php }?>
@@ -126,11 +128,13 @@
                   </button>
                   <ul id="album_list" class="dropdown-menu" style="width: 100%; max-height: 145px; overflow-x: hidden; overflow-y: auto;">
                     <!-- dropdown menu links -->
+                    <div class="albums">
                     <?php if($albums) {
                       foreach ($albums as $album) { ?>
-                        <li style="text-overflow: ellipsis; overflow: hidden; white-space: nowrap;"><a href="#" onClick="SetCurrentAlbum(this.innerHTML)"><?php echo $album; ?></a></li>
+                        <li style="text-overflow: ellipsis; overflow: hidden; white-space: nowrap;"><a href="#" onClick="SetCurrentAlbum(this.innerHTML)"><?php echo htmlspecialchars($album); ?></a></li>
                       <?php }
                     }?>
+                    </div>
                     <li class="divider"></li>
                     <li>
                       <?php
@@ -155,7 +159,10 @@
               </div>
               <?php echo form_close(); ?>
             </div>
-            <div class="modal-footer"> 
+            <div class="modal-footer">
+              <div class="pull-left">
+                <div class="error-message">Correct album name</div>
+              </div>
             </div>
           </div>
           <!-- END pick Form -->
@@ -189,6 +196,9 @@
               <?php echo form_close(); ?>
             </div>
             <div class="modal-footer"> 
+              <div class="pull-left">
+                <div class="error-message">We have a problem, please try later!</div>
+              </div>
             </div>
           </div>
           <!-- END comment Form -->
@@ -197,7 +207,3 @@
   </div>
   <button class="btn btn-large btn-block" id="btn-load" type="button"><b>More</b></button>
 </div>
-
-<button id="ScrollToTop" class="btn" type="button" style="display: none;">
-  Scroll to Top
-</button>

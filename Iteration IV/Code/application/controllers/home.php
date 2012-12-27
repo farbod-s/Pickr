@@ -147,4 +147,21 @@ class Home extends MY_Controller {
 			echo json_encode(FALSE);
 		}
 	}
+
+	public function load_albums() {
+		$this->ci =& get_instance();
+		$this->ci->load->database();
+		$this->ci->load->model('album_model');
+
+		$user_id = $this->ci->session->userdata('user_id');
+		$albums = $this->ci->album_model->get_all_album_name($user_id);
+
+		$albums_block = "";
+		foreach ($albums as $album) {
+			$albums_block.='<li style="text-overflow: ellipsis; overflow: hidden; white-space: nowrap;"><a href="#" onClick="SetCurrentAlbum(this.innerHTML)">
+							'.htmlspecialchars($album).'
+							</a></li>';
+		}
+		echo json_encode($albums_block);
+	}
 }

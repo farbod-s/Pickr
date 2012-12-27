@@ -210,7 +210,7 @@ $(document).ready(function() {
     });
 
     // delete album
-    $('.delete-album-btn').click(function() {
+    $('#delete-album-btn').click(function() {
         var form_data = {
             album_name: PICKR['uri_segment_3']
         };
@@ -225,12 +225,14 @@ $(document).ready(function() {
                     window.location = PICKR['baseUrl'] + 'user/' + PICKR['uri_segment_2'];
                 }
                 else {
-                    alert('Error, Can not delete album');
+                    //alert('Error, Can not delete album');
+                    $(".error-message").show().animate({opacity: 1.0}, 1000).fadeOut(3000);
                 }
             },
             error: function() {
-                alert('Ajax Error');
+                //alert('Ajax Error');
                 //window.location = PICKR['baseUrl'];
+                $(".error-message").show().animate({opacity: 1.0}, 1000).fadeOut(3000);
             }
         });
         return false;
@@ -240,8 +242,8 @@ $(document).ready(function() {
     // rename album
     $('#rename-album-btn').click(function() {
         var form_data = {
-            old_album_name: $('#old_album_name').attr('placeholder'),
-            new_album_name: $('#new_album_name').val()
+            old_album_name: $('#old_album_name').attr('placeholder').replace(/&lt;/g,'<').replace(/&gt;/g,'>').replace(/&amp;/g,'&'),
+            new_album_name: $('#new_album_name').val().replace(/&lt;/g,'<').replace(/&gt;/g,'>').replace(/&amp;/g,'&')
         };
         $.ajax({
             url: PICKR['baseUrl'] + "album/rename_album",
@@ -254,7 +256,8 @@ $(document).ready(function() {
                     window.location = PICKR['baseUrl'] + 'user/' + PICKR['uri_segment_2'];
                 }
                 else {
-                    alert('Error, Can not rename picture');
+                    //alert('Error, Can not rename picture');
+                    $(".error-message").show().animate({opacity: 1.0}, 1000).fadeOut(3000);
                 }
             },
             error: function() {
@@ -275,7 +278,7 @@ $(document).ready(function() {
     $('#create-album-btn').click(function() {
         $(this).button('loading');
         var form_data = {
-            album_name: $('#album_name').val()
+            album_name: $('#album_name').val().replace(/&lt;/g,'<').replace(/&gt;/g,'>').replace(/&amp;/g,'&')
         };
         if(!$('#create-album-form').valid()) {
             $(this).button('reset');
@@ -289,17 +292,18 @@ $(document).ready(function() {
             success: function(result) {
                 if(result) {
                     //alert('Success, Album created');
-                    var item = $('<li><a href="#" onClick="SetCurrentAlbum(this.innerHTML)">' + $('#album_name').val() + '</a></li>');
-                    $("#album_list").prepend(item);
+                    LoadAlbums(); // refresh album list
                     $('#album_name').attr('value', '');
                 }
                 else {
-                    alert('Error, Can not create album');
+                    //alert('Error, Can not create album');
+                    $(".error-message").show().animate({opacity: 1.0}, 1000).fadeOut(3000);
                 }
             },
             error: function() {
-                alert('Ajax Error');
+                //alert('Ajax Error');
                 //window.location = PICKR['baseUrl'];
+                $(".error-message").show().animate({opacity: 1.0}, 1000).fadeOut(3000);
             }
         });
         $(this).button('reset');
@@ -310,7 +314,7 @@ $(document).ready(function() {
     $('#new-album-btn').click(function() {
         $(this).button('loading');
         var form_data = {
-            album_name: $('#album_name').val()
+            album_name: $('#album_name').val().replace(/&lt;/g,'<').replace(/&gt;/g,'>').replace(/&amp;/g,'&')
         };
         if(!$('#new-album-form').valid()) {
             $(this).button('reset');
@@ -327,7 +331,8 @@ $(document).ready(function() {
                     window.location = PICKR['baseUrl'] + 'user/' + PICKR['uri_segment_2'];
                 }
                 else {
-                    alert('Error, Can not create album');
+                    //alert('Error, Can not create album');
+                    $(".error-message").show().animate({opacity: 1.0}, 1000).fadeOut(3000);
                 }
             },
             error: function() {
@@ -344,7 +349,7 @@ $(document).ready(function() {
         $(this).button('loading');
         var form_data = {
             picture_path: $('#picked-pic').attr('src'),
-            album_name: $('#current-album strong').html(),
+            album_name: $('#current-album strong').html().replace(/&lt;/g,'<').replace(/&gt;/g,'>').replace(/&amp;/g,'&'),
             description: $('textarea#album-description').val()
         };
         if(!$('#pick-form').valid()) {
@@ -362,7 +367,8 @@ $(document).ready(function() {
                     $('#pick').modal('hide');
                 }
                 else {
-                    alert('Error, Can not pick');
+                    //alert('Error, Can not pick');
+                    $(".error-message").show().animate({opacity: 1.0}, 1000).fadeOut(3000);
                 }
             },
             error: function() {
@@ -396,16 +402,18 @@ $(document).ready(function() {
                     // update comments
                     var comments = Number($(LAST_IMG + ' span.record-comment').html()) + 1;
                     $(LAST_IMG + ' span.record-comment').html(comments);
-
+                    $('textarea#comment-content').val('');
                     LoadComments(); // load comments
                 }
                 else {
-                    alert('Error, Can not add comment');
+                    //alert('Error, Can not add comment');
+                    $(".error-message").show().animate({opacity: 1.0}, 1000).fadeOut(3000);
                 }
             },
             error: function() {
-                alert('Ajax Error');
+                //alert('Ajax Error');
                 //window.location = PICKR['baseUrl'];
+                $(".error-message").show().animate({opacity: 1.0}, 1000).fadeOut(3000);
             }
         });
         $(this).button('reset');
@@ -446,7 +454,6 @@ $(document).ready(function() {
 
 function LoadComments() {
     $('.comments').html('');
-    //$('#comment').modal('show');
     var form_data = {
         picture_path: $('#commented-pic').attr('src')
     };
@@ -462,6 +469,29 @@ function LoadComments() {
             }
             else {
                 //alert('Error, No comment exists for loading');
+            }
+        },
+        error: function() {
+            alert('Ajax Error');
+            //window.location = PICKR['baseUrl'];
+        }
+    });
+    return false;
+}
+
+function LoadAlbums() {
+    $('.albums').html('');
+    $.ajax({
+        url: PICKR['baseUrl'] + "home/load_albums",
+        type: 'POST',
+        dataType: 'JSON',
+        success: function(result) {
+            if(result) {
+                //alert('Success, Albums loaded');
+                $('.albums').html(result);
+            }
+            else {
+                //alert('Error, No album exists for loading');
             }
         },
         error: function() {

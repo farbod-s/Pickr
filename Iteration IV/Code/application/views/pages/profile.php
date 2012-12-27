@@ -15,18 +15,24 @@
 	?>
 
 	<div class="profile-details">
-		<div class="pull-left">
+		<div class="pull-left visible-desktop">
 			<img src="<?php if($pic_address != '') echo $pic_address; else echo base_url(IMAGES.'220x200.gif'); ?>" class="img-circle pull-left pickr-pic" style="width: 150px; height: 150px;" />
 		</div>
 		<div class="pull-left">
 			<div class="profile-name"><?php if($firstname != '') echo $firstname; else echo "Here's";?> 
 			<?php if($lastname != '') echo $lastname; else echo "name"; ?><?php if($ME) echo " (You)"?></div>
-			<div class="profile-description"><?php if($description != '') echo $description; else echo "Here's Description";?></div>
-		</div>
-		<div class="pull-right">
+			<div class="profile-description visible-desktop"><?php if($description != '') echo $description; else echo "Here's Description";?></div>
 			<?php if(!$ME && $album_count != 0) {?>
-				<button class="btn btn-large btn-danger" style="margin-top: 25px;">Follow All</button>
+				<button class="btn btn-large btn-danger follow-all-btn">Follow All</button>
 			<?php }?>
+		</div>
+		<div class="pull-right hidden-phone">
+			<div class="user-records">
+				<p style="padding: 5px;">Followers<span class="pull-right">---</span></p>
+				<p style="padding: 5px;">Following<span class="pull-right">---</span></p>
+				<p style="padding: 5px;">Likes<span class="pull-right">---</span></p>
+				<p style="padding: 5px;">Picks<span class="pull-right">---</span></p>
+			</div>
 		</div>
 	</div>
 
@@ -40,17 +46,17 @@
 		<?php if($albums_detail && !empty($albums_detail)) {
 			foreach($albums_detail as $name => $first_pic) { ?>
 		<div class="pin pinBoard" id="board1">
-			<a href="<?php echo base_url('user/'.strtolower($username).'/'.preg_replace('![^a-z0-9_]+!i', '-', strtolower($name)))?>"><div class="serif"><?php echo $name; ?></div></a>
+			<a href="<?php echo base_url('user/'.strtolower($username).'/'.preg_replace('![^a-z0-9_]+!i', '-', strtolower($name)))?>"><div class="serif"><?php echo htmlspecialchars($name); ?></div></a>
 			<div class="board">
 				<div class="holder">
 					<span class="cover">
-						<img class="lazy" src="<?php echo base_url(IMAGES.'grey.gif');?>" data-original="<?php echo $first_pic; ?>" style="width: 100%; min-height: 150px;">
+						<img class="lazy" src="<?php echo base_url(IMAGES.'grey.gif');?>" data-original="<?php echo $first_pic[0]; ?>" style="width: 100%; min-height: 150px;">
 					</span>
 					<span class="thumbs">
-					<img class="lazy" src="<?php echo base_url(IMAGES.'grey.gif');?>" data-original="<?php echo base_url(IMAGES.'grey.gif');?>" alt="Photo of a pin">
-					<img class="lazy" src="<?php echo base_url(IMAGES.'grey.gif');?>" data-original="<?php echo base_url(IMAGES.'grey.gif');?>" alt="Photo of a pin">
-					<img class="lazy" src="<?php echo base_url(IMAGES.'grey.gif');?>" data-original="<?php echo base_url(IMAGES.'grey.gif');?>" alt="Photo of a pin">
-					<img class="lazy" src="<?php echo base_url(IMAGES.'grey.gif');?>" data-original="<?php echo base_url(IMAGES.'grey.gif');?>" alt="Photo of a pin">
+					<img class="lazy" src="<?php echo base_url(IMAGES.'grey.gif');?>" data-original="<?php echo $first_pic[1]; ?>" alt="Photo of a pin">
+					<img class="lazy" src="<?php echo base_url(IMAGES.'grey.gif');?>" data-original="<?php echo $first_pic[2]; ?>" alt="Photo of a pin">
+					<img class="lazy" src="<?php echo base_url(IMAGES.'grey.gif');?>" data-original="<?php echo $first_pic[3]; ?>" alt="Photo of a pin">
+					<img class="lazy" src="<?php echo base_url(IMAGES.'grey.gif');?>" data-original="<?php echo $first_pic[4]; ?>" alt="Photo of a pin">
 					</span>
 				</div>
 				<div class="buttonContainer">
@@ -92,7 +98,7 @@
 			</div>
 
 			<!-- create Form -->
-	        <div id="new_album" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="newAlbumLabel" aria-hidden="true">
+	        <div id="new_album" class="modal hide fade modal-small" tabindex="-1" role="dialog" aria-labelledby="newAlbumLabel" aria-hidden="true">
 	          <?php $attributes = array('id' => 'new-album-form', 'class' => 'form-horizontal');
 	          echo form_open(base_url('profile/new_album'), $attributes); ?>
 	          <div class="modal-header">
@@ -101,14 +107,16 @@
 	          </div>
 	          <div class="modal-body">
 	            <div class="control-group">
-	                <label class="control-label" for="album_name">Album Name</label>
-	                <div class="controls">
-	                  <input type="text" id="album_name" name="album_name" value="<?php echo set_value('album_name');?>" maxlength="50" minlength="4" placeholder="Album Name" spellcheck="false" required />
+	                <div class="controls" style="margin-left: 75px; margin-top: 18px;">
+	                  <input type="text" id="album_name" name="album_name" value="<?php echo set_value('album_name');?>" placeholder="Album Name" spellcheck="false" />
 	                </div>
 	            </div>
 	          </div>
 	          <div class="modal-footer"> 
-	            <button type="submit" style="width:100%; font-weight: bold;" class="btn btn-large btn-primary" id="new-album-btn" data-loading-text="Creating Album...">Create New Album</button>
+	            <button type="submit" class="btn btn-large btn-primary" id="new-album-btn" data-loading-text="Creating Album...">Create New Album</button>
+	          	<div class="pull-left">
+		          <div class="error-message" style="margin-top: 10px;">Correct album name</div>
+		        </div>
 	          </div>
 	          <?php echo form_close();?>
 	        </div>
