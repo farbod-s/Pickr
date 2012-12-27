@@ -164,4 +164,22 @@ class Home extends MY_Controller {
 		}
 		echo json_encode($albums_block);
 	}
+
+	public function load_notifications() {
+		$this->ci =& get_instance();
+		$this->ci->load->database();
+		$this->ci->load->model('notification');
+		$user_id = $this->ci->session->userdata('user_id');
+
+		$notifications = array();
+		$notifications = $this->ci->notification->load_notifications($user_id);
+		
+		$notifications_cotent = '<li><strong style="margin-left: 35px;"> Recent Events </strong></li>';
+		foreach ($notifications as $notification) {
+			$notifications_cotent = $notifications_cotent.'<li class="divider"></li>
+			  <li style="margin-left: 5px;">'.$notification['date'].': <strong>'.$notification['description'].'</strong></li>';
+		}
+
+		echo json_encode($notifications_cotent);
+	}
 }

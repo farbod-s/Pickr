@@ -55,10 +55,8 @@
 		    			<!-- The User Control drop down menu -->
 			        	<ul class="nav pull-left">
 			        	  <li class="divider-vertical"></li>
-			        	  <li class="header-link">
-				          	<a href="#upload-picture-form" data-toggle="modal"><i class="icon-upload icon-white icon-group"></i> Upload</a>
-				          </li>
-			        	  <li class="divider-vertical"></li>
+
+			        	  <!-- user -->
 				          <li class="dropdown header-link">
 				            <a class="dropdown-toggle" href="#" data-toggle="dropdown">
 								<i class="icon-user icon-white icon-group"></i>
@@ -84,6 +82,25 @@
 								    <li><a href="<?php echo base_url('auth/logout')?>"><i class="icon-off"></i> Sign Out</a></li>
 								</ul>
 				          </li>
+				          <!-- user -->
+
+				          <!-- notification -->
+				          <li id="dropdown-notification" class="dropdown header-link">
+				            <a class="dropdown-toggle" href="#" data-toggle="dropdown">
+								<i class="icon-eye-open icon-white icon-group"></i>
+				            	<strong>Notification</strong>
+				            </a>
+				            	<!-- User Control -->
+				            	<ul id="dropdown-notification-content" class="dropdown-menu">
+								</ul>
+				          </li>
+				          <!-- /notification -->
+
+				          <!-- upload -->
+				          <li class="header-link">
+				          	<a href="#upload-picture-form" data-toggle="modal"><i class="icon-upload icon-white icon-group"></i> Upload</a>
+				          </li>
+			        	  <!-- /upload -->
 				        </ul>
 		    		<?php } ?>
 

@@ -448,6 +448,22 @@ $(document).ready(function() {
         });
         return false;
     });
+
+    // load notifications
+    $('#dropdown-notification').click(function() {
+        $('#dropdown-notification-content').html('');
+        $.ajax({
+            url: PICKR['baseUrl'] + "home/load_notifications",
+            type: 'POST',
+            dataType: 'JSON',
+            success: function(result) {
+                $('#dropdown-notification-content').html(result);
+            },
+            error: function() {
+                alert('Ajax Error');
+            }
+        });
+    });
 });
 
 
