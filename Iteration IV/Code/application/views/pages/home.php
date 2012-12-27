@@ -131,7 +131,7 @@
                     <div class="albums">
                     <?php if($albums) {
                       foreach ($albums as $album) { ?>
-                        <li style="text-overflow: ellipsis; overflow: hidden; white-space: nowrap;"><a href="#" onClick="SetCurrentAlbum(this.innerHTML)"><?php echo htmlspecialchars($album); ?></a></li>
+                        <li style="text-overflow: ellipsis; overflow: hidden; white-space: nowrap;"><a onClick="SetCurrentAlbum(this.innerHTML)"><?php echo htmlspecialchars($album); ?></a></li>
                       <?php }
                     }?>
                     </div>

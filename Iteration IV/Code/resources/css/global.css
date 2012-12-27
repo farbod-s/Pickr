@@ -310,6 +310,18 @@ hr.soft {
     opacity: 0;
 }
 
+#dropdown-notification-content {
+    width: 300%;
+    max-height: 500px;
+    overflow-x: hidden;
+    overflow-y: auto;
+    cursor: default;
+}
+
+#album_list {
+    cursor: pointer;
+}
+
 
 
 /*** BEGIN Album Style ***/

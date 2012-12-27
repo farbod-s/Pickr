@@ -174,12 +174,25 @@ class Home extends MY_Controller {
 		$notifications = array();
 		$notifications = $this->ci->notification->load_notifications($user_id);
 		
-		$notifications_cotent = '<li><strong style="margin-left: 35px;"> Recent Events </strong></li>';
-		foreach ($notifications as $notification) {
-			$notifications_cotent = $notifications_cotent.'<li class="divider"></li>
-			  <li style="margin-left: 5px;">'.$notification['date'].': <strong>'.$notification['description'].'</strong></li>';
+		$notifications_cotent = '<li><div style="padding: 5px 15px; font-weight: bold; color: #999;">Recent Events</div></li>';
+		if (count($notifications) < 1) {
+			$notifications_cotent = $notifications_cotent.'
+									<li class="divider"></li>
+			  						<li><a>
+		  							<div style="font-weight: bold; padding-top: 5px; padding-bottom: 5px;">No Activity</div>
+			  						</a></li>';
 		}
-
+		else {
+			foreach ($notifications as $notification) {
+				$notifications_cotent = $notifications_cotent.'
+										<li class="divider"></li>
+				  						<li><a><div style="font-weight: bold;">
+			  							'.$notification['description'].'
+				  						</div><div style="font-size: 11px;">
+				  						'.$notification['date'].'
+				  						</div></a></li>';
+			}
+		}
 		echo json_encode($notifications_cotent);
 	}
 }
