@@ -63,6 +63,26 @@ class Picture_Album extends CI_Model
 		return $albums_id;
 	}
 
+	public function get_followed_pictures($followed_albums,$limit){
+		$pictures = array(); 
+		foreach($followed_albums as $id){
+			$this->db->where('album_id' , $id);
+			$query = $this->db->get($this->table_name);
+			if ($query->num_rows() > 0) {
+				foreach($query->result() as $row){
+					$this->db->where('id' , $row->picture_id)
+							 ->order_by('added', 'ASC') 
+						     ->limit($limit['length'],$limit['start']);					
+					$query2 = $this->db->get($this->picture_table_name);
+					if($query2->num_rows() > 0){
+						array_push($pictures , $query2->row()->picture);
+					}
+				}
+			}
+		}
+		return $pictures;
+	}
+
 	public function get_album_pictures($user_id, $album_name) {
 		$albums_id = array();
 		$this->db->select('*');

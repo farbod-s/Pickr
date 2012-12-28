@@ -8,11 +8,31 @@ class Home extends MY_Controller {
 			$this->ci =& get_instance();
 			$this->ci->load->database();
 			$this->ci->load->model('album_model');
+			$this->ci->load->model('follow');			
+			$this->ci->load->model('picture_album');				
 
 			$user_id = $this->ci->session->userdata('user_id');
+			$followed_albums = $this->ci->follow->get_followed_ids($user_id);
+			$limit = array( 'start' => "0" ,
+							'length' => "24");
+			$this->data['followed_pictures'] = $this->ci->picture_album->get_followed_pictures($followed_albums,$limit);
 			$this->data['albums'] = $this->ci->album_model->get_all_album_name($user_id);
 		}
 		$this->_render('pages/home');
+	}
+
+	public function more_pics(){
+		$this->ci =& get_instance();
+		$this->ci->load->database();
+		$this->ci->load->model('follow');			
+		$this->ci->load->model('picture_album');
+					
+		$requested_page = $_POST['page_num'];
+		$limit = array( 'start' => '(($requested_page - 1) * 24)' ,
+						'length' => "24");		
+		$followed_albums = $this->ci->follow->get_followed_ids($user_id);		
+		$this->data['followed_pictures'] = $this->ci->picture_album->get_followed_pictures($followed_albums,$limit);	
+				
 	}
 
 	public function like_picture() {

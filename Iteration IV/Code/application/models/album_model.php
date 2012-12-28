@@ -129,6 +129,12 @@ class Album_Model extends CI_Model
 		return FALSE;
 	}
 
+	public function get_all_album_ids($user_id){
+		$albums_ids = array();
+		$albums_ids = $this->get_all_album_id($user_id);
+		return $albums_ids;
+	}	
+
 	private function get_all_album_id($user_id) {
 		$albums_id = array();
 		$this->db->where('user_id', $user_id);
@@ -163,7 +169,7 @@ class Album_Model extends CI_Model
 	    return $albums_name;
 	}
 
-	public function get_albums_detail($user_id) {
+	/*public function get_albums_detail($user_id) {
 		$detail = array();
 		$this->db->where('user_id', $user_id);
 		$query = $this->db->get($this->user_album_table_name);
@@ -200,5 +206,48 @@ class Album_Model extends CI_Model
 			}
 		}
 		return $detail;
-	}
+	}*/
+
+	public function get_albums_detail($user_id) {
+		$detail = array();
+		$this->db->where('user_id', $user_id);
+		$query = $this->db->get($this->user_album_table_name);
+		foreach($query->result() as $row) {
+			$this->db->where('id', $row->album_id);
+			$query2 = $this->db->get($this->table_name);
+			if ($query2->num_rows() > 0) {
+				$album_id = $query2->row()->id;				
+				$album_name = $query2->row()->name;
+				$this->db->where('album_id', $row->album_id)
+						 ->order_by('added', 'ASC') // first pick is cover for album
+						 ->limit(5);
+				$temp = $this->db->get($this->picture_album_table_name);
+				if ($temp->num_rows() > 0) {
+					$pics = array();
+					foreach ($temp->result() as $value) {
+						$this->db->where('id', $value->picture_id);
+						$picture_address = $this->db->get($this->picture_table_name);
+						if ($picture_address->num_rows() > 0) {
+							array_push($pics, $picture_address->row()->picture);
+						}
+					}		
+					for ($i = 0; $i < (5 - $temp->num_rows()); $i++) { // the rest of array must be full
+						array_push($pics, base_url(IMAGES.'grey.gif'));
+					}
+					$detail[$album_id] = array( 'name' => "$album_name" ,
+													'pic' => $pics );
+				}
+				else { //  full array with default pictures
+					$pics = array(base_url(IMAGES.'upload_picture.png'),
+												 base_url(IMAGES.'grey.gif'),
+												 base_url(IMAGES.'grey.gif'),
+												 base_url(IMAGES.'grey.gif'),
+												 base_url(IMAGES.'grey.gif'));
+					$detail[$album_id] = array( 'name' => "$album_name" ,
+												'pic' => $pics );
+				}
+			}
+		}
+		return $detail;
+	}	
 }

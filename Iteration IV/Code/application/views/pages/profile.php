@@ -23,7 +23,15 @@
 			<?php if($lastname != '') echo $lastname; else echo "name"; ?><?php if($ME) echo " (You)"?></div>
 			<div class="profile-description visible-desktop"><?php if($description != '') echo $description; else echo "Here's Description";?></div>
 			<?php if(!$ME && $album_count != 0) {?>
-				<button class="btn btn-large btn-danger follow-all-btn">Follow All</button>
+				<?php
+				if(!$person_followed){
+				echo form_open(base_url('profile/follow_person/'.strtolower($user_id))); ?>	
+				<button class="btn btn-large btn-danger follow-all-btn" type="submit">Follow All</button>
+				<?php }
+				else{
+				echo form_open(base_url('profile/unfollow_person/'.strtolower($user_id))); ?>
+				<button class="btn btn-large btn-danger follow-all-btn" type="submit">Unfollow All</button>
+				<?php }	?>		
 			<?php }?>
 		</div>
 		<div class="pull-right hidden-phone">
@@ -44,7 +52,10 @@
 
 	<div class="boards">
 		<?php if($albums_detail && !empty($albums_detail)) {
-			foreach($albums_detail as $name => $first_pic) { ?>
+			foreach($albums_detail as $album_id => $details) { 
+				$name = $details['name'];
+				$first_pic = $details['pic'];
+		?>
 		<div class="pin pinBoard" id="board1">
 			<a href="<?php echo base_url('user/'.strtolower($username).'/'.preg_replace('![^a-z0-9_]+!i', '-', strtolower($name)))?>"><div class="serif"><?php echo htmlspecialchars($name); ?></div></a>
 			<div class="board">
@@ -70,11 +81,25 @@
 							</button>
 						<?php echo form_close(); ?>
 					<?php } else {?>
-						<!-- TODO -->
-						<button class="btn" type="submit" style="width: 100%; height: 100%; border-radius: 0 0 6px 6px;">
-							<strong>Follow</strong>
-						</button>
-					<?php }?>
+						<!-- TODO: Use AJAX -->
+						<?php
+						$attributes = array('class' => 'form-horizontal',
+											'style' =>  'width: 100%; height: 100%;');
+						if (!in_array(strtolower($album_id), $followed_albums)) {
+							echo form_open(base_url('profile/follow_album/'.strtolower($album_id)), $attributes); ?>
+								<button class="btn" type="submit" style="width: 100%; height: 100%; border-radius: 0 0 6px 6px;">
+									<strong>Follow</strong>
+								</button>
+							<?php echo form_close(); 
+						}
+						else {
+							echo form_open(base_url('profile/unfollow_album/'.strtolower($album_id)), $attributes); ?>
+								<button class="btn" type="submit" style="width: 100%; height: 100%; border-radius: 0 0 6px 6px;">
+									<strong>Unfollow</strong>
+								</button>
+							<?php echo form_close(); 
+					 	}
+					}?>
 				</div>
 			</div>
 		</div>

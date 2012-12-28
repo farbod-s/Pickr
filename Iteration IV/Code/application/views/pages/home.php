@@ -77,9 +77,49 @@
         <!-- END SignUp Form -->
     <?php } ?>
 
+
+
+    <!-- Load Pictures -->
+    <?php if ($is_logged_in) { ?>
+    <div class="gallery" id="infinite_loop">
+      <?php
+      $i=0; 
+      foreach($followed_pictures as $pic) {
+        $i++; ?>
+        <div class="article">
+              <div class="frame">
+                <figure class="cap-bot">
+                  <div class="inner-box" id="pic_<?php echo $i; ?>">
+                    <?php
+                      if ($is_logged_in) { ?>
+                      <span class="tool-box">
+                          <a href="#pick" role="button" class="btn btn-small pick-btn" data-toggle="modal"><i class="icon-magnet"></i> Pick</a>
+                          <a href="#comment" role="button" class="btn btn-small comment-btn" data-toggle="modal"><i class="icon-comment"></i></a>
+                          <a class="btn btn-small like-btn" href="#"><i class="icon-thumbs-up"></i></a>
+                      </span><?php }
+                      ?>
+                      <a class="pic-link" href="#">
+                          <img id="pic_<?php echo $i; ?>" class="lazy" src="<?php echo $pic ?>" data-original="<?php echo $pic ?>" alt="pic_<?php echo $i; ?>" />
+                      </a> <?php  ?>
+                        <figcaption>
+                        <span>by unknown photographer</span>
+                        <span class="record pull-right">
+                            <i class="icon-comment icon-white record-img"></i> <span class="record-comment"><?php echo (2 * $i + 3); ?></span>
+                            <i class="icon-heart icon-white record-img"></i> <span class="record-like"><?php echo (2 * $i + 1); ?></span>
+                        </span>
+                    </figcaption>
+                  </div>
+              </figure>
+            </div>
+        </div> 
+    <?php } ?>    
+    </div>
+    <?php } ?>
+
+   <?php if (!$is_logged_in) { ?>
     <!-- Load Pictures -->
     <div class="gallery">
-    <?php /* TODO: MUST LOAD FROM DATABASE && INFINITE LOOP */
+    <?php 
       for($i = 1; $i < 25; $i++) { ?>
         <div class="article">
               <div class="frame">
@@ -108,7 +148,8 @@
         </div>
     <?php } ?>
     </div>
-    <!-- END Load Pictures -->
+    <?php } ?>
+    <!-- END Load Pictures -->    
 
     <?php
       if ($is_logged_in) { ?>

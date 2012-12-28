@@ -2,6 +2,7 @@ $(document).ready(function() {
 
     // used in update comment record in main page
     var LAST_IMG = "";
+    var page = 1;
 
     // Fix input element click problem
     $('.dropdown-menu').click(function(e) {
@@ -61,6 +62,25 @@ $(document).ready(function() {
         else {
             $('#ScrollToTop').stop(true, true).fadeOut();
         }
+        /*$('btn-load').hide();
+        if($(window).scrollTop() + $(window).height() > $(document).height() - 300) {
+        $('#btn-load').show();
+        }        
+        if  ($(window).scrollTop() == $(document).height() - $(window).height()){
+            $('#btn-load').hide();
+            page++;
+            var data = {page_num: page}
+            var actual_count = "<?php echo $actual_row_count; ?>";
+            $.ajax(
+                type: "POST",
+                url: '<?php echo base_url().'home/more_pics';?>',
+                data:data,
+                success: function(res){
+                    $("#infinite_loop").append(res);
+                    console.log(res);
+                }
+            );
+        }*/        
     });
 
     //Click event to scroll to top
