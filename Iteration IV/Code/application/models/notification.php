@@ -3,6 +3,9 @@
 class Notification extends CI_Model
 {
 	private $notification_table = 'notification';
+	private $users_table = 'users';
+	private $user_album_table = 'user_album';
+	private $picture_album_table = 'picture_album';
 	
 	function __construct() {
 		parent::__construct();
@@ -27,12 +30,80 @@ class Notification extends CI_Model
 		return $notifications;
 	}
 
-	public function add_pick_notification($user_id, $picture_id) {
+	public function add_pick_notification($subject_user_id, $picture_id) {
+		$this->db->select('album_id')
+				 ->from($this->picture_album_table)
+				 ->where('picture_id', $picture_id);
+		$album_id_query = $this->db->get();
+		if($album_id_query.num_rows != 1) {
+			return FALSE;
+		}
+		$album_id = $album_id_query->row()->album_id;
 
+		$this->db->select('user_id')
+				 ->from($this->user_album_table)
+				 ->where('album_id', $album_id);
+		$object_user_id_query = $this->db->get();
+		if($object_user_id_query->num_rows() != 1) {
+			return FALSE;
+		}
+		$object_user_id = $object_user_id_query->row()->user_id;
+
+		$this->db->select('username')
+				 ->from($this->users_table)
+				 ->where('id', $subject_user_id);
+		$subject_username_query = $this->db->get();
+		if($subject_username_query->num_rows() != 1) {
+			return FALSE;
+		}
+		$subject_username = $subject_username_query->row()->username;
+
+		$new_notification = array('date' => date('Y-m-d H:i:s'),
+								  'description' => $subject_username.' picked one of your pictures.',
+							      'user_id' => 20); // $object_user_id);
+		if(!$this->db->insert($this->notification_table, $new_notification)) {
+			return FALSE;
+		}
+
+		return TRUE;
 	}
 
-	public function add_like_notification($user_id, $picture_id) {
+	public function add_like_notification($subject_user_id, $picture_id) {		
+		$this->db->select('album_id')
+				 ->from($this->picture_album_table)
+				 ->where('picture_id', $picture_id);
+		$album_id_query = $this->db->get();
+		if($album_id_query.num_rows != 1) {
+			return FALSE;
+		}
+		$album_id = $album_id_query->row()->album_id;
 
+		$this->db->select('user_id')
+				 ->from($this->user_album_table)
+				 ->where('album_id', $album_id);
+		$object_user_id_query = $this->db->get();
+		if($object_user_id_query->num_rows() != 1) {
+			return FALSE;
+		}
+		$object_user_id = $object_user_id_query->row()->user_id;
+
+		$this->db->select('username')
+				 ->from($this->users_table)
+				 ->where('id', $subject_user_id);
+		$subject_username_query = $this->db->get();
+		if($subject_username_query->num_rows() != 1) {
+			return FALSE;
+		}
+		$subject_username = $subject_username_query->row()->username;
+
+		$new_notification = array('date' => date('Y-m-d H:i:s'),
+								  'description' => $subject_username.' liked one of your pictures.',
+							      'user_id' => 20); // $object_user_id);
+		if(!$this->db->insert($this->notification_table, $new_notification)) {
+			return FALSE;
+		}
+
+		return TRUE;
 	}
 
 	public function add_comment_notification() {
@@ -45,52 +116,5 @@ class Notification extends CI_Model
 
 	public function add_follow_all_notification() {
 
-	}
-
-	// *************************************************************
-	// Get username by user_id
-	private function get_username($user_id)
-	{
-		$this->db->where('id', $user_id);
-		$query = $this->db->get($this->users_table_name);
-		if ($query->num_rows() == 1) return $query->row()->username;
-		return NULL;
-	}
-
-	public function add_comment_to_picture($user_id, $picture_path, $comment) {
-		$picture_id = $this->get_picture_id($picture_path);
-		if ($this->insert_comment($comment, $picture_id, $user_id)) {
-			return TRUE;
-		}
-		return FALSE;
-	}
-
-	private function get_picture_id($picture_path) {
-		$pic_id = 0;
-		$this->db->where('picture', $picture_path);
-		$query = $this->db->get($this->picture_table_name);
-		if ($query->num_rows() > 0) {
-			$pic_id = $query->row()->id;
-		}
-		return $pic_id;
-	}
-
-	private function insert_comment($comment, $picture_id, $user_id)
-	{
-		$data_array = array('user_id' => $user_id,
-							'picture_id' => $picture_id,
-							'date' => date('Y-m-d H:i:s'),
-							'comment' => $comment);
-		if ($this->db->insert($this->table_name, $data_array)) {
-			return TRUE;
-		}
-		return FALSE;
-	}
-
-	private function delete_comment($picture_id, $user_id)
-	{
-		$this->db->where('user_id', $user_id);
-		$this->db->where('picture_id', $picture_id);
-		$this->db->delete($this->table_name);
 	}
 }

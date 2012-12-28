@@ -195,4 +195,30 @@ class Home extends MY_Controller {
 		}
 		echo json_encode($notifications_cotent);
 	}
+
+	public function add_pick_notification() {
+		$this->ci =& get_instance();
+		$this->ci->load->database();
+		$this->ci->load->model('notification');
+		$user_id = $this->ci->session->userdata('user_id');
+		if($this->ci->notification->add_pick_notification($user_id, $this->input->post('pictureId'))) {
+			echo json_encode(TRUE);
+		}
+		else {
+			echo json_encode(FALSE);
+		}
+	}
+
+	public function add_like_notification() {
+		$this->ci =& get_instance();
+		$this->ci->load->database();
+		$this->ci->load->model('notification');
+		$user_id = $this->ci->session->userdata('user_id');
+		if($this->ci->notification->add_like_notification($user_id, $this->input->post('pictureId'))) {
+			echo json_encode(TRUE);
+		}
+		else {
+			echo json_encode(FALSE);
+		}
+	}
 }

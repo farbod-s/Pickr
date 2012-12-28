@@ -129,6 +129,9 @@ $(document).ready(function() {
                     // remove like button & add dislike button
                     $(image + ' a.like-btn').addClass('dislike-btn');
                     $(image + ' a.like-btn').removeClass('like-btn');
+
+                    // notification
+                    // AddLikeNotification($(this).parent().parent().attr('id'));
                 }
                 else {
                     alert('Error, Can not like');
@@ -646,5 +649,42 @@ function StretchImages() {
     $(".article").each(function (index, div) {
         var img = $(div).find("img.lazy").get(0);
         StretchImage(div, img);
+    });
+}
+
+// notification
+function AddPickNotification(pictureId) {
+    var form_data = {
+        picture_id: pictureId
+    };
+    $.ajax({
+        url: PICKR['baseUrl'] + "home/add_pick_notification",
+        type: 'POST',
+        dataType: 'JSON',
+        data: form_data,
+        success: function(result) {
+            // alert('Pick Notification Added.');
+        },
+        error: function() {
+            alert('Ajax Error');
+        }
+    });
+}
+
+function AddLikeNotification(pictureId) {
+    var form_data = {
+        picture_id: pictureId
+    };
+    $.ajax({
+        url: PICKR['baseUrl'] + "home/add_like_notification",
+        type: 'POST',
+        dataType: 'JSON',
+        data: form_data,
+        success: function(result) {
+            // alert('Like Notification Added.');
+        },
+        error: function() {
+            alert('Ajax Error');
+        }
     });
 }
