@@ -83,13 +83,12 @@
     <?php if ($is_logged_in) { ?>
     <div class="gallery" id="infinite_loop">
       <?php
-      $i=0; 
-      foreach($followed_pictures as $pic) {
-        $i++; ?>
+      //print_r($followed_pictures);
+      foreach($followed_pictures as $pic => $pic_id) { ?>
         <div class="article">
               <div class="frame">
                 <figure class="cap-bot">
-                  <div class="inner-box" id="pic_<?php echo $i; ?>">
+                  <div class="inner-box" id="pic_<?php echo $pic_id; ?>">
                     <?php
                       if ($is_logged_in) { ?>
                       <span class="tool-box">
@@ -99,13 +98,13 @@
                       </span><?php }
                       ?>
                       <a class="pic-link" href="#">
-                          <img id="pic_<?php echo $i; ?>" class="lazy" src="<?php echo $pic ?>" data-original="<?php echo $pic ?>" alt="pic_<?php echo $i; ?>" />
+                          <img id="pic_<?php echo $pic_id; ?>" class="lazy" src="<?php echo $pic ?>" data-original="<?php echo $pic ?>" alt="pic_<?php echo $pic_id; ?>" />
                       </a> <?php  ?>
                         <figcaption>
                         <span>by unknown photographer</span>
                         <span class="record pull-right">
-                            <i class="icon-comment icon-white record-img"></i> <span class="record-comment"><?php echo (2 * $i + 3); ?></span>
-                            <i class="icon-heart icon-white record-img"></i> <span class="record-like"><?php echo (2 * $i + 1); ?></span>
+                            <i class="icon-comment icon-white record-img"></i> <span class="record-comment"><?php echo (2 * $pic_id + 3); ?></span>
+                            <i class="icon-heart icon-white record-img"></i> <span class="record-like"><?php echo (2 * $pic_id + 1); ?></span>
                         </span>
                     </figcaption>
                   </div>
