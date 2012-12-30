@@ -115,7 +115,7 @@
     </div>
     <?php } ?>
 
-   <?php if (!$is_logged_in) { ?>
+   <?php if ($is_logged_in) { ?>
     <!-- Load Pictures -->
     <div class="gallery">
     <?php 
@@ -123,7 +123,7 @@
         <div class="article">
               <div class="frame">
                 <figure class="cap-bot">
-                  <div class="inner-box" id="pic_<?php echo $i; ?>">
+                  <div class="inner-box" id="pic_<?php echo ($i + 4); ?>">
                     <?php
                       if ($is_logged_in) { ?>
                       <span class="tool-box">
@@ -132,7 +132,7 @@
                           <a class="btn btn-small like-btn" href="#"><i class="icon-thumbs-up"></i></a>
                       </span><?php }?>
                       <a class="pic-link" href="#">
-                          <img id="pic_<?php echo $i; ?>" class="lazy" src="<?php echo base_url(IMAGES.'grey.gif');?>" data-original="<?php echo base_url(IMAGES.'main/'.$i.'.jpg');?>" alt="pic_<?php echo $i; ?>" />
+                          <img id="pic_<?php echo ($i + 4); ?>" class="lazy" src="<?php echo base_url(IMAGES.'grey.gif');?>" data-original="<?php echo base_url(IMAGES.'main/'.$i.'.jpg');?>" alt="pic_<?php echo $i; ?>" />
                       </a>
                         <figcaption>
                         <span>by unknown photographer</span>
@@ -201,7 +201,7 @@
             </div>
             <div class="modal-footer">
               <div class="pull-left">
-                <div class="error-message">Correct album name</div>
+                <div class="error-message">Wrong album name</div>
               </div>
             </div>
           </div>

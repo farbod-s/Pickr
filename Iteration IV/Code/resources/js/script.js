@@ -44,6 +44,12 @@ $(document).ready(function() {
         $(img).css("left", result.targetleft);
         $(img).css("top", result.targettop);
     });
+    
+    // exchange Login & Recover forms
+    $('.flipLink').click(function(e){
+        // Flipping the forms
+        $('#formContainer').toggleClass('flipped');
+    });
 
     //Description with restrict chars
     $('textarea[maxlength]').keyup(function() {
@@ -103,6 +109,8 @@ $(document).ready(function() {
         var image = '#' + $(this).parent().parent().attr('id') + ' img';
         var src = $(image).attr('src');
         $('.thumbnail').attr('src', src);
+
+        LAST_IMG = $(this).parent().parent().attr('id');
     });
 
     // resize comment box <!we have bug on this, when user press Enter!>
@@ -121,14 +129,15 @@ $(document).ready(function() {
         $('.thumbnail').attr('src', src);
 
         // update last image clicked
-        LAST_IMG = '#' + $(this).parent().parent().attr('id');
+        LAST_IMG = $(this).parent().parent().attr('id');
     });
 
     // like action
     $('.tool-box').on('click', 'a.like-btn', function() { // delegate like-btn
         var image = '#' + $(this).parent().parent().attr('id');
         var form_data = {
-            picture_path: $(image + ' img').attr('src')
+            //picture_path: $(image + ' img').attr('src')
+            picture_id: image
         };
         $.ajax({
             url: PICKR['baseUrl'] + "home/like_picture",
@@ -151,7 +160,7 @@ $(document).ready(function() {
                     $(image + ' a.like-btn').removeClass('like-btn');
 
                     // notification
-                    // AddLikeNotification($(this).parent().parent().attr('id'));
+                    AddLikeNotification($(this).parent().parent().attr('id'));
                 }
                 else {
                     alert('Error, Can not like');
@@ -169,7 +178,8 @@ $(document).ready(function() {
     $('.tool-box').on('click', 'a.dislike-btn', function() { // delegate dislike-btn
         var image = '#' + $(this).parent().parent().attr('id');
         var form_data = {
-            picture_path: $(image + ' img').attr('src')
+            //picture_path: $(image + ' img').attr('src')
+            picture_id: image
         };
         $.ajax({
             url: PICKR['baseUrl'] + "home/dislike_picture",
@@ -207,7 +217,8 @@ $(document).ready(function() {
     $('.delete-picture-btn').click(function() {
         var image = '#' + $(this).parent().parent().attr('id');
         var form_data = {
-            picture_path: $(image + ' img').attr('src'),
+            //picture_path: $(image + ' img').attr('src'),
+            picture_id: image,
             album_name: PICKR['uri_segment_3']
         };
         $.ajax({
@@ -371,7 +382,8 @@ $(document).ready(function() {
     $('#add-to-album-btn').click(function() {
         $(this).button('loading');
         var form_data = {
-            picture_path: $('#picked-pic').attr('src'),
+            //picture_path: $('#picked-pic').attr('src'),
+            picture_id: LAST_IMG,
             album_name: $('#current-album strong').html().replace(/&lt;/g,'<').replace(/&gt;/g,'>').replace(/&amp;/g,'&'),
             description: $('textarea#album-description').val()
         };
@@ -387,6 +399,7 @@ $(document).ready(function() {
             success: function(result) {
                 if(result) {
                     //alert('Success, Picked');
+                    AddPickNotification();
                     $('#pick').modal('hide');
                 }
                 else {
@@ -400,6 +413,7 @@ $(document).ready(function() {
             }
         });
         $(this).button('reset');
+        LAST_IMG = "";
         return false;
     });
 
@@ -407,7 +421,8 @@ $(document).ready(function() {
     $('#add-comment-btn').click(function() {
         $(this).button('loading');
         var form_data = {
-            picture_path: $('#commented-pic').attr('src'),
+            //picture_path: $('#commented-pic').attr('src'),
+            picture_id: LAST_IMG,
             comment_content: $('textarea#comment-content').val()
         };
         if(!$('#comment-form').valid()) {
@@ -423,8 +438,8 @@ $(document).ready(function() {
                 if(result) {
                     //alert('Success, Comment added');
                     // update comments
-                    var comments = Number($(LAST_IMG + ' span.record-comment').html()) + 1;
-                    $(LAST_IMG + ' span.record-comment').html(comments);
+                    var comments = Number($('#' + LAST_IMG + ' span.record-comment').html()) + 1;
+                    $('#' + LAST_IMG + ' span.record-comment').html(comments);
                     $('textarea#comment-content').val('');
                     LoadComments(); // load comments
                 }
@@ -440,6 +455,7 @@ $(document).ready(function() {
             }
         });
         $(this).button('reset');
+        LAST_IMG = "";
         return false;
     });
 
@@ -448,7 +464,8 @@ $(document).ready(function() {
         $('.comments').html('');
         $('#comment').modal('show');
         var form_data = {
-            picture_path: $('#commented-pic').attr('src')
+            //picture_path: $('#commented-pic').attr('src')
+            picture_id: LAST_IMG
         };
         $.ajax({
             url: PICKR['baseUrl'] + "home/load_comments",
@@ -494,7 +511,8 @@ $(document).ready(function() {
 function LoadComments() {
     $('.comments').html('');
     var form_data = {
-        picture_path: $('#commented-pic').attr('src')
+        //picture_path: $('#commented-pic').attr('src')
+        picture_id: LAST_IMG
     };
     $.ajax({
         url: PICKR['baseUrl'] + "home/load_comments",

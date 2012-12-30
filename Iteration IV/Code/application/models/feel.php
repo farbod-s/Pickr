@@ -20,16 +20,14 @@ class Feel extends CI_Model
         return $items;
 	}
 
-	public function like($user_id, $picture_path) {
-		$picture_id = $this->get_picture_id($picture_path);
+	public function like($user_id, $picture_id) {
 		if ($picture_id && $this->save_like($picture_id, $user_id)) {
 			return TRUE;
 		}
 		return FALSE;
 	}
 
-	public function dislike($user_id, $picture_path) {
-		$picture_id = $this->get_picture_id($picture_path);
+	public function dislike($user_id, $picture_id) {
 		if ($picture_id && $this->delete_like($picture_id, $user_id)) {
 			return TRUE;
 		}

@@ -63,8 +63,9 @@ class Album extends MY_Controller {
 		$this->ci->load->model('picture_album');
 
 		$user_id = $this->ci->session->userdata('user_id');
+		$picture_id = preg_replace('![^0-9]+!i', '', $this->input->post('picture_id'));
 		if ($this->ci->picture_album->delete_pic($user_id,
-								  				 $this->input->post('picture_path'),
+								  				 $picture_id,
 								  				 $this->input->post('album_name'))) {
 			echo json_encode(TRUE);
 		}

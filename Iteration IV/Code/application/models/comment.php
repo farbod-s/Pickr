@@ -10,9 +10,9 @@ class Comment extends CI_Model
 		parent::__construct();
 	}
 
-	public function load_all_comments($picture_path)
+	public function load_all_comments($picture_id)
 	{
-		$picture_id = $this->get_picture_id($picture_path);
+		//$picture_id = $this->get_picture_id($picture_path);
 		$comments = array();
 		$this->db->select('*')
 				 ->from($this->table_name)
@@ -41,9 +41,9 @@ class Comment extends CI_Model
 		return NULL;
 	}
 
-	public function add_comment_to_picture($user_id, $picture_path, $comment) {
-		$picture_id = $this->get_picture_id($picture_path);
-		if ($this->insert_comment($comment, $picture_id, $user_id)) {
+	public function add_comment_to_picture($user_id, $picture_id, $comment) {
+		//$picture_id = $this->get_picture_id($picture_path);
+		if ($picture_id && $this->insert_comment($comment, $picture_id, $user_id)) {
 			return TRUE;
 		}
 		return FALSE;

@@ -54,7 +54,6 @@ class Album_Model extends CI_Model
 	}
 
 	public function delete_user_album($user_id, $album_name) {
-		// BUG: Must delete picks of this album!
 		$albums_id = array();
 		$this->db->select('*');
 		$query = $this->db->get($this->table_name);
@@ -73,9 +72,39 @@ class Album_Model extends CI_Model
 				break;
 			}
 		}
-		$this->db->where('id', $final_album_id);
-		$this->db->delete($this->table_name);
-		return ($this->db->affected_rows() > 0) ? TRUE : FALSE;
+		// delete picked pictures in this album
+		$picture_ids = $this->get_all_picture_id($final_album_id);
+		if ($picture_ids) {
+			foreach ($picture_ids as $pic_id) {
+				$this->db->where('id', $pic_id);
+				$this->db->delete($this->picture_table_name);
+			}
+		}
+		// delete all pictures in this album
+		$this->db->where('album_id', $final_album_id);
+		$this->db->delete($this->picture_album_table_name);
+		// delete album for this user
+		$this->db->where('album_id', $final_album_id);
+		$this->db->delete($this->user_album_table_name);
+		if ($this->db->affected_rows() > 0) {
+			// delete album
+			$this->db->where('id', $final_album_id);
+			$this->db->delete($this->table_name);
+			return ($this->db->affected_rows() > 0) ? TRUE : FALSE;
+		}
+		return FALSE;
+	}
+
+	private function get_all_picture_id($album_id) {
+		$picture_ids = array();
+		$this->db->where('album_id', $album_id);
+		$query = $this->db->get($this->picture_album_table_name);
+		if ($query->num_rows() > 0) {
+			foreach ($query->result() as $pic) {
+				array_push($picture_ids, $pic->picture_id);
+			}
+		}
+		return $picture_ids;
 	}
 
 	public function rename_user_album($user_id, $old_album_name, $new_album_name) {
@@ -105,7 +134,6 @@ class Album_Model extends CI_Model
 
 	public function create_album($album_name, $user_id) {
 		$albums_name = $this->get_all_album_name($user_id);
-		
 		// duplicated albums aborted!
 		$clean_names = array();
 		foreach ($albums_name as $name) {
@@ -115,7 +143,6 @@ class Album_Model extends CI_Model
 		if (in_array($clean_album_name, $clean_names)) {
 			return FALSE;
 		}
-		
 		$data['name'] = $album_name;
 		$data['added'] = date('Y-m-d H:i:s');
 		if ($this->db->insert($this->table_name, $data)) {
@@ -169,45 +196,6 @@ class Album_Model extends CI_Model
 	    return $albums_name;
 	}
 
-	/*public function get_albums_detail($user_id) {
-		$detail = array();
-		$this->db->where('user_id', $user_id);
-		$query = $this->db->get($this->user_album_table_name);
-		foreach($query->result() as $row) {
-			$this->db->where('id', $row->album_id);
-			$query2 = $this->db->get($this->table_name);
-			if ($query2->num_rows() > 0) {
-				$album_name = $query2->row()->name;
-				$this->db->where('album_id', $row->album_id)
-						 ->order_by('added', 'ASC') // first pick is cover for album
-						 ->limit(5);
-				$temp = $this->db->get($this->picture_album_table_name);
-				if ($temp->num_rows() > 0) {
-					$pics = array();
-					foreach ($temp->result() as $value) {
-						$this->db->where('id', $value->picture_id);
-						$picture_address = $this->db->get($this->picture_table_name);
-						if ($picture_address->num_rows() > 0) {
-							array_push($pics, $picture_address->row()->picture);
-						}
-					}		
-					for ($i = 0; $i < (5 - $temp->num_rows()); $i++) { // the rest of array must be full
-						array_push($pics, base_url(IMAGES.'grey.gif'));
-					}
-					$detail[$album_name] = $pics;
-				}
-				else { //  full array with default pictures
-					$detail[$album_name] = array(base_url(IMAGES.'upload_picture.png'),
-												 base_url(IMAGES.'grey.gif'),
-												 base_url(IMAGES.'grey.gif'),
-												 base_url(IMAGES.'grey.gif'),
-												 base_url(IMAGES.'grey.gif'));
-				}
-			}
-		}
-		return $detail;
-	}*/
-
 	public function get_albums_detail($user_id) {
 		$detail = array();
 		$this->db->where('user_id', $user_id);
@@ -219,7 +207,6 @@ class Album_Model extends CI_Model
 				$album_id = $query2->row()->id;				
 				$album_name = $query2->row()->name;
 				$this->db->where('album_id', $row->album_id)
-						 ->order_by('added', 'ASC') // first pick is cover for album
 						 ->limit(5);
 				$temp = $this->db->get($this->picture_album_table_name);
 				if ($temp->num_rows() > 0) {
@@ -234,16 +221,16 @@ class Album_Model extends CI_Model
 					for ($i = 0; $i < (5 - $temp->num_rows()); $i++) { // the rest of array must be full
 						array_push($pics, base_url(IMAGES.'grey.gif'));
 					}
-					$detail[$album_id] = array( 'name' => "$album_name" ,
-													'pic' => $pics );
+					$detail[$album_id] = array( 'name' => "$album_name",
+												'pic' => $pics );
 				}
 				else { //  full array with default pictures
 					$pics = array(base_url(IMAGES.'upload_picture.png'),
-												 base_url(IMAGES.'grey.gif'),
-												 base_url(IMAGES.'grey.gif'),
-												 base_url(IMAGES.'grey.gif'),
-												 base_url(IMAGES.'grey.gif'));
-					$detail[$album_id] = array( 'name' => "$album_name" ,
+								  base_url(IMAGES.'grey.gif'),
+								  base_url(IMAGES.'grey.gif'),
+								  base_url(IMAGES.'grey.gif'),
+								  base_url(IMAGES.'grey.gif'));
+					$detail[$album_id] = array( 'name' => "$album_name",
 												'pic' => $pics );
 				}
 			}

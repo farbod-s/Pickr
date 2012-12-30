@@ -41,8 +41,9 @@ class Home extends MY_Controller {
 		$this->ci->load->model('feel');
 
 		$user_id = $this->ci->session->userdata('user_id');
+		$picture_id = preg_replace('![^0-9]+!i', '', $this->input->post('picture_id'));
 		if ($this->ci->feel->like($user_id,
-								  $this->input->post('picture_path'))) {
+								  $picture_id)) {
 			echo json_encode(TRUE);
 		}
 		else {
@@ -56,8 +57,9 @@ class Home extends MY_Controller {
 		$this->ci->load->model('feel');
 
 		$user_id = $this->ci->session->userdata('user_id');
+		$picture_id = preg_replace('![^0-9]+!i', '', $this->input->post('picture_id'));
 		if ($this->ci->feel->dislike($user_id,
-								  	 $this->input->post('picture_path'))) {
+								  	 $picture_id)) {
 			echo json_encode(TRUE);
 		}
 		else {
@@ -71,7 +73,8 @@ class Home extends MY_Controller {
 		$this->ci->load->model('comment');
 
 		$comments = array();
-		$comments = $this->ci->comment->load_all_comments($this->input->post('picture_path'));
+		$picture_id = preg_replace('![^0-9]+!i', '', $this->input->post('picture_id'));
+		$comments = $this->ci->comment->load_all_comments($picture_id);
 		
 		$comments_block = "";
 		foreach ($comments as $comment) {
@@ -79,9 +82,9 @@ class Home extends MY_Controller {
 			  <div class="comment">
 	            <div class="comment-header">
 	              <div class="btn-group pull-right">
-	                <a class="btn dropdown-toggle" data-toggle="dropdown" href="#"><span class="caret"></span></a>
+	                <a class="btn dropdown-toggle" data-toggle="dropdown"><span class="caret"></span></a>
 	                <ul class="dropdown-menu">
-	                  <li><a href="#"><i class="icon-flag"></i> Report Violation</a></li>
+	                  <li><a><i class="icon-flag"></i> Report Violation</a></li>
 	                </ul>
 	              </div>
 	              <img src="'.base_url(IMAGES.'in.jpg').'" class="img-circle pull-left commenter-pic" style="width: 50px; height: 50px;" />
@@ -103,13 +106,13 @@ class Home extends MY_Controller {
 		$this->ci->load->database();
 		$this->ci->load->model('comment');
 
-		$this->form_validation->set_rules('picture_path', 'Picture Path', 'trim|xss_clean');
 		$this->form_validation->set_rules('comment_content', 'Comment Content', 'trim|xss_clean');
 
 		if ($this->form_validation->run()) {
 			$user_id = $this->ci->session->userdata('user_id');
+			$picture_id = preg_replace('![^0-9]+!i', '', $this->input->post('picture_id'));
 			if ($this->ci->comment->add_comment_to_picture($user_id,
-													   $this->form_validation->set_value('picture_path'),
+													   $picture_id,
 													   $this->form_validation->set_value('comment_content'))) {
 				echo json_encode(TRUE);
 			}
@@ -127,15 +130,14 @@ class Home extends MY_Controller {
 		$this->ci->load->database();
 		$this->ci->load->model('picture_album');
 
-		$this->form_validation->set_rules('picture_path', 'Picture Path', 'trim|xss_clean');
-		//$this->form_validation->set_rules('album_name', 'Album Name', 'trim|xss_clean');
 		$this->form_validation->set_rules('description', 'Description', 'trim|xss_clean');
 
 		if ($this->form_validation->run()) {
 			$user_id = $this->ci->session->userdata('user_id');
+			$picture_id = preg_replace('![^0-9]+!i', '', $this->input->post('picture_id'));
 			if ($this->ci->picture_album->add_picture_to_album($user_id,
-													   $this->form_validation->set_value('picture_path'),
-													   trim($this->input->post('album_name')),
+													   $picture_id,
+													   $this->input->post('album_name'),
 													   $this->form_validation->set_value('description'))) {
 				echo json_encode(TRUE);
 			}
@@ -178,7 +180,8 @@ class Home extends MY_Controller {
 
 		$albums_block = "";
 		foreach ($albums as $album) {
-			$albums_block.='<li style="text-overflow: ellipsis; overflow: hidden; white-space: nowrap;"><a href="#" onClick="SetCurrentAlbum(this.innerHTML)">
+			$albums_block.='<li style="text-overflow: ellipsis; overflow: hidden; white-space: nowrap;">
+							<a onClick="SetCurrentAlbum(this.innerHTML)">
 							'.htmlspecialchars($album).'
 							</a></li>';
 		}
@@ -221,7 +224,8 @@ class Home extends MY_Controller {
 		$this->ci->load->database();
 		$this->ci->load->model('notification');
 		$user_id = $this->ci->session->userdata('user_id');
-		if($this->ci->notification->add_pick_notification($user_id, $this->input->post('pictureId'))) {
+		$picture_id = preg_replace('![^0-9]+!i', '', $this->input->post('picture_id'));
+		if($this->ci->notification->add_pick_notification($user_id, $picture_id)) {
 			echo json_encode(TRUE);
 		}
 		else {
@@ -234,7 +238,8 @@ class Home extends MY_Controller {
 		$this->ci->load->database();
 		$this->ci->load->model('notification');
 		$user_id = $this->ci->session->userdata('user_id');
-		if($this->ci->notification->add_like_notification($user_id, $this->input->post('pictureId'))) {
+		$picture_id = preg_replace('![^0-9]+!i', '', $this->input->post('picture_id'));
+		if($this->ci->notification->add_like_notification($user_id, $picture_id)) {
 			echo json_encode(TRUE);
 		}
 		else {

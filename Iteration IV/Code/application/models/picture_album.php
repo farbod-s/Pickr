@@ -12,19 +12,31 @@ class Picture_Album extends CI_Model
 	}
 
 	// add picture to album
-	public function add_picture_to_album($user_id, $picture_path, $album_name, $description) {
-		$picture_id = $this->get_picture_id($picture_path);
+	public function add_picture_to_album($user_id, $picture_id, $album_name, $description) {
+		$picture_path = $this->get_picture_path($picture_id);
 		$album_id = $this->get_album_id($user_id, $album_name);
-		if ($picture_id && $album_id) {
-			$data['picture_id'] = $picture_id;
-			$data['album_id'] = $album_id;
-			$data['description'] = $description;
+		if ($picture_id && $album_id && $picture_path) {
+			$data['picture'] = $picture_path;
 			$data['added'] = date('Y-m-d H:i:s');
-			if ($this->db->insert($this->table_name, $data)) {
-				return TRUE;
+			$data['description'] = $description;
+			if ($this->db->insert($this->picture_table_name, $data)) {
+				$new_data['picture_id'] = $this->db->insert_id();
+				$new_data['album_id'] = $album_id;
+				if ($this->db->insert($this->table_name, $new_data)) {
+					return TRUE;
+				}
 			}
 		}
 		return FALSE;
+	}
+
+	private function get_picture_path($picture_id) {
+		$this->db->where('id', $picture_id);
+		$query = $this->db->get($this->picture_table_name);
+		if ($query->num_rows() > 0) {
+			return $query->row()->picture;
+		}
+		return NULL;
 	}
 
 	private function get_picture_id($picture_path) {
@@ -75,14 +87,14 @@ class Picture_Album extends CI_Model
 					array_push($temp, $pic->picture_id);
 				}
 			}
-		}
+		}/*
 		for($i=$limit['start']; $i<$limit['start']+$limit['length']; $i++){
 			$pic_id = $temp[$i];
 			$this->db->where('id' , $pic_id);					
 			$query = $this->db->get($this->picture_table_name);
 			//array_push($pictures, $query->row()->picture);
 			$pictures[$query->row()->picture] = $pic_id;
-		}
+		}*/
 		return $pictures;
 	}
 
@@ -122,21 +134,25 @@ class Picture_Album extends CI_Model
 			$query = $this->db->get($this->picture_table_name);
 			if ($query->num_rows() > 0) {
 				foreach ($query->result() as $row) {
-					array_push($pictures, $row->picture);
+					array_push($pictures, array('id' => $row->id,
+												'path' => $row->picture));
 				}
 			}
 		}
 		return $pictures;
 	}
 
-	public function delete_pic($user_id, $picture_path, $album_name) {
-		$picture_id = $this->get_picture_id($picture_path);
+	public function delete_pic($user_id, $picture_id, $album_name) {
 		$album_id = $this->get_album_id_from_url($user_id, $album_name);
 		if ($picture_id && $album_id) {
 			$this->db->where('picture_id', $picture_id);
 			$this->db->where('album_id', $album_id);
 			$this->db->delete($this->table_name);
-			return ($this->db->affected_rows() > 0) ? TRUE : FALSE;
+			if ($this->db->affected_rows() > 0) {
+				$this->db->where('id', $picture_id);
+				$this->db->delete($this->picture_table_name);
+				return ($this->db->affected_rows() > 0) ? TRUE : FALSE;
+			}
 		}
 		return FALSE;
 	}

@@ -8,11 +8,6 @@
 			$album_name = $album_info[0]['name'];
 			$description = $album_info[0]['description'];
 		}
-		//echo $description;
-		//echo $album_name;
-		//echo $picks;
-		//echo $ME;
-		//echo $username;
 	?>
 
 	<div class="profile-details">
@@ -46,11 +41,11 @@
     <?php
     	if($pictures) {
     	$i = 0;
-      foreach($pictures as $picture_path) { $i++; ?>
+      foreach($pictures as $picture) { $i++;?>
         <div class="article">
               <div class="frame">
                 <figure class="cap-bot">
-                  <div class="inner-box" id="albumPic_<?php echo $i; ?>">
+                  <div class="inner-box" id="albumPic_<?php echo $picture['id']; ?>">
                       <span class="tool-box">
                           <a href="#pick" role="button" class="btn btn-small pick-btn" data-toggle="modal"><i class="icon-magnet"></i> Repick</a>
                           <?php if(!$ME) {?>
@@ -62,7 +57,7 @@
                           <?php }?>
                       </span>
                       <a class="pic-link" href="#">
-                          <img id="albumPic_<?php echo $i; ?>" class="lazy" src="<?php echo base_url(IMAGES.'grey.gif');?>" data-original="<?php echo $picture_path; ?>" alt="albumPic_<?php echo $i; ?>" />
+                          <img id="albumPic_<?php echo $picture['id']; ?>" class="lazy" src="<?php echo base_url(IMAGES.'grey.gif');?>" data-original="<?php echo $picture['path']; ?>" alt="albumPic_<?php echo $picture['id']; ?>" />
                       </a>
                       <figcaption>
                         <span>by unknown photographer</span>
@@ -103,7 +98,7 @@
         <div class="modal-footer">
           <input type="submit" class="btn btn-large btn-primary" id="rename-album-btn" value="Rename Album" />
           <div class="pull-left">
-            <div class="error-message" style="margin-top: 10px;">Correct album name</div>
+            <div class="error-message" style="margin-top: 10px;">Wrong album name</div>
           </div>
         </div>
         <?php echo form_close();?>
@@ -209,7 +204,7 @@
       </div>
       <div class="modal-footer">
         <div class="pull-left">
-          <div class="error-message">Correct album name</div>
+          <div class="error-message">Wrong album name</div>
         </div>
       </div>
     </div>

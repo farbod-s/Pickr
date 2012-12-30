@@ -25,11 +25,11 @@
 			<?php if(!$ME && $album_count != 0) {?>
 				<?php
 				if(!$person_followed){
-				echo form_open(base_url('profile/follow_person/'.strtolower($user_id))); ?>	
+				echo form_open(base_url('profile/follow_person/'.$user_id)); ?>	
 				<button class="btn btn-large btn-danger follow-all-btn" type="submit">Follow All</button>
 				<?php }
 				else{
-				echo form_open(base_url('profile/unfollow_person/'.strtolower($user_id))); ?>
+				echo form_open(base_url('profile/unfollow_person/'.$user_id)); ?>
 				<button class="btn btn-large btn-danger follow-all-btn" type="submit">Unfollow All</button>
 				<?php }	?>		
 			<?php }?>
@@ -56,7 +56,7 @@
 				$name = $details['name'];
 				$first_pic = $details['pic'];
 		?>
-		<div class="pin pinBoard" id="board1">
+		<div class="pin pinBoard" id="album_<?php echo $album_id;?>">
 			<a href="<?php echo base_url('user/'.strtolower($username).'/'.preg_replace('![^a-z0-9_]+!i', '-', strtolower($name)))?>"><div class="serif"><?php echo htmlspecialchars($name); ?></div></a>
 			<div class="board">
 				<div class="holder">
@@ -86,14 +86,14 @@
 						$attributes = array('class' => 'form-horizontal',
 											'style' =>  'width: 100%; height: 100%;');
 						if (!in_array(strtolower($album_id), $followed_albums)) {
-							echo form_open(base_url('profile/follow_album/'.strtolower($album_id)), $attributes); ?>
+							echo form_open(base_url('profile/follow_album/'.$album_id), $attributes); ?>
 								<button class="btn" type="submit" style="width: 100%; height: 100%; border-radius: 0 0 6px 6px;">
 									<strong>Follow</strong>
 								</button>
 							<?php echo form_close(); 
 						}
 						else {
-							echo form_open(base_url('profile/unfollow_album/'.strtolower($album_id)), $attributes); ?>
+							echo form_open(base_url('profile/unfollow_album/'.$album_id), $attributes); ?>
 								<button class="btn" type="submit" style="width: 100%; height: 100%; border-radius: 0 0 6px 6px;">
 									<strong>Unfollow</strong>
 								</button>
@@ -140,7 +140,7 @@
 	          <div class="modal-footer"> 
 	            <button type="submit" class="btn btn-large btn-primary" id="new-album-btn" data-loading-text="Creating Album...">Create New Album</button>
 	          	<div class="pull-left">
-		          <div class="error-message" style="margin-top: 10px;">Correct album name</div>
+		          <div class="error-message" style="margin-top: 10px;">Wrong album name</div>
 		        </div>
 	          </div>
 	          <?php echo form_close();?>

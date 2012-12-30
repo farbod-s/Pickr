@@ -17,7 +17,8 @@ $(document).ready(function() {
 			success: function(result) {
 				if (result) {
 					//alert('Success, Signed up');
-                	window.location = PICKR['baseUrl'];
+                	//window.location = PICKR['baseUrl'];
+                	$('#signUp').modal('hide');
 	            }
 	            else {
 	                //alert('Error, Can not register');
