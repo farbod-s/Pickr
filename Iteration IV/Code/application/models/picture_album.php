@@ -75,6 +75,16 @@ class Picture_Album extends CI_Model
 		return $albums_id;
 	}
 
+	public function count_followed_pictures($followed_albums){
+		$count =0;
+		foreach($followed_albums as $album_id){
+			$this->db->where('album_id' , $album_id);
+			$query = $this->db->count_all_results($this->table_name);
+			$count += $query;
+		}		
+		return $count;
+	}
+
 	public function get_followed_pictures($followed_albums,$limit){
 		$pictures = array(); 
 		$temp = array();
@@ -87,14 +97,23 @@ class Picture_Album extends CI_Model
 					array_push($temp, $pic->picture_id);
 				}
 			}
-		}/*
-		for($i=$limit['start']; $i<$limit['start']+$limit['length']; $i++){
-			$pic_id = $temp[$i];
-			$this->db->where('id' , $pic_id);					
-			$query = $this->db->get($this->picture_table_name);
-			//array_push($pictures, $query->row()->picture);
-			$pictures[$query->row()->picture] = $pic_id;
-		}*/
+		}
+		if($limit['start']+$limit['length'] < count($temp)){
+			for($i=$limit['start']; $i<$limit['start']+$limit['length']; $i++){
+				$pic_id = $temp[$i];
+				$this->db->where('id' , $pic_id);					
+				$query = $this->db->get($this->picture_table_name);
+				$pictures[$query->row()->picture] = $pic_id;
+			}
+		}
+		else {
+			for($i=$limit['start']; $i<count($temp); $i++){
+				$pic_id = $temp[$i];
+				$this->db->where('id' , $pic_id);					
+				$query = $this->db->get($this->picture_table_name);
+				$pictures[$query->row()->picture] = $pic_id;	
+			}		
+		}
 		return $pictures;
 	}
 

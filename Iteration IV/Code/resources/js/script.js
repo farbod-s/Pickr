@@ -62,33 +62,29 @@ $(document).ready(function() {
 
     //Check to see if the window is top if not then display button
     $(window).scroll(function() {
-        if ($(this).scrollTop() > 100) {
+        if ($(window).scrollTop() > 100) {
             $('#ScrollToTop:hidden').stop(true, true).fadeIn();
         }
         else {
             $('#ScrollToTop').stop(true, true).fadeOut();
         }
-        /*$('btn-load').hide();
-        if($(window).scrollTop() + $(window).height() > $(document).height() - 300) {
-        $('#btn-load').show();
-        }        
-        if  ($(window).scrollTop() == $(document).height() - $(window).height()){
-            $('#btn-load').hide();
+       
+        if ($(window).scrollTop() == $(document).height() - $(window).height()){
             page++;
-            var data = {page_num: page}
-            var actual_count = "<?php echo $actual_row_count; ?>";
-            $.ajax(
+            var page_number = {page_num: page};
+            $.ajax({
+                url: PICKR['baseUrl'] + "home/more_pics", 
                 type: "POST",
-                url: '<?php echo base_url().'home/more_pics';?>',
-                data:data,
-                success: function(res){
-                    $("#infinite_loop").append(res);
-                    console.log(res);
+                dataType: 'JSON',                               
+                data: page_number,
+                success: function(result){
+                    $("#infinite_loading").append(result);
+                    console.log(result);
                 }
-            );
-        }*/        
+            });
+        }  
     });
-
+	
     //Click event to scroll to top
     $("#ScrollToTop").click(function() {
         $("html, body").animate({ scrollTop: 0 }, "slow");

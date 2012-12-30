@@ -9,14 +9,31 @@ class Home extends MY_Controller {
 			$this->ci->load->database();
 			$this->ci->load->model('album_model');
 			$this->ci->load->model('follow');			
-			$this->ci->load->model('picture_album');				
+			$this->ci->load->model('picture_album');
+			$this->ci->load->model('picture');				
 
 			$user_id = $this->ci->session->userdata('user_id');
 			$followed_albums = $this->ci->follow->get_followed_ids($user_id);
 			$limit = array( 'start' => "0" ,
 							'length' => "24");
-			$this->data['followed_pictures'] = $this->ci->picture_album->get_followed_pictures($followed_albums,$limit);
-			$this->data['albums'] = $this->ci->album_model->get_all_album_name($user_id);
+			$followed_pictures = array();
+			$followed_pictures = $this->ci->picture_album->get_followed_pictures($followed_albums,$limit);
+			$public_pictures = array();
+			$public_pictures = $this->ci->picture->get_public_pictures($limit);
+				
+			$ctr = 24-count($followed_pictures);
+			if(count($followed_pictures)<24){
+
+				foreach($public_pictures as $pic => $id){					
+					$followed_pictures[$pic] = $id;
+					if($ctr++ == 24) break 1 ;
+				}
+			}
+
+			$this->data['public_pictures'] = $public_pictures;
+			$this->data['followed_pictures'] = $followed_pictures;
+			$this->data['albums'] = $this->ci->album_model->get_all_album_name($user_id); 
+
 		}
 		$this->_render('pages/home');
 	}
@@ -26,13 +43,88 @@ class Home extends MY_Controller {
 		$this->ci->load->database();
 		$this->ci->load->model('follow');			
 		$this->ci->load->model('picture_album');
+		$this->ci->load->model('picture');	
 					
-		$requested_page = $_POST['page_num'];
-		$limit = array( 'start' => '(($requested_page - 1) * 24)' ,
-						'length' => "24");		
+		$requested_page = $this->input->post('page_num');
+		$user_id = $this->ci->session->userdata('user_id');				
 		$followed_albums = $this->ci->follow->get_followed_ids($user_id);		
-		$this->data['followed_pictures'] = $this->ci->picture_album->get_followed_pictures($followed_albums,$limit);	
-				
+		$limit = array( 'start' => (($requested_page - 1) * 24) ,
+						'length' => "24");				
+		$followed_pictures = $this->ci->picture_album->get_followed_pictures($followed_albums,$limit);
+		$count = $this->ci->picture_album->count_followed_pictures($followed_albums);	
+
+		if($requested_page < ((($count - ($count % 24)) / 24)+1)) {
+		$pics_block ="";
+
+        	foreach($followed_pictures as $pic => $pic_id){		
+				$pics_block =$pics_block.'
+        			<div class="article">
+              			<div class="frame">
+                			<figure class="cap-bot">
+                  				<div class="inner-box" id="'.$pic_id.'">                   	
+                      				<span class="tool-box">
+                          				<a href="#pick" role="button" class="btn btn-small pick-btn" data-toggle="modal"><i class="icon-magnet"></i> Pick</a>
+                          				<a href="#comment" role="button" class="btn btn-small comment-btn" data-toggle="modal"><i class="icon-comment"></i></a>
+                          				<a class="btn btn-small like-btn" href="#"><i class="icon-thumbs-up"></i></a>
+                      				</span>
+                      				<a class="pic-link" href="#">
+                          				<img id="pic_'.$pic_id.'" class="lazy" src="'.$pic.'" data-original="'.$pic.'" alt="pic_'.$pic_id.'" />
+                      				</a> 
+                        			<figcaption>
+                        				<span>by unknown photographer</span>
+                        				<span class="record pull-right">
+                            			<i class="icon-comment icon-white record-img"></i> <span class="record-comment">'.(2 * $pic_id + 3).'</span>
+                            			<i class="icon-heart icon-white record-img"></i> <span class="record-like">'.(2 * $pic_id + 1).'</span>
+                        				</span>
+                   					</figcaption>
+                  				</div>
+              				</figure>
+            			</div>
+        			</div>';
+        	}
+		}
+		else{
+			$limit = array( 'start' => (($requested_page - ((($count - ($count % 24)) / 24)+1)) * 24) ,
+							'length' => "24");
+			$public_pictures = $this->ci->picture->get_public_pictures($limit);
+
+			$ctr = 24-count($followed_pictures);
+			if(count($followed_pictures)<24){
+				foreach($public_pictures as $pic => $id){					
+					$followed_pictures[$pic] = $id;
+					if($ctr++ == 24) break 1 ;
+				}
+			}
+			$pics_block ="";
+
+        		foreach($followed_pictures as $pic => $pic_id){			
+				$pics_block =$pics_block.'
+       			 	<div class="article">
+              		<div class="frame">
+               		 	<figure class="cap-bot">
+                  			<div class="inner-box" id="'.$pic_id.'">                   	
+                      			<span class="tool-box">
+                          			<a href="#pick" role="button" class="btn btn-small pick-btn" data-toggle="modal"><i class="icon-magnet"></i> Pick</a>
+                          			<a href="#comment" role="button" class="btn btn-small comment-btn" data-toggle="modal"><i class="icon-comment"></i></a>
+                          			<a class="btn btn-small like-btn" href="#"><i class="icon-thumbs-up"></i></a>
+                      			</span>
+                      			<a class="pic-link" href="#">
+                        	  		<img id="pic_'.$pic_id.'" class="lazy" src="'.$pic.'" data-original="'.$pic.'" alt="pic_'.$pic_id.'" />
+                      			</a> 
+                        		<figcaption>
+                        			<span>by unknown photographer</span>
+                        			<span class="record pull-right">
+                            		<i class="icon-comment icon-white record-img"></i> <span class="record-comment">'.(2 * $pic_id + 3).'</span>
+                            		<i class="icon-heart icon-white record-img"></i> <span class="record-like">'.(2 * $pic_id + 1).'</span>
+                        			</span>
+                   				</figcaption>
+                  			</div>
+              			</figure>
+            		</div>
+        		</div>';
+        	}						
+		}		
+		echo json_encode($pics_block);				
 	}
 
 	public function like_picture() {

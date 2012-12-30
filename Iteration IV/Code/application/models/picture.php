@@ -18,4 +18,17 @@ class Picture extends CI_Model
 		}
 		return $pic_id;
 	}
+
+	public function get_public_pictures($limit){
+		$pictures = array();
+		$this->db->select('picture , id')
+	 		 ->order_by('id', 'desc')
+	  		 ->limit($limit['length'],$limit['start']);		
+		$pics = $this->db->get($this->table_name);
+		foreach($pics->result() as $pic){
+			$address = $pic->picture;
+			$pictures[$address] = $pic->id; 
+		}
+		return $pictures;
+	}
 }

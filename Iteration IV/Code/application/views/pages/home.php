@@ -81,22 +81,18 @@
 
     <!-- Load Pictures -->
     <?php if ($is_logged_in) { ?>
-    <div class="gallery" id="infinite_loop">
+    <div class="gallery" id="infinite_loading">
       <?php
-      //print_r($followed_pictures);
       foreach($followed_pictures as $pic => $pic_id) { ?>
         <div class="article">
               <div class="frame">
                 <figure class="cap-bot">
                   <div class="inner-box" id="pic_<?php echo $pic_id; ?>">
-                    <?php
-                      if ($is_logged_in) { ?>
                       <span class="tool-box">
                           <a href="#pick" role="button" class="btn btn-small pick-btn" data-toggle="modal"><i class="icon-magnet"></i> Pick</a>
                           <a href="#comment" role="button" class="btn btn-small comment-btn" data-toggle="modal"><i class="icon-comment"></i></a>
                           <a class="btn btn-small like-btn" href="#"><i class="icon-thumbs-up"></i></a>
-                      </span><?php }
-                      ?>
+                      </span>
                       <a class="pic-link" href="#">
                           <img id="pic_<?php echo $pic_id; ?>" class="lazy" src="<?php echo $pic ?>" data-original="<?php echo $pic ?>" alt="pic_<?php echo $pic_id; ?>" />
                       </a> <?php  ?>
@@ -111,11 +107,11 @@
               </figure>
             </div>
         </div> 
-    <?php } ?>    
+      <?php } ?>    
     </div>
     <?php } ?>
 
-   <?php if ($is_logged_in) { ?>
+   <?php if (!$is_logged_in) { ?>
     <!-- Load Pictures -->
     <div class="gallery">
     <?php 
@@ -242,8 +238,11 @@
             </div>
           </div>
           <!-- END comment Form -->
-    <?php } ?>
+              <?php } ?>
+        <?php /*<button class="btn btn-large btn-block" id="btn-load" type="button"><b>More</b></button> */?>
 
-  </div>
-  <button class="btn btn-large btn-block" id="btn-load" type="button"><b>More</b></button>
+  </div >
+
+
+
 </div>
