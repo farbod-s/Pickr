@@ -136,20 +136,24 @@ class Album_Model extends CI_Model
 		$albums_name = $this->get_all_album_name($user_id);
 		// duplicated albums aborted!
 		$clean_names = array();
-		foreach ($albums_name as $name) {
-			array_push($clean_names, preg_replace("![^a-z0-9_]+!i", "-", strtolower($name)));
-		}
-		$clean_album_name = preg_replace("![^a-z0-9_]+!i", "-", strtolower($album_name));
-		if (in_array($clean_album_name, $clean_names)) {
-			return FALSE;
+		if ($albums_name) {
+			foreach ($albums_name as $name) {
+				array_push($clean_names, preg_replace("![^a-z0-9_]+!i", "-", strtolower($name)));
+			}
+			$clean_album_name = preg_replace("![^a-z0-9_]+!i", "-", strtolower($album_name));
+			if (in_array($clean_album_name, $clean_names)) {
+				return FALSE;
+			}
 		}
 		$data['name'] = $album_name;
+		$data['description'] = "";
+		$data['cover'] = 0;
 		$data['added'] = date('Y-m-d H:i:s');
 		if ($this->db->insert($this->table_name, $data)) {
 			$album_id = $this->db->insert_id();
-			$this->db->set('user_id', $user_id);
-			$this->db->set('album_id', $album_id);
-			if ($this->db->insert($this->user_album_table_name)) {
+			$new_data['user_id'] = $user_id;
+			$new_data['album_id'] = $album_id;
+			if ($this->db->insert($this->user_album_table_name, $new_data)) {
 				return TRUE;
 			}
 		}

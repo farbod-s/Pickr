@@ -160,7 +160,7 @@ $(document).ready(function() {
                     $(image + ' a.like-btn').removeClass('like-btn');
 
                     // notification
-                    AddLikeNotification($(this).parent().parent().attr('id'));
+                    //AddLikeNotification($(this).parent().parent().attr('id'));
                 }
                 else {
                     alert('Error, Can not like');
@@ -328,6 +328,7 @@ $(document).ready(function() {
                     //alert('Success, Album created');
                     LoadAlbums(); // refresh album list
                     $('#album_name').attr('value', '');
+                    SetCurrentAlbum(form_data['album_name']);
                 }
                 else {
                     //alert('Error, Can not create album');
@@ -399,7 +400,7 @@ $(document).ready(function() {
             success: function(result) {
                 if(result) {
                     //alert('Success, Picked');
-                    AddPickNotification();
+                    //AddPickNotification();
                     $('#pick').modal('hide');
                 }
                 else {
@@ -413,13 +414,52 @@ $(document).ready(function() {
             }
         });
         $(this).button('reset');
-        LAST_IMG = "";
         return false;
     });
+
+    // repick
+    $('#repick-btn').click(function() {
+        $(this).button('loading');
+        var form_data = {
+            //picture_path: $('#picked-pic').attr('src'),
+            picture_id: LAST_IMG,
+            album_name: $('#current-album strong').html().replace(/&lt;/g,'<').replace(/&gt;/g,'>').replace(/&amp;/g,'&'),
+            description: $('textarea#album-description').val()
+        };
+        if(!$('#repick-form').valid()) {
+            $(this).button('reset');
+            return false;
+        }
+        $.ajax({
+            url: PICKR['baseUrl'] + "home/add_pic_to_album",
+            type: 'POST',
+            dataType: 'JSON',
+            data: form_data,
+            success: function(result) {
+                if(result) {
+                    //alert('Success, Picked');
+                    //AddPickNotification();
+                    window.location = PICKR['baseUrl'] + 'user/' + PICKR['uri_segment_2'] + '/' + PICKR['uri_segment_3'];
+                }
+                else {
+                    //alert('Error, Can not pick');
+                    $(".error-message").show().animate({opacity: 1.0}, 1000).fadeOut(3000);
+                }
+            },
+            error: function() {
+                alert('Ajax Error');
+                //window.location = PICKR['baseUrl'];
+            }
+        });
+        $(this).button('reset');
+        return false;
+    });
+
 
     // add comment
     $('#add-comment-btn').click(function() {
         $(this).button('loading');
+        var image = '#' + LAST_IMG;
         var form_data = {
             //picture_path: $('#commented-pic').attr('src'),
             picture_id: LAST_IMG,
@@ -438,10 +478,10 @@ $(document).ready(function() {
                 if(result) {
                     //alert('Success, Comment added');
                     // update comments
-                    var comments = Number($('#' + LAST_IMG + ' span.record-comment').html()) + 1;
-                    $('#' + LAST_IMG + ' span.record-comment').html(comments);
+                    var comments = Number($(image + ' span.record-comment').html()) + 1;
+                    $(image + ' span.record-comment').html(comments);
                     $('textarea#comment-content').val('');
-                    LoadComments(); // load comments
+                    LoadComments(image); // load comments
                 }
                 else {
                     //alert('Error, Can not add comment');
@@ -455,7 +495,6 @@ $(document).ready(function() {
             }
         });
         $(this).button('reset');
-        LAST_IMG = "";
         return false;
     });
 
@@ -508,11 +547,11 @@ $(document).ready(function() {
 
 
 
-function LoadComments() {
+function LoadComments(pictureId) {
     $('.comments').html('');
     var form_data = {
         //picture_path: $('#commented-pic').attr('src')
-        picture_id: LAST_IMG
+        picture_id: pictureId
     };
     $.ajax({
         url: PICKR['baseUrl'] + "home/load_comments",
@@ -572,6 +611,15 @@ function SetCurrentAlbum(current_value) {
     $('#current-album').html(value);
     $('#add-to-album-btn').removeClass('disabled');
     $('#add-to-album-btn').removeAttr('disabled');
+
+    $('[data-toggle="dropdown"]').parent().removeClass('open');
+}
+
+function SetCurrentAlbum_repick(current_value) {
+    var value = '<strong style="float: left;">' + current_value + '</strong> <span class="caret" style="float: right;"></span>';
+    $('#current-album').html(value);
+    $('#repick-btn').removeClass('disabled');
+    $('#repick-btn').removeAttr('disabled');
 
     $('[data-toggle="dropdown"]').parent().removeClass('open');
 }

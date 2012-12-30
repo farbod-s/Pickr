@@ -12,7 +12,6 @@ class Comment extends CI_Model
 
 	public function load_all_comments($picture_id)
 	{
-		//$picture_id = $this->get_picture_id($picture_path);
 		$comments = array();
 		$this->db->select('*')
 				 ->from($this->table_name)

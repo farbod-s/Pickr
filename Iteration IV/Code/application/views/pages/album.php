@@ -174,7 +174,7 @@
               <div class="albums">
               <?php if($albums) {
                 foreach ($albums as $album) { ?>
-                  <li style="text-overflow: ellipsis; overflow: hidden; white-space: nowrap;"><a onClick="SetCurrentAlbum(this.innerHTML)"><?php echo htmlspecialchars($album); ?></a></li>
+                  <li style="text-overflow: ellipsis; overflow: hidden; white-space: nowrap;"><a onClick="SetCurrentAlbum_repick(this.innerHTML)"><?php echo htmlspecialchars($album); ?></a></li>
                 <?php }
               }?>
               </div>
@@ -191,14 +191,14 @@
           </div>
         </div>
         <?php
-          $attributes = array('id' => 'pick-form', 'class' => 'form-horizontal');
+          $attributes = array('id' => 'repick-form', 'class' => 'form-horizontal');
           echo form_open(base_url('home/add_pic_to_album'), $attributes); ?>
         <a class="pull-left" href="#" style="width: 45%; height: 175px;">
           <img class="thumbnail" id="picked-pic" style="margin-right: 5px; width: 100%; height: 95%;" src="<?php echo base_url(IMAGES.'220x200.gif'); ?>">
         </a>
         <div class="control-group pull-right" style="width: 50%; margin-bottom: 0;">
           <textarea id="album-description" rows="3" cols="40" style="resize: none; margin-top: 10%; width: 96.5%;" maxlength="50" placeholder="Description" spellcheck="false"></textarea>
-          <button type="submit" class="btn btn-large btn-primary disabled" data-loading-text="Picking..." id="add-to-album-btn" style="width:100%; margin-top:5%; font-weight: bold;" disabled="disabled">Add Picture to Album</button>
+          <button type="submit" class="btn btn-large btn-primary disabled" data-loading-text="Picking..." id="repick-btn" style="width:100%; margin-top:5%; font-weight: bold;" disabled="disabled">Add Picture to Album</button>
         </div>
         <?php echo form_close(); ?>
       </div>
