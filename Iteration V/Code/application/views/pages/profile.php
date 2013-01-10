@@ -24,22 +24,19 @@
 			<div class="profile-description visible-desktop"><?php if($description != '') echo $description; else echo "Here's Description";?></div>
 			<?php if(!$ME && $album_count != 0) {?>
 				<?php
-				if(!$person_followed){
-				echo form_open(base_url('profile/follow_person/'.$user_id)); ?>	
-				<button class="btn btn-large btn-danger follow-all-btn" type="submit">Follow All</button>
-				<?php }
-				else{
-				echo form_open(base_url('profile/unfollow_person/'.$user_id)); ?>
-				<button class="btn btn-large btn-danger follow-all-btn" type="submit">Unfollow All</button>
+				if(!$person_followed) { ?>
+					<button class="btn btn-large btn-danger follow-all-btn" type="submit" data-loading-text="Following All...">Follow All</button>
+				<?php } else { ?>
+					<button class="btn btn-large btn-danger unfollow-all-btn" type="submit" data-loading-text="Unfollowing All...">Unfollow All</button>
 				<?php }	?>		
 			<?php }?>
 		</div>
 		<div class="pull-right hidden-phone">
 			<div class="user-records">
-				<p style="padding: 5px;">Followers<span class="pull-right">---</span></p>
-				<p style="padding: 5px;">Following<span class="pull-right">---</span></p>
-				<p style="padding: 5px;">Likes<span class="pull-right">---</span></p>
-				<p style="padding: 5px;">Picks<span class="pull-right">---</span></p>
+				<p style="padding: 5px;">Followers<span class="pull-right"><?php echo $follower_count;?></span></p>
+				<p style="padding: 5px;">Following<span class="pull-right"><?php echo $following_count;?></span></p>
+				<p style="padding: 5px;">Likes<span class="pull-right"><?php echo $like_count;?></span></p>
+				<p style="padding: 5px;">Picks<span class="pull-right"><?php echo $pick_count;?></span></p>
 			</div>
 		</div>
 	</div>
@@ -56,10 +53,10 @@
 				$name = $details['name'];
 				$first_pic = $details['pic'];
 		?>
-		<a href="<?php echo base_url('user/'.strtolower($username).'/'.preg_replace('![^a-z0-9_]+!i', '-', strtolower($name)))?>">
 		<div class="pin pinBoard" id="album_<?php echo $album_id;?>">
 			<div class="serif"><?php echo htmlspecialchars($name); ?></div>
 			<div class="board">
+				<a href="<?php echo base_url('user/'.strtolower($username).'/'.preg_replace('![^a-z0-9_]+!i', '-', strtolower($name)))?>">
 				<div class="holder">
 					<span class="cover">
 						<img src="<?php echo $first_pic[0]; ?>" style="width: 100%; min-height: 150px;">
@@ -71,6 +68,7 @@
 					<img src="<?php echo $first_pic[4]; ?>" alt="Photo of a pick">
 					</span>
 				</div>
+				</a>
 				<div class="buttonContainer">
 					<?php if($ME) {
 						$attributes = array('class' => 'form-horizontal',
@@ -81,30 +79,20 @@
 								<strong>Edit</strong>
 							</button>
 						<?php echo form_close(); ?>
-					<?php } else {?>
-						<!-- TODO: Use AJAX -->
-						<?php
-						$attributes = array('class' => 'form-horizontal',
-											'style' =>  'width: 100%; height: 100%;');
-						if (!in_array(strtolower($album_id), $followed_albums)) {
-							echo form_open(base_url('profile/follow_album/'.$album_id), $attributes); ?>
-								<button class="btn" type="submit" style="width: 100%; height: 100%; border-radius: 0 0 6px 6px;">
-									<strong>Follow</strong>
-								</button>
-							<?php echo form_close(); 
-						}
-						else {
-							echo form_open(base_url('profile/unfollow_album/'.$album_id), $attributes); ?>
-								<button class="btn" type="submit" style="width: 100%; height: 100%; border-radius: 0 0 6px 6px;">
-									<strong>Unfollow</strong>
-								</button>
-							<?php echo form_close(); 
-					 	}
+					<?php } else {
+						if (!in_array($album_id, $followed_albums)) { ?>
+							<button class="btn follow-btn" type="submit" data-loading-text="Following..." style="width: 100%; height: 100%; border-radius: 0 0 6px 6px;">
+								<strong>Follow</strong>
+							</button>
+						<?php } else { ?>
+							<button class="btn unfollow-btn" type="submit" data-loading-text="Unfllowing..." style="width: 100%; height: 100%; border-radius: 0 0 6px 6px;">
+								<strong>Unfollow</strong>
+							</button>
+						<?php }
 					}?>
 				</div>
 			</div>
 		</div>
-	</a>
 		<?php } }?>
 
 		<?php if($ME) {?>

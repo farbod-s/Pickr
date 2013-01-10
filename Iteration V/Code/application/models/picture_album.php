@@ -334,4 +334,23 @@ class Picture_Album extends CI_Model
 		}
 		return $final_album_id;
 	}
+
+	public function get_user_pick_count($user_id) {
+		$counts = 0;
+		$albums_id = array();
+		$this->db->where('user_id', $user_id);
+		$query = $this->db->get($this->user_album_table_name);
+		if ($query->num_rows() > 0) {
+			foreach ($query->result() as $row) {
+				array_push($albums_id, $row->album_id);
+			}
+		}
+		if (count($albums_id) > 0) {
+			foreach ($albums_id as $album_id) {
+				$this->db->where('album_id', $album_id);
+				$counts += $this->db->count_all_results($this->table_name);
+			}
+		}
+        return $counts;
+	}
 }

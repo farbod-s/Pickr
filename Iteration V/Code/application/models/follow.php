@@ -174,36 +174,44 @@ class follow extends CI_Model
 		}
 	}
 
-	public function insert_follow($user_id,$album_id) {
-		$data = array (
-			'user_id' => $user_id,
-			'album_id' => $album_id
-		);
-		$this->db->insert($this->table_name,$data);
+	public function insert_follow($user_id, $album_id) {
+		$data = array(
+				'user_id' => $user_id,
+				'album_id' => $album_id
+			);
+		if ($this->db->insert($this->table_name, $data)) {
+			return TRUE;
+		}
+		return FALSE;
 	}
 
-	public function delete_follow($user_id,$album_id) {
+	public function delete_follow($user_id, $album_id) {
 		$this->db->where('user_id', $user_id);
 		$this->db->where('album_id', $album_id);
 		$this->db->delete($this->table_name);
+		return ($this->db->affected_rows() > 0) ? TRUE : FALSE;
 	}
 
-	public function insert_follow_all($user_id,$album_ids) {
+	public function insert_follow_all($user_id, $album_ids) {
 		foreach ($album_ids as $id) {
-			$data = array (
+			$data = array(
 				'user_id' => $user_id,
 				'album_id' => $id
 			);
-			$this->db->insert($this->table_name,$data);			
+			if (!$this->db->insert($this->table_name, $data)) {
+				return FALSE;
+			}
 		}
+		return TRUE;
 	}
 
-	public function delete_follow_all($user_id,$album_ids) {
+	public function delete_follow_all($user_id, $album_ids) {
 		foreach ($album_ids as $id) {
 			$this->db->where('user_id', $user_id);
 			$this->db->where('album_id', $id);
 			$this->db->delete($this->table_name);
 		}
+		return ($this->db->affected_rows() > 0) ? TRUE : FALSE;
 	}
 
 	public function is_person_followed($user_id,$album_ids) {
@@ -226,4 +234,53 @@ class follow extends CI_Model
 		return TRUE;
 	}
 
+	public function get_following_count($user_id) {
+		$albums_id = array();
+		$this->db->where('user_id', $user_id);
+		$query = $this->db->get($this->table_name);
+		if ($query->num_rows() > 0) {
+			foreach ($query->result() as $follow) {
+				array_push($albums_id, $follow->album_id);
+			}
+		}
+        $followings = array();
+		if (count($albums_id) > 0) {
+			foreach ($albums_id as $album_id) {
+				$this->db->where('album_id', $album_id);
+				$query = $this->db->get($this->user_album_table_name);
+				if ($query->num_rows() > 0) {
+					foreach ($query->result() as $user_album) {
+						array_push($followings, $user_album->user_id);
+					}
+				}
+			}
+			return count(array_unique($followings));
+		}
+        return 0;
+	}
+
+	public function get_follower_count($user_id) {
+		$albums_id = array();
+		$this->db->where('user_id', $user_id);
+		$query = $this->db->get($this->user_album_table_name);
+		if ($query->num_rows() > 0) {
+			foreach ($query->result() as $row) {
+				array_push($albums_id, $row->album_id);
+			}
+		}
+		$followers = array();
+		if (count($albums_id) > 0) {
+			foreach ($albums_id as $album_id) {
+				$this->db->where('album_id', $album_id);
+				$query = $this->db->get($this->table_name);
+				if ($query->num_rows() > 0) {
+					foreach ($query->result() as $follow) {
+						array_push($followers, $follow->user_id);
+					}
+				}
+			}
+			return count(array_unique($followers));
+		}
+        return 0;
+	}
 }

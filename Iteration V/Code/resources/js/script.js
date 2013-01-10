@@ -591,6 +591,132 @@ $(document).ready(function() {
         return false;
     });
 
+    $('.buttonContainer').on('click', '.follow-btn', function() { // delegate follow-btn
+        $(this).button('loading');
+        var form_data = {
+            album_id: $(this).parent().parent().parent().attr('id')
+        };
+        $.ajax({
+            url: PICKR['baseUrl'] + "profile/follow_album",
+            type: 'POST',
+            dataType: 'JSON',
+            data: form_data,
+            success: function(result) {
+                if(result) {
+                    //alert('Success, Followed');
+                    /*
+                    var handler = '#' + $(this).parent().parent().parent().attr('id') + ' button.follow-btn';
+                    $(handler).html('<strong>Unfollow</strong>');
+                    $(handler).attr('data-loading-text', 'Unfollowing...');
+                    $(handler).addClass('unfollow-btn');
+                    $(handler).removeClass('follow-btn');
+                    */
+                    window.location = PICKR['baseUrl'] + 'user/' + PICKR['uri_segment_2'];
+                }
+                else {
+                    //alert('Error, Can not follow');
+                }
+            },
+            error: function() {
+                alert('Ajax Error');
+                //window.location = PICKR['baseUrl'];
+            }
+        });
+        $(this).button('reset');
+        return false;
+    });
+
+    $('.buttonContainer').on('click', '.unfollow-btn', function() { // delegate unfollow-btn
+        $(this).button('loading');
+        var form_data = {
+            album_id: $(this).parent().parent().parent().attr('id')
+        };
+        $.ajax({
+            url: PICKR['baseUrl'] + "profile/unfollow_album",
+            type: 'POST',
+            dataType: 'JSON',
+            data: form_data,
+            success: function(result) {
+                if(result) {
+                    //alert('Success, Unfollowed');
+                    /*
+                    var handler = '#' + $(this).parent().parent().parent().attr('id') + ' button.unfollow-btn';
+                    $(handler).html('<strong>Follow</strong>');
+                    $(handler).attr('data-loading-text', 'Following...');
+                    $(handler).addClass('follow-btn');
+                    $(handler).removeClass('unfollow-btn');
+                    */
+                    window.location = PICKR['baseUrl'] + 'user/' + PICKR['uri_segment_2'];
+                }
+                else {
+                    //alert('Error, Can not Unfollow');
+                }
+            },
+            error: function() {
+                alert('Ajax Error');
+                //window.location = PICKR['baseUrl'];
+            }
+        });
+        $(this).button('reset');
+        return false;
+    });
+
+    $('.follow-all-btn').click(function() {
+        $(this).button('loading');
+        var form_data = {
+            username: PICKR['uri_segment_2']
+        };
+        $.ajax({
+            url: PICKR['baseUrl'] + "profile/follow_person",
+            type: 'POST',
+            dataType: 'JSON',
+            data: form_data,
+            success: function(result) {
+                if(result) {
+                    //alert('Success, Unfollowed');
+                    window.location = PICKR['baseUrl'] + 'user/' + PICKR['uri_segment_2'];
+                }
+                else {
+                    //alert('Error, Can not Unfollow');
+                }
+            },
+            error: function() {
+                alert('Ajax Error');
+                //window.location = PICKR['baseUrl'];
+            }
+        });
+        $(this).button('reset');
+        return false;
+    });
+
+    $('.unfollow-all-btn').click(function() {
+        $(this).button('loading');
+        var form_data = {
+            username: PICKR['uri_segment_2']
+        };
+        $.ajax({
+            url: PICKR['baseUrl'] + "profile/unfollow_person",
+            type: 'POST',
+            dataType: 'JSON',
+            data: form_data,
+            success: function(result) {
+                if(result) {
+                    //alert('Success, Unfollowed');
+                    window.location = PICKR['baseUrl'] + 'user/' + PICKR['uri_segment_2'];
+                }
+                else {
+                    //alert('Error, Can not Unfollow');
+                }
+            },
+            error: function() {
+                alert('Ajax Error');
+                //window.location = PICKR['baseUrl'];
+            }
+        });
+        $(this).button('reset');
+        return false;
+    });
+
     // load notifications
     $('#dropdown-notification').click(function() {
         $('#dropdown-notification-content').html('');

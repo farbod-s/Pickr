@@ -424,6 +424,11 @@ hr.soft {
     width: 200px;
 }
 
+.unfollow-all-btn {
+    margin: 10px 0 0 50px;
+    width: 200px;
+}
+
 .album-name {
     padding: 10px 0 10px 0;
     font-size: 25px;
@@ -481,7 +486,7 @@ hr.soft {
 
 .pinBoard {
     /*width: 222px !important;*/
-    height: 238px;
+    height: 270px;
     padding: 0 !important;
     background: none;
     box-shadow: none;
@@ -494,7 +499,6 @@ hr.soft {
     border-radius: 6px;
     -moz-border-radius: 6px;
     -webkit-border-radius: 6px;
-    height: 270px;
 }
 
 .pinBoard .board {

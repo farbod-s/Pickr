@@ -9,15 +9,11 @@ class Feel extends CI_Model
 		parent::__construct();
 	}
 
-	public  function get_count_like($picture_id)
-	{
-		$items = $this->db->select('COUNT(picture_id) AS count', FALSE)
-                  ->from($this->table_name)
-                  ->where('picture_id', $picture_id)
-                  ->group_by('picture_id')
-                  ->get()->result();
-
-        return $items;
+	public function get_user_like_count($user_id) {
+		$counts = 0;
+		$this->db->where('user_id', $user_id);
+		$counts = $this->db->count_all_results($this->table_name);
+        return $counts;
 	}
 
 	public function like($user_id, $picture_id) {

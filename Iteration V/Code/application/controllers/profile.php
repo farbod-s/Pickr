@@ -24,7 +24,9 @@ class Profile extends MY_Controller {
 		$this->ci->load->database();
 		$this->ci->load->model('tank_auth/users');
 		$this->ci->load->model('album_model');
-		$this->ci->load->model('follow');		
+		$this->ci->load->model('follow');
+		$this->ci->load->model('picture_album');
+		$this->ci->load->model('feel');	
 
 		if(!$this->ci->users->is_username_available($username)) { // user exist
 			$ME = FALSE;
@@ -42,6 +44,10 @@ class Profile extends MY_Controller {
 				$this->data['followed_albums'] = $this->ci->follow->get_followed_ids($self_user_id);
 			}
 			$this->data['profile_info'] = $this->ci->users->pickr_get_profile($user_id);
+			$this->data['following_count'] = $this->ci->follow->get_following_count($user_id);
+			$this->data['follower_count'] = $this->ci->follow->get_follower_count($user_id);
+			$this->data['like_count'] = $this->ci->feel->get_user_like_count($user_id);
+			$this->data['pick_count'] = $this->ci->picture_album->get_user_pick_count($user_id);
 			$this->data['albums_detail'] = $this->ci->album_model->get_albums_detail($user_id);
 			$this->data['ME'] = $ME;
 			$this->data['username'] = $username;
@@ -76,42 +82,58 @@ class Profile extends MY_Controller {
 		}
 	}
 	
-	public function follow_person($user_id){
+	public function follow_person() {
 		$this->ci =& get_instance();
 		$this->ci->load->database();
+		$this->ci->load->model('tank_auth/users');
 		$this->ci->load->model('follow');
-		$this->ci->load->model('album_model');				
+		$this->ci->load->model('album_model');	
+
+		$user_id = $this->ci->users->get_user_by_username($this->input->post('username'))->id;
 		$album_ids = $this->ci->album_model->get_all_album_ids($user_id);
-		$user_id = $this->ci->session->userdata('user_id');	
-		$this->ci->follow->insert_follow_all($user_id,$album_ids); 	
-		redirect(base_url());			
+		$user_id = $this->ci->session->userdata('user_id');
+		$this->ci->follow->insert_follow_all($user_id, $album_ids);
+
+		echo json_encode(TRUE);
 	}
 
-	public function unfollow_person($user_id){
+	public function unfollow_person() {
 		$this->ci =& get_instance();
 		$this->ci->load->database();
+		$this->ci->load->model('tank_auth/users');
 		$this->ci->load->model('follow');
-		$this->ci->load->model('album_model');				
+		$this->ci->load->model('album_model');	
+
+		$user_id = $this->ci->users->get_user_by_username($this->input->post('username'))->id;
 		$album_ids = $this->ci->album_model->get_all_album_ids($user_id);
 		$user_id = $this->ci->session->userdata('user_id');	
-		$this->ci->follow->delete_follow_all($user_id,$album_ids); 	
-		redirect(base_url());			
+		$this->ci->follow->delete_follow_all($user_id, $album_ids);
+
+		echo json_encode(TRUE);	
 	}	
 
-	public function follow_album($album_id){
+	public function follow_album() {
 		$this->ci =& get_instance();
 		$this->ci->load->database();
-		$this->ci->load->model('follow');	
+		$this->ci->load->model('follow');
+
+		$album_id = preg_replace('![^0-9]+!i', '', $this->input->post('album_id'));
 		$user_id = $this->ci->session->userdata('user_id');
-		$this->ci->follow->insert_follow($user_id,$album_id); 
-		redirect(base_url());
+
+		$this->ci->follow->insert_follow($user_id, $album_id);
+		
+		echo json_encode(TRUE);
 	}
-	public function unfollow_album($album_id){
+	public function unfollow_album() {
 		$this->ci =& get_instance();
 		$this->ci->load->database();
-		$this->ci->load->model('follow');	
+		$this->ci->load->model('follow');
+
+		$album_id = preg_replace('![^0-9]+!i', '', $this->input->post('album_id'));
 		$user_id = $this->ci->session->userdata('user_id');
-		$this->ci->follow->delete_follow($user_id,$album_id); 			
-		redirect(base_url());
+
+		$this->ci->follow->delete_follow($user_id, $album_id);
+		
+		echo json_encode(TRUE);
 	}	
 }
