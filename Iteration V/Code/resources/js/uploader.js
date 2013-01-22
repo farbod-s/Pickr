@@ -22,7 +22,7 @@ $(document).ready(function() {
                 var myObject = JSON.parse(data); // pars json array
                 if(status == "success" && myObject.status != "error") {
                     // show thumbnail
-                    $('#uploaded-pic').attr('onLoad', 'OnImageLoad(event)');
+                    //$('#uploaded-pic').attr('onLoad', 'OnImageLoad(event)');
                     $('#uploaded-pic').attr('src', myObject.picture_path);
                     $("#success-upload-msg").show().animate({opacity: 1.0}, 1000).fadeOut(3000);
                 }

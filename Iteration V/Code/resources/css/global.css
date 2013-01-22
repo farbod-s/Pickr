@@ -5,6 +5,10 @@ body {
     background: #F1F1F1 url('../images/noise-2.png');
 }
 
+body.modal-open {
+    overflow: hidden;
+}
+
 a, a:link, a:visited {
     text-decoration : none;
     /*font-family: "calibri";*/
@@ -480,6 +484,22 @@ hr.soft {
     cursor: pointer;
 }
 
+#back-login-lbl {
+    color: #666;
+}
+
+#back-login-lbl:hover {
+    color: #111;
+}
+
+#forgot-pass-lbl {
+    color: #666;
+}
+
+#forgot-pass-lbl:hover {
+    color: #111;
+}
+
 
 
 /*** BEGIN Album Style ***/
@@ -637,7 +657,7 @@ overflow: hidden;
     border-radius: 6px 6px 0 0;
 }
 
-.serif:hover {
+.pinBoard:hover .serif {
     color: #000;
 }
 

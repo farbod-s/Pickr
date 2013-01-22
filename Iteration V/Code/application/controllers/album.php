@@ -49,7 +49,7 @@ class Album extends MY_Controller {
 										<span class="tool-box">
 								            <a href="#pick" role="button" class="btn btn-small pick-btn" data-toggle="modal"><i class="icon-share"></i> Repick</a>
 								            <a href="#comment" role="button" class="btn btn-small comment-btn" data-toggle="modal"><i class="icon-comment"></i></a>
-								            <a href="#edit-pic" role="button" class="btn btn-small edit-pic-btn" data-toggle="modal"><i class="icon-edit"></i> Edit</a>
+								            <a class="btn btn-small delete-picture-btn"><i class="icon-trash"></i></a>
 								        </span>';
 				}
 				else {

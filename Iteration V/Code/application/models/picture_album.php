@@ -302,6 +302,12 @@ class Picture_Album extends CI_Model
 		$album_id = $this->get_album_id_from_url($user_id, $album_name);
 		if ($picture_id && $album_id) {
 			$this->db->where('picture_id', $picture_id);
+			$this->db->delete($this->feel_table_name);
+
+			$this->db->where('picture_id', $picture_id);
+			$this->db->delete($this->comment_table_name);
+		
+			$this->db->where('picture_id', $picture_id);
 			$this->db->where('album_id', $album_id);
 			$this->db->delete($this->table_name);
 			if ($this->db->affected_rows() > 0) {

@@ -5,6 +5,8 @@ class Album_Model extends CI_Model
 	private $table_name = 'album';
 	private $user_album_table_name = 'user_album';
 	private $picture_table_name = 'picture';
+	private $feel_table_name = 'feel';
+	private $comment_table_name = 'comment';
 	private $picture_album_table_name = 'picture_album';
 
 	function __construct() {
@@ -106,6 +108,12 @@ class Album_Model extends CI_Model
 			foreach ($picture_ids as $pic_id) {
 				$this->db->where('id', $pic_id);
 				$this->db->delete($this->picture_table_name);
+
+				$this->db->where('picture_id', $pic_id);
+				$this->db->delete($this->feel_table_name);
+
+				$this->db->where('picture_id', $pic_id);
+				$this->db->delete($this->comment_table_name);
 			}
 		}
 		// delete all pictures in this album

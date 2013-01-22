@@ -24,6 +24,7 @@ $(document).ready(function() {
             $('.visible-desktop').css('display', 'none');
             $('.hidden-desktop').css('display', 'block');
         }
+        $('#ScrollToTop').hide();
     });
 
     //Description with restrict chars
@@ -47,13 +48,18 @@ $(document).ready(function() {
     $(window).scroll(function() {
         if ($(window).scrollTop() > 100) {
             $('#ScrollToTop:hidden').stop(true, true).fadeIn();
+            $('#signUpLink:hidden').stop(true, true).fadeIn();
             if ($(window).width() > 979) {
                 $('.brand img.visible-desktop').hide();
                 $('.brand img.hidden-desktop').show();
             }
+            if($(window).width() < 480) {
+                $('#ScrollToTop').hide();
+            }
         }
         else {
             $('#ScrollToTop').stop(true, true).fadeOut();
+            $('#signUpLink').stop(true, true).fadeOut();
             if ($(window).width() > 979) {
                 $('.brand img.hidden-desktop').hide();
                 $('.brand img.visible-desktop').show();
@@ -277,10 +283,9 @@ $(document).ready(function() {
         return false;
     });
 
-
     // delete picture
     $('.delete-picture-btn').click(function() {
-        var image = '#' + $(this).parent().parent().attr('id');
+        var image = $(this).parent().parent().attr('id');
         var form_data = {
             picture_id: image,
             album_name: PICKR['uri_segment_3']

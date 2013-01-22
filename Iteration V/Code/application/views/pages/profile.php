@@ -54,9 +54,9 @@
 				$first_pic = $details['pic'];
 		?>
 		<div class="pin pinBoard" id="album_<?php echo $album_id;?>">
+			<a href="<?php echo base_url('user/'.strtolower($username).'/'.preg_replace('![^a-z0-9_]+!i', '-', strtolower($name)))?>">
 			<div class="serif"><?php echo htmlspecialchars($name); ?></div>
 			<div class="board">
-				<a href="<?php echo base_url('user/'.strtolower($username).'/'.preg_replace('![^a-z0-9_]+!i', '-', strtolower($name)))?>">
 				<div class="holder">
 					<span class="cover">
 						<img src="<?php echo $first_pic[0]; ?>" style="width: 100%; min-height: 150px;">

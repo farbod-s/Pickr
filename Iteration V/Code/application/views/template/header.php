@@ -36,7 +36,7 @@
 			              	 	  <input type="submit" class="btn btn-primary" id="login-btn" style="clear: left; width: 100%; height: 32px; font-weight: bold;" value="Sign In" />
 			              	 	  <li class="divider" style="width: 100%;"></li>
 			              	 	  <li>
-			              	 	  	<a href="#" id="flipToRecover" class="flipLink" style="background-color: transparent; color: #000; padding: 0;">
+			              	 	  	<a id="flipToRecover" class="flipLink" style="background-color: transparent; color: #000; padding: 0; cursor: pointer;">
 			              	 	  		<strong class="pull-left" id="forgot-pass-lbl">Forgot password?</strong>
 			              	 	  	</a>
 			              	 	  	<span class="pull-right error" style="font-weight: bold; color: #B94A48; opacity: 0;">Error<span>
@@ -48,7 +48,7 @@
 								  <input type="submit" name="submit" class="btn btn-primary" id="recover-btn" style="clear: left; width: 100%; height: 32px; font-weight: bold;" value="Recover" />
 								  <li class="divider" style="width: 100%;"></li>
 								  <li>
-								  	<a href="#" id="flipToLogin" class="flipLink" style="background-color: transparent; color: #000; padding: 0;">
+								  	<a id="flipToLogin" class="flipLink" style="background-color: transparent; color: #000; padding: 0; cursor: pointer;">
 								  		<strong class="pull-left" id="back-login-lbl">Back to Login</strong>
 								  	</a>
 								  </li>
@@ -57,7 +57,17 @@
 				            </div>
 				          </li>
 				        </ul>
-		    		<?php }
+
+				        <!-- The Register drop down menu -->
+				        <ul class="nav pull-left" id="signUpLink" style="display: none;">
+				          <li class="header-link">
+				            <a href="#signUp" role="button" data-toggle="modal">
+				            	<i class="icon-plus icon-white icon-group"></i><i class="icon-user icon-white icon-group" style="margin-left: -5px;"></i> <strong>Sign Up</strong>
+				            </a>
+				          </li>
+				        </ul>
+
+				    <?php }
 		    		else { ?>
 		    			<!-- The User Control drop down menu -->
 			        	<ul class="nav pull-left">
