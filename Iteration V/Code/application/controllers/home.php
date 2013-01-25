@@ -348,9 +348,9 @@ class Home extends MY_Controller {
 		$this->ci =& get_instance();
 		$this->ci->load->database();
 		$this->ci->load->model('notification');
-		$user_id = $this->ci->session->userdata('user_id');
+		$subject_user_id = $this->ci->session->userdata('user_id');
 		$picture_id = preg_replace('![^0-9]+!i', '', $this->input->post('picture_id'));
-		if($this->ci->notification->add_pick_notification($user_id, $picture_id)) {
+		if($this->ci->notification->add_pick_notification($subject_user_id, $picture_id)) {
 			echo json_encode(TRUE);
 		}
 		else {
@@ -362,9 +362,23 @@ class Home extends MY_Controller {
 		$this->ci =& get_instance();
 		$this->ci->load->database();
 		$this->ci->load->model('notification');
-		$user_id = $this->ci->session->userdata('user_id');
+		$subject_user_id = $this->ci->session->userdata('user_id');
 		$picture_id = preg_replace('![^0-9]+!i', '', $this->input->post('picture_id'));
-		if($this->ci->notification->add_like_notification($user_id, $picture_id)) {
+		if($this->ci->notification->add_like_notification($subject_user_id, $picture_id)) {
+			echo json_encode(TRUE);
+		}
+		else {
+			echo json_encode(FALSE);
+		}
+	}
+
+	public function add_comment_notification() {
+		$this->ci =& get_instance();
+		$this->ci->load->database();
+		$this->ci->load->model('notification');
+		$subject_user_id = $this->ci->session->userdata('user_id');
+		$picture_id = preg_replace('![^0-9]+!i', '', $this->input->post('picture_id'));
+		if($this->ci->notification->add_comment_notification($subject_user_id, $picture_id)) {
 			echo json_encode(TRUE);
 		}
 		else {

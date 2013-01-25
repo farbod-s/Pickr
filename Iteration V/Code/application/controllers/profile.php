@@ -135,5 +135,23 @@ class Profile extends MY_Controller {
 		$this->ci->follow->delete_follow($user_id, $album_id);
 		
 		echo json_encode(TRUE);
-	}	
+	}
+
+	public function add_follow_notification() {
+		/* $this->ci =& get_instance();
+		$this->ci->load->database();
+		$this->ci->load->model('notification');
+		$subject_user_id = $this->ci->session->userdata('user_id');
+		$album_id = preg_replace('![^0-9]+!i', '', $this->input->post('album_id'));
+		if($this->ci->notification->add_follow_notification($subject_user_id, $album_id)) {
+			echo json_encode(TRUE);
+		}
+		else {
+			echo json_encode(FALSE);
+		} */
+	}
+
+	public function add_follow_all_notification() {
+
+	}
 }

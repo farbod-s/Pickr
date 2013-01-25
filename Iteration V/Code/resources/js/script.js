@@ -165,7 +165,7 @@ $(document).ready(function() {
                     $(image + ' a.like-btn').removeClass('like-btn');
 
                     // notification
-                    //AddLikeNotification($(this).parent().parent().attr('id'));
+                    AddLikeNotification(image);
                 }
                 else {
                     alert('Error, Can not like');
@@ -498,8 +498,10 @@ $(document).ready(function() {
             success: function(result) {
                 if(result) {
                     //alert('Success, Picked');
-                    //AddPickNotification();
                     $('#pick').modal('hide');
+
+                    // notification
+                    AddPickNotification(LAST_IMG);
                 }
                 else {
                     //alert('Error, Can not pick');
@@ -535,7 +537,6 @@ $(document).ready(function() {
             success: function(result) {
                 if(result) {
                     //alert('Success, Picked');
-                    //AddPickNotification();
                     window.location = PICKR['baseUrl'] + 'user/' + PICKR['uri_segment_2'] + '/' + PICKR['uri_segment_3'];
                 }
                 else {
@@ -580,6 +581,9 @@ $(document).ready(function() {
                     $('#add-comment-btn').addClass('disabled');
                     $('#add-comment-btn').attr('disabled', 'disabled');
                     LoadComments(image); // load comments
+
+                    // notification
+                    AddCommentNotification(image);
                 }
                 else {
                     //alert('Error, Can not add comment');
@@ -598,6 +602,7 @@ $(document).ready(function() {
 
     $('.buttonContainer').on('click', '.follow-btn', function() { // delegate follow-btn
         $(this).button('loading');
+        var albumId = $(this).parent().parent().parent().attr('id');
         var form_data = {
             album_id: $(this).parent().parent().parent().attr('id')
         };
@@ -616,7 +621,13 @@ $(document).ready(function() {
                     $(handler).addClass('unfollow-btn');
                     $(handler).removeClass('follow-btn');
                     */
+
                     window.location = PICKR['baseUrl'] + 'user/' + PICKR['uri_segment_2'];
+
+
+                    // notification
+                    // AddFollowNotification(albumId);
+                    
                 }
                 else {
                     //alert('Error, Can not follow');
@@ -847,7 +858,7 @@ function AddPickNotification(pictureId) {
         dataType: 'JSON',
         data: form_data,
         success: function(result) {
-            // alert('Pick Notification Added.');
+            // alert(':)');
         },
         error: function() {
             alert('Ajax Error');
@@ -865,10 +876,46 @@ function AddLikeNotification(pictureId) {
         dataType: 'JSON',
         data: form_data,
         success: function(result) {
-            // alert('Like Notification Added.');
+            // alert(':)');
         },
         error: function() {
             alert('Ajax Error');
+        }
+    });
+}
+
+function AddCommentNotification(pictureId) {
+    var form_data = {
+        picture_id: pictureId
+    };
+    $.ajax({
+        url: PICKR['baseUrl'] + "home/add_comment_notification",
+        type: 'POST',
+        dataType: 'JSON',
+        data: form_data,
+        success: function(result) {
+            alert(':)');
+        },
+        error: function() {
+            alert('Ajax Error');
+        }
+    });
+}
+
+function AddFollowNotification(albumId) {
+    var form_data = {
+        album_id: albumId
+    };
+    $.ajax({
+        url: PICKR['baseUrl'] + "profile/add_follow_notification",
+        type: 'POST',
+        dataType: 'JSON',
+        data: form_data,
+        success: function(result) {
+            alert(':) ' + albumId);
+        },
+        error: function() {
+            alert('Ajax Error ' + albumId);
         }
     });
 }
