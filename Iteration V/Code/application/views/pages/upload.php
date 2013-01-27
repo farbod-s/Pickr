@@ -35,7 +35,7 @@
 	  </div>
 	  <form method="post" action="" id="upload_file">
 		  <div class="control-group pull-left" style="width: 50%; margin: 0;">
-	  		<a href="#" style="width: 100%;">
+	  		<a style="width: 100%;">
 		    	<img class="thumbnail" id="uploaded-pic" style="margin-right: 5px; width: 90%; max-height: 350px; min-height: 175px;" src="<?php echo base_url(IMAGES.'upload_picture.png'); ?>">
 		  	</a>
 		  	<input type="file" name="userfile" id="userfile" size="20" style="width: 90%; margin-top: 10px; margin-bottom: 0;" />
