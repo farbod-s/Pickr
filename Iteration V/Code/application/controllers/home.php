@@ -58,8 +58,8 @@ class Home extends MY_Controller {
 				        <figure class="cap-bot">
 				          <div class="pick-holder" id="pic_'.$pic_obj["id"].'">
 				            '.$tool_box.'
-				            <a href="#">
-				              <img src="'.$pic_obj["path"].'" style="width: 100%;" />
+				            <a href="'.$pic_obj["path"].'" target="_blank">
+				              <img src="'.$pic_obj["path"].'" style="width: 100%; cursor: -webkit-zoom-in;" />
 				            </a>
 				            <figcaption>
 				              <span class="record pull-right">
@@ -127,8 +127,8 @@ class Home extends MY_Controller {
 			        	$data = $data.'
 				          <div class="pick-holder" id="pic_'.$pic_obj["id"].'">
 				            '.$tool_box.'
-				            <a href="#">
-				              <img src="'.$pic_obj["path"].'" style="width: 100%;" />
+				            <a href="'.$pic_obj["path"].'" target="_blank">
+				              <img src="'.$pic_obj["path"].'" style="width: 100%; cursor: -webkit-zoom-in;" />
 				            </a>';
 				            if ($is_logged_in) {
 				            	$data = $data.'
@@ -280,7 +280,7 @@ class Home extends MY_Controller {
 		$this->ci->load->database();
 		$this->ci->load->model('album_model');
 
-		$this->form_validation->set_rules('album_name', 'Album Name', 'trim|xss_clean');
+		$this->form_validation->set_rules('album_name', 'Album Name', 'trim|xss_clean|min_length[1]|max_length[50]');
 		if ($this->form_validation->run()) {
 			$user_id = $this->ci->session->userdata('user_id');
 			if ($this->ci->album_model->create_album($this->form_validation->set_value('album_name'), $user_id)) {

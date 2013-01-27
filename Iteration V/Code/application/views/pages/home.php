@@ -12,7 +12,7 @@
         <div style="margin-bottom: 10px; font-size: 16px; font-weight: bold; text-align: center;">Welcome to Pickr</div>
         <div style="margin-bottom: 20px; font-size: 13px; font-weight: bold; text-align: center;">You wana be a pickr?</div>
         <!-- Button to trigger modal -->
-        <a href="#signUp" role="button" class="btn btn-danger" data-toggle="modal" style="width: 100%; line-height: 22px;"><strong>Sign Up</strong></a>
+        <a href="#signUp" role="button" class="btn btn-danger" data-toggle="modal" style="width: 100%; line-height: 22px;"><strong>Join Us</strong></a>
         <img src="<?php echo base_url(IMAGES.'social.png');?>" width="175" height="175" style="margin-top: 20px; margin-bottom: -8px; margin-left: -10px;"></img>
       </div>
       <!-- END Top Message -->
@@ -24,7 +24,7 @@
 
 <div id="loader">
   <div id="loaderCircle"></div>
-  <div id="finished">Congratulations, You see all! :)</div>
+  <div id="finished">Congratulations, You see all <div class="rotate" style="width: 20px; height: 20px; margin-left: 50%; margin-top: 5px;">:)</div></div>
 </div>
 
 <?php

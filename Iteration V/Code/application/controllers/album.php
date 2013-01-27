@@ -72,8 +72,8 @@ class Album extends MY_Controller {
 				        <figure class="cap-bot">
 				          <div class="pick-holder" id="pic_'.$pic_obj["id"].'">
 				            '.$tool_box.'
-				            <a href="#">
-				              <img src="'.$pic_obj["path"].'" style="width: 100%;" />
+				            <a href="'.$pic_obj["path"].'" target="_blank">
+				              <img src="'.$pic_obj["path"].'" style="width: 100%; cursor: -webkit-zoom-in;" />
 				            </a>
 				            <figcaption>
 				              <span class="record pull-right">
@@ -168,8 +168,8 @@ class Album extends MY_Controller {
 		$this->ci->load->database();
 		$this->ci->load->model('album_model');
 
-		$this->form_validation->set_rules('old_album_name', 'Old Album Name', 'trim|required|xss_clean|min_length[4]|max_length[50]');
-		$this->form_validation->set_rules('new_album_name', 'New Album Name', 'trim|required|xss_clean|min_length[4]|max_length[50]');
+		$this->form_validation->set_rules('old_album_name', 'Old Album Name', 'trim|required|xss_clean|min_length[1]|max_length[50]');
+		$this->form_validation->set_rules('new_album_name', 'New Album Name', 'trim|required|xss_clean|min_length[1]|max_length[50]');
 
 		if ($this->form_validation->run()) {
 			$user_id = $this->ci->session->userdata('user_id');

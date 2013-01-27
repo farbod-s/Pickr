@@ -67,7 +67,7 @@ class Profile extends MY_Controller {
 		$this->ci->load->database();
 		$this->ci->load->model('album_model');
 
-		$this->form_validation->set_rules('album_name', 'Album Name', 'trim|required|xss_clean|min_length[4]|max_length[50]');
+		$this->form_validation->set_rules('album_name', 'Album Name', 'trim|required|xss_clean|min_length[1]|max_length[50]');
 		if ($this->form_validation->run()) {
 			$user_id = $this->ci->session->userdata('user_id');
 			if ($this->ci->album_model->create_album($this->form_validation->set_value('album_name'), $user_id)) {

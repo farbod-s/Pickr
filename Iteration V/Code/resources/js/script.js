@@ -876,7 +876,7 @@ function AddLikeNotification(pictureId) {
         dataType: 'JSON',
         data: form_data,
         success: function(result) {
-            // alert(':)');
+            alert(':)');
         },
         error: function() {
             alert('Ajax Error');
