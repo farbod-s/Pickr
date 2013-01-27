@@ -77,18 +77,41 @@ $(document).ready(function() {
     $('#pick').bind('hidden', function () {
         var src = PICKR['baseUrl'] + "resources/images/upload_picture.png";
         $('.thumbnail').attr('src', src);
+
+        $('.modal-container.pick-modal').hide();
     });
 
     // when pop-up window want to close
     $('#comment').bind('hidden', function () {
         var src = PICKR['baseUrl'] + "resources/images/upload_picture.png";
         $('.thumbnail').attr('src', src);
+        
+        $('.modal-container.comment-modal').hide();
+    });
+
+    // when pop-up window want to close
+    $('#signUp').bind('hidden', function () {
+        $('.modal-container.register-modal').hide();
+    });
+
+    $('#rename_album').bind('hidden', function () {
+        $('.modal-container.rename-album-modal').hide();
+    });
+
+    $('#delete_album').bind('hidden', function () {
+        $('.modal-container.delete-album-modal').hide();
+    });
+
+    $('#new_album').bind('hidden', function () {
+        $('.modal-container.new-album-modal').hide();
     });
 
     // when pop-up window want to close
     $('#upload-picture-form').bind('hidden', function () {
         var src = PICKR['baseUrl'] + "resources/images/upload_picture.png";
         $('.thumbnail').attr('src', src);
+
+        $('.modal-container.upload-modal').hide();
     });
 
     // show user actions
@@ -100,11 +123,34 @@ $(document).ready(function() {
             $(img_id).hide();
     });
 
+    $('#signUp').bind('show', function () {
+        $('.modal-container.register-modal').show();
+    });
+
+    $('#upload-picture-form').bind('show', function () {
+        $('.modal-container.upload-modal').show();
+    });
+
+    $('#rename_album').bind('show', function () {
+        $('.modal-container.rename-album-modal').show();
+    });
+
+    $('#delete_album').bind('show', function () {
+        $('.modal-container.delete-album-modal').show();
+    });
+
+    $('#new_album').bind('show', function () {
+        $('.modal-container.new-album-modal').show();
+    });
+
     // Pick action
     $('#tiles').on('click', 'a.pick-btn', function() { // delegate pick-btn
         var image = '#' + $(this).parent().parent().attr('id') + ' img';
         var src = $(image).attr('src');
         $('.thumbnail#picked-pic').attr('src', src);
+        $('.thumbnail#picked-pic').parent().attr('href', src);
+
+        $('.modal-container.pick-modal').show();
 
         // update last image clicked
         LAST_IMG = $(this).parent().parent().attr('id');
@@ -115,9 +161,12 @@ $(document).ready(function() {
         var image = '#' + $(this).parent().parent().attr('id') + ' img';
         var src = $(image).attr('src');
         $('.thumbnail#commented-pic').attr('src', src);
+        $('.thumbnail#commented-pic').parent().attr('href', src);
 
         // update last image clicked
         LAST_IMG = $(this).parent().parent().attr('id');
+
+        $('.modal-container.comment-modal').show();
 
         // load comments
         var img = '#' + LAST_IMG;
@@ -129,6 +178,9 @@ $(document).ready(function() {
         var image = '#' + $(this).parent().parent().attr('id') + ' img';
         var src = $(image).attr('src');
         $('.thumbnail#commented-pic').attr('src', src);
+        $('.thumbnail#commented-pic').parent().attr('href', src);
+
+        $('.modal-container.comment-modal').show();
 
         // update last image clicked
         LAST_IMG = $(this).parent().parent().attr('id');
@@ -876,7 +928,7 @@ function AddLikeNotification(pictureId) {
         dataType: 'JSON',
         data: form_data,
         success: function(result) {
-            alert(':)');
+            // alert(':)');
         },
         error: function() {
             alert('Ajax Error');
@@ -894,7 +946,7 @@ function AddCommentNotification(pictureId) {
         dataType: 'JSON',
         data: form_data,
         success: function(result) {
-            alert(':)');
+            // alert(':)');
         },
         error: function() {
             alert('Ajax Error');

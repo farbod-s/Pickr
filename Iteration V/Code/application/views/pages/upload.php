@@ -1,5 +1,6 @@
 <!-- upload Form -->
-<div id="upload-picture-form" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="uploadLabel" aria-hidden="true">
+<div class="modal-container upload-modal">
+<div id="upload-picture-form" style="margin: 50px auto;" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="uploadLabel" aria-hidden="true">
 	<div class="modal-header">
 	  <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
 	  <h3 id="uploadLabel">Upload</h3>
@@ -54,5 +55,6 @@
 	  	<div id="success-upload-msg" style="font-weight: bold; color: green; display: none;">Successfully uploaded</div>
 	  </div>
 	</div>
+</div>
 </div>
 <!-- END upload Form -->

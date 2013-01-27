@@ -30,7 +30,8 @@
 <?php
   if ($is_logged_in) { ?>
       <!-- pick Form -->
-      <div id="pick" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="pickLabel" aria-hidden="true">
+      <div class="modal-container pick-modal">
+      <div id="pick" style="margin: 50px auto;" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="pickLabel" aria-hidden="true">
         <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
           <h3 id="pickLabel">Pick</h3>
@@ -66,8 +67,8 @@
           <?php
             $attributes = array('id' => 'pick-form', 'class' => 'form-horizontal');
             echo form_open(base_url('home/add_pic_to_album'), $attributes); ?>
-          <a class="pull-left" href="#" style="width: 45%;">
-            <img class="thumbnail" id="picked-pic" style="margin-right: 5px; width: 100%; max-height: 350px; min-height: 175px;" src="<?php echo base_url(IMAGES.'upload_picture.png'); ?>">
+          <a class="pull-left" href="#" target="_blank" style="width: 45%;">
+            <img class="thumbnail" id="picked-pic" style="margin-right: 5px; width: 100%; max-height: 350px; min-height: 175px; cursor: -webkit-zoom-in;" src="<?php echo base_url(IMAGES.'upload_picture.png'); ?>">
           </a>
           <div class="control-group pull-right" style="width: 50%; margin-bottom: 0;">
             <textarea id="album-description" rows="3" cols="40" style="resize: none; margin-top: 10%; width: 96.5%;" maxlength="50" placeholder="Description" spellcheck="false"></textarea>
@@ -81,10 +82,12 @@
           </div>
         </div>
       </div>
+      </div>
       <!-- END pick Form -->
 
       <!-- comment Form -->
-      <div id="comment" class="modal hide fade modal-comment" tabindex="-1" role="dialog" aria-labelledby="commentLabel" aria-hidden="true">
+      <div class="modal-container comment-modal">
+      <div id="comment" style="margin: 50px auto;" class="modal hide fade modal-comment" tabindex="-1" role="dialog" aria-labelledby="commentLabel" aria-hidden="true">
         <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
           <h3 id="commentLabel">Comment</h3>
@@ -99,8 +102,8 @@
             $attributes = array('id' => 'comment-form', 'class' => 'form-horizontal');
             echo form_open(base_url('home/comment_on_picture'), $attributes); ?>
           <div class="control-group pull-left" style="width: 50%; margin: 0;">
-            <a href="#">
-              <img class="thumbnail" id="commented-pic" style="margin-right: 5px; width: 330px; max-height: 450px; min-height: 175px;" src="<?php echo base_url(IMAGES.'upload_picture.png'); ?>">
+            <a href="#" target="_blank">
+              <img class="thumbnail" id="commented-pic" style="margin-right: 5px; width: 330px; max-height: 450px; min-height: 175px; cursor: -webkit-zoom-in;" src="<?php echo base_url(IMAGES.'upload_picture.png'); ?>">
             </a>
             <textarea id="comment-content" rows="1" cols="30" style="resize: none; max-height: 64px; margin-top: 7%; width: 93%;" maxlength="100" placeholder="Write a comment..." spellcheck="false"></textarea>
             <button type="submit" class="btn btn-large btn-primary disabled" data-loading-text="Adding Comment..." id="add-comment-btn" style="width:93%; margin-top:3%; font-weight: bold;" disabled="disabled">Add Comment</button>
@@ -113,10 +116,12 @@
           </div>
         </div>
       </div>
+      </div>
       <!-- END comment Form -->
 <?php } else { ?>
     <!-- SignUp Form -->
-    <div id="signUp" style="width: 500px;" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="signUpLabel" aria-hidden="true">
+    <div class="modal-container register-modal">
+    <div id="signUp" style="width: 500px; margin: 50px auto;" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="signUpLabel" aria-hidden="true">
     
     <?php $attributes = array('id' => 'register-form', 'class' => 'form-horizontal');
       echo form_open(base_url('auth/register'), $attributes); ?>
@@ -171,6 +176,7 @@
         </div>
       </div>
       <?php echo form_close();?>
+    </div>
     </div>
     <!-- END SignUp Form -->
 <?php } ?>

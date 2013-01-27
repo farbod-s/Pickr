@@ -113,7 +113,8 @@
 			</div>
 
 			<!-- create Form -->
-	        <div id="new_album" class="modal hide fade modal-small" tabindex="-1" role="dialog" aria-labelledby="newAlbumLabel" aria-hidden="true">
+			<div class="modal-container new-album-modal">
+	        <div id="new_album" style="margin: 50px auto;" class="modal hide fade modal-small" tabindex="-1" role="dialog" aria-labelledby="newAlbumLabel" aria-hidden="true">
 	          <?php $attributes = array('id' => 'new-album-form', 'class' => 'form-horizontal');
 	          echo form_open(base_url('profile/new_album'), $attributes); ?>
 	          <div class="modal-header">
@@ -135,6 +136,7 @@
 	          </div>
 	          <?php echo form_close();?>
 	        </div>
+	    	</div>
 	        <!-- END create Form -->
 		<?php }?>
 	</div>

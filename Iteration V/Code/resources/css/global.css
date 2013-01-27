@@ -1,6 +1,18 @@
 ::-moz-selection { background: #fe57a1; color: #fff; text-shadow: none; }
 ::selection { background: #fe57a1; color: #fff; text-shadow: none; }
 
+.modal-container {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 1040;
+    background-color: rgba(0, 0, 0, 0.8);
+    overflow-y: scroll;
+    display: none;
+}
+
 body {
     background: #F1F1F1 url('../images/noise-2.png');
 }
