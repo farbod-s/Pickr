@@ -148,4 +148,38 @@ class Picture extends CI_Model
 		}
 		return NULL;
 	}
+
+	public function get_search_results($search_string, $is_logged_in, $offset, $limit = 24) {
+		$data = array();
+		if($search_string != '') {
+			$this->db->select('*')
+					 ->like('LOWER(description)', strtolower($search_string))
+					 ->order_by('id', 'DESC');
+			$query = $this->db->get($this->table_name, $limit, $limit * $offset);
+			if ($query->num_rows() > 0) {
+				foreach ($query->result() as $picture) {
+					$pictures = array();
+
+					$pictures['id'] = $picture->id;
+					$pictures['path'] = $picture->picture;
+					$pictures['description'] = $picture->description;
+					
+					$details = $this->get_picture_details($picture->id);
+					$pictures['album_name'] = $details['album_name'];
+					$pictures['username'] = $details['username'];
+					$pictures['complete_name'] = $details['complete_name'];
+					
+					if ($is_logged_in) {
+						$records = $this->get_picture_records($picture->id);
+						$pictures['comments'] = $records['comments'];
+						$pictures['likes'] = $records['likes'];
+
+						$pictures['is_liked'] = $this->is_liked_by_user($picture->id);
+					}
+					array_push($data, $pictures);
+				}
+			}
+		}
+		return $data;
+	}
 }

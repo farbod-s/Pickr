@@ -3,6 +3,17 @@ $(document).ready(function() {
     // static variable used for update records in main page
     var LAST_IMG = "";
 
+    // Search
+    $("#pickr-search-bar").keydown(function (e) {
+        var query = $("#pickr-search-bar").attr('value');
+        if (e.keyCode == '13') {
+            e.preventDefault();
+            if(query != '') {
+                window.location = PICKR['baseUrl'] + 'search/index/' + query;
+            }
+        }
+    });
+
     // Fix input element click problem
     $('.dropdown-menu').click(function(e) {
         e.stopPropagation();

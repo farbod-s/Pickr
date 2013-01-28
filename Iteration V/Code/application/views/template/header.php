@@ -122,7 +122,7 @@
 		    		<?php } ?>
 
 				<form class="navbar-search pull-right" action="" _lpchecked="1">
-					<input type="text" class="search-query span3" spellcheck="false" placeholder="Search" />
+					<input id="pickr-search-bar" type="text" class="search-query span3" spellcheck="false" placeholder="Search" />
 				</form>
 			</div><!--/.nav-collapse -->
 		</div>

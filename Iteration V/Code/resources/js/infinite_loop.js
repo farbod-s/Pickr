@@ -9,6 +9,9 @@ var home_follow_apiURL = PICKR['baseUrl'] + 'home/more_follow_pics';
 var home_public_apiURL = PICKR['baseUrl'] + 'home/more_public_pics';
 var album_apiURL = PICKR['baseUrl'] + 'album/more_pics';
 
+var search_page = false;
+var search_apiURL = PICKR['baseUrl'] + 'search/more_search_results';
+
 // Prepare layout options.
 var options = {
 	autoResize: true, // This will auto-update the layout when the browser window is resized.
@@ -28,12 +31,19 @@ function isHomePage() {
 		return true;
 };
 
+function isSearchPage() {
+	if(PICKR['uri_segment_1'] == 'search') {
+		return true;
+	}
+}
+
 /**
 * When scrolled all the way to the bottom, add more tiles.
 */
 function onScroll(event) {
 	if(album_page && finished)		return;
 	if(home_page && finished_all)	return;
+	if(search_page && finished)     return;
 	// Only check when we're not still waiting for data.
 	if(!isLoading) {
 		// Check if we're within 100 pixels of the bottom edge of the broser window.
@@ -62,7 +72,16 @@ function applyLayout() {
 function loadData() {
 	isLoading = true;
 	$('#loaderCircle').show();
-	if(home_page && !finished) {
+	if(search_page && !finished) {
+		$.ajax({
+			url: search_apiURL,
+			type: 'POST',
+			dataType: 'JSON',
+			data: {page: page, searchStr: PICKR['uri_segment_3']},
+			success: onLoadSearchResults
+		});
+	}
+	else if(home_page && !finished) {
 		$.ajax({
 			url: home_follow_apiURL,
 			type: 'POST',
@@ -164,9 +183,35 @@ function onLoadPublicData(data) {
 	applyLayout();
 };
 
+function onLoadSearchResults(data) {
+	// alert(data);
+	isLoading = false;
+	$('#loaderCircle').hide();
+
+	// Increment page index for future calls.
+	page++;
+
+	// Create HTML for the images.
+	var html = data;
+
+	if(html == '') {
+		finished = true;
+		page = 0;
+	}
+
+	// Add image HTML to the page.
+	$('#tiles').append(html);
+
+	// Apply layout.
+	applyLayout();
+}
+
 $(document).ready(new function() {
 	// detect where we are
-	if(isHomePage()) {
+	if(isSearchPage()) {
+		search_page = true;
+	}
+	else if(isHomePage()) {
 		home_page = true;
 	}
 	else if(isAlbumPage()) {
